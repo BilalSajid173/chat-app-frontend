@@ -1,9 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Fragment } from "react";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <div className="App">
+    <Fragment>
+      <Login />
+    </Fragment>
+  );
+}
+
+export default App;
+// sdnsldslcd
+// aodofdfdlkv
+/* <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,10 +28,4 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
-  );
-}
-
-export default App;
-// sdnsldslcd
-// aodofdfdlkv
+    </div> */
