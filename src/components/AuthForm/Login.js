@@ -16,11 +16,10 @@ const LoginForm = (props) => {
     <Fragment>   
      <div className={classes.maincontainer}>            
       <div className={classes.logincontainer}>
-        <h3>Create Account</h3>
         <form onSubmit={formSubmitHandler}>
-          <div className={classes.Username}>
-            <label htmlFor="email">Username</label>
+          <div className={classes.username}>
             <input
+            placeholder="Username"
               type="email"
               id="email"
               autoComplete="off"
@@ -29,17 +28,16 @@ const LoginForm = (props) => {
             />
           </div>
           <div className={classes.password}>
-            <label htmlFor="password">Password</label>
             <input
+            placeholder="Password"
               type="password"
               id="password"
               required
               ref={passwordInputRef}
             />
           </div>
-          <div>
             <button type="submit">Login</button>
-          </div>
+            <h4>New here? SignUp</h4>
         </form>
       </div>
       <div className={classes.loginimg}>

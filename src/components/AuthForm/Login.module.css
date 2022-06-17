@@ -1,38 +1,80 @@
 * {
   top: 0;
   bottom: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.maincontainer{
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background-image: linear-gradient(pink, blue);
+}
+
+.maincontainer {
   display: flex;
-  flex-wrap: center;
-  margin: 4rem 17rem;
-  padding: 10%;
-  box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.004), 0 1px 8.5px rgba(0, 0, 0, 0.01), 0 1.9px 15.7px rgba(0, 0, 0, 0.019), 0 3.4px 28.2px rgba(0, 0, 0, 0.03), 0 6.3px 54.4px rgba(0, 0, 0, 0.047), 0 15px 137px rgba(0, 0, 0, 0.07); 
+  margin: 6% 18%;
+  padding: 5%;
+  box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.004),
+    0 1px 8.5px rgba(0, 0, 0, 0.01), 0 1.9px 15.7px rgba(0, 0, 0, 0.019),
+    0 3.4px 28.2px rgba(0, 0, 0, 0.03), 0 6.3px 54.4px rgba(0, 0, 0, 0.047),
+    0 15px 137px rgba(0, 0, 0, 0.07);
   border-radius: 20px;
-  flex-direction: row;
   background-color: white;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.logincontainer h3{
+.logincontainer {
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-}  
-.logincontainer button{
-  background-color: black;
-  color: white;
-  padding: 6px 80px;
-  margin-left: 29px;
-  margin-top: 50px;
+}
+
+.logincontainer h4{
+  color: rgb(125, 0, 125);
+}
+
+.logincontainer form {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  flex-direction: column;
 }
 
-.loginimg img{
-  padding-left: 130px;
-  height: 350px;
-  width: 400px;
+.logincontainer input {
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid gray;
+  margin: 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.logincontainer button {
+  border: 0;
+  outline: 0;
+  background-color: purple;
+  color: rgb(255, 255, 255);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  width: 80%;
+  font-size: 1.8rem;
+}
+
+.logincontainer button:hover {
+  cursor: pointer;
+  background-color: rgb(146, 146, 219);
+}
+
+.loginimg {
+  width: 50%;
+}
+
+.loginimg img {
+  width: 100%;
+  height: 100%;
 }
