@@ -84,6 +84,8 @@ body {
   height: 100%;
 }
 
+/********************Media Queries*************************************************/
+
 @media (max-width: 1200px) {
   .maincontainer {
     margin: 8% 10%;
@@ -155,11 +157,9 @@ body {
     width: 90%;
     padding: 13% 5%;
   }
-
 }
 
 @media (max-width: 350px) {
-
   .maincontainer {
     margin: 40% auto;
   }
