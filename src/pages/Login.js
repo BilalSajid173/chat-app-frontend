@@ -1,10 +1,11 @@
+import { Fragment } from "react";
 import LoginForm from "../components/AuthForm/Login";
 
 const Login = (props) => {
   return (
-    <div>
+    <Fragment>
       <LoginForm />
-    </div>
+    </Fragment>
   );
 };
 
