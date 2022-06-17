@@ -1,40 +1,38 @@
-.logincontainer {
+* {
+  top: 0;
+  bottom: 0;
+}
+.maincontainer{
+  display: flex;
+  flex-wrap: center;
+  margin: 4rem 17rem;
+  padding: 10%;
+  box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.004), 0 1px 8.5px rgba(0, 0, 0, 0.01), 0 1.9px 15.7px rgba(0, 0, 0, 0.019), 0 3.4px 28.2px rgba(0, 0, 0, 0.03), 0 6.3px 54.4px rgba(0, 0, 0, 0.047), 0 15px 137px rgba(0, 0, 0, 0.07); 
+  border-radius: 20px;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.logincontainer h3{
   display: flex;
   justify-content: center;
-  flex-wrap: center;
-  padding: 10%;
-  font-size: 1.5rem;
+  align-items: center;
+}  
+.logincontainer button{
+  background-color: black;
+  color: white;
+  padding: 6px 80px;
+  margin-left: 29px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
-.logincontainer form {
-  border-radius: 5px;
-  padding: 8%;
-  background-color: white;
-  box-shadow: 2px 2px 2px rgb(134, 101, 101), -2px -2px 2px rgb(134, 101, 101);
-}
-
-.logincontainer label {
-  display: block;
-}
-
-.logincontainer input {
-  padding: 5px;
-  border: 0;
-  outline: 0;
-  margin: 0.5rem 0;
-  font-size: 1.5rem;
-  border-bottom: 2px solid black;
-}
-
-.logincontainer button {
-  width: 100%;
-  margin-top: 2rem;
-  font-size: 2rem;
-  background-color: blueviolet;
-  border: 0;
-  border-radius: 5px;
-}
-
-.logincontainer button:hover {
-  background-color: blue;
+.loginimg img{
+  padding-left: 130px;
+  height: 350px;
+  width: 400px;
 }
