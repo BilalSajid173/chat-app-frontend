@@ -1,6 +1,6 @@
 import { useRef, Fragment } from "react";
 import classes from "./Login.module.css";
-import image from "../../images/login.jpg"
+import image from "../../images/login.jpg";
 
 const LoginForm = (props) => {
   const emailInputRef = useRef();
@@ -13,40 +13,37 @@ const LoginForm = (props) => {
     console.log(enteredEmail, enteredPassword);
   };
   return (
-    <Fragment>   
-     <div className={classes.maincontainer}>            
-      <div className={classes.logincontainer}>
-        <h3>Create Account</h3>
-        <form onSubmit={formSubmitHandler}>
-          <div className={classes.Username}>
-            <label htmlFor="email">Username</label>
-            <input
-              type="email"
-              id="email"
-              autoComplete="off"
-              required
-              ref={emailInputRef}
-            />
-          </div>
-          <div className={classes.password}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              required
-              ref={passwordInputRef}
-            />
-          </div>
-          <div>
+    <Fragment>
+      <div className={classes.maincontainer}>
+        <div className={classes.logincontainer}>
+          <form onSubmit={formSubmitHandler}>
+            <div className={classes.username}>
+              <input
+                placeholder="Username"
+                type="email"
+                id="email"
+                autoComplete="off"
+                required
+                ref={emailInputRef}
+              />
+            </div>
+            <div className={classes.password}>
+              <input
+                placeholder="Password"
+                type="password"
+                id="password"
+                required
+                ref={passwordInputRef}
+              />
+            </div>
             <button type="submit">Login</button>
-          </div>
-        </form>
+            <h4>New here? SignUp</h4>
+          </form>
+        </div>
+        <div className={classes.loginimg}>
+          <img src={image} alt="img" />
+        </div>
       </div>
-      <div className={classes.loginimg}>
-        <img src={image} alt="img" />
-      </div>
-     </div>      
-      
     </Fragment>
   );
 };
