@@ -1,5 +1,6 @@
 import { useRef, Fragment } from "react";
 import classes from "./Login.module.css";
+import image from "../../images/login.jpg"
 
 const LoginForm = (props) => {
   const emailInputRef = useRef();
@@ -12,10 +13,12 @@ const LoginForm = (props) => {
     console.log(enteredEmail, enteredPassword);
   };
   return (
-    <Fragment>
+    <Fragment>   
+     <div className={classes.maincontainer}>            
       <div className={classes.logincontainer}>
+        <h3>Create Account</h3>
         <form onSubmit={formSubmitHandler}>
-          <div>
+          <div className={classes.Username}>
             <label htmlFor="email">Username</label>
             <input
               type="email"
@@ -25,7 +28,7 @@ const LoginForm = (props) => {
               ref={emailInputRef}
             />
           </div>
-          <div>
+          <div className={classes.password}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -39,6 +42,11 @@ const LoginForm = (props) => {
           </div>
         </form>
       </div>
+      <div className={classes.loginimg}>
+        <img src={image} alt="img" />
+      </div>
+     </div>      
+      
     </Fragment>
   );
 };
