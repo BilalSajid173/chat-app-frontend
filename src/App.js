@@ -1,12 +1,15 @@
 import "./App.css";
-import { Fragment } from "react";
+import React from "react";
 import Login from "./pages/Login";
+import { Route, Routes } from "react-router-dom";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <Fragment>
-      <Login />
-    </Fragment>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   );
 }
 
