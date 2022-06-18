@@ -14,7 +14,7 @@ html {
 
 body {
   font-family: "Varela Round", sans-serif;
-  background-image: linear-gradient(blue, pink);
+  background-image: linear-gradient(#7ee8fa, #eec0c6);
 }
 
 .maincontainer {
@@ -22,7 +22,7 @@ body {
   flex-wrap: wrap;
   margin: 6% 18%;
   padding: 5%;
-  border-radius: 20px;
+  border-radius: 8px;
   background-color: white;
   justify-content: center;
   box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.004),
@@ -35,11 +35,20 @@ body {
   width: 50%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+  flex-direction: column;
 }
 
-.logincontainer h4 {
-  color: rgb(125, 0, 125);
+.logincontainer h2{
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.logincontainer h4{
+  font-weight: lighter;
+  font-family: "Varela Round", sans-serif;
+  color: #484848;
+  font-size: 0.9rem;
 }
 
 .logincontainer form {
@@ -61,7 +70,7 @@ body {
   outline: 0;
   border-bottom: 2px solid gray;
   margin: 1.5rem 0;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .logincontainer button {
@@ -69,20 +78,28 @@ body {
   border: 0;
   outline: 0;
   background-color: black;
-  color: rgb(255, 255, 255);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  width: 80%;
-  font-size: 1.9rem;
+  color: white;
+  margin: 2rem 0;
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 9px 20px;
 }
 
 .logincontainer button:hover {
   cursor: pointer;
-  background-color: rgb(146, 146, 219);
+  background-color: #484848;
 }
 
 .loginimg {
   width: 50%;
+}
+
+.logincontainer a{
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+  color: black;
+  font-size: 0.9rem;
 }
 
 .loginimg img {
@@ -108,36 +125,41 @@ body {
 
 @media (max-width: 1200px) {
   .maincontainer {
-    margin: 8% 10%;
+    margin: 7% 10%;
   }
 }
 
 @media (max-width: 1000px) {
   .maincontainer {
-    margin: 10% 5%;
+    margin: 9% 5%;
   }
 }
 @media (max-width: 850px) {
-  .logincontainer input {
-    font-size: 1rem;
-  }
 
   .maincontainer {
-    margin: 15% 5%;
+    margin: 12% 5%;
+  }
+
+  .logincontainer{
+    width: 40%;
+  }
+
+  .loginimg{
+    width: 60%;
   }
 
   .logincontainer button {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 
   .logincontainer h4 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 }
 
 @media (max-width: 700px) {
   .maincontainer {
-    margin: 20% 5%;
+    margin: 15% 5%;
   }
 }
 
@@ -147,43 +169,49 @@ body {
   }
 
   .maincontainer {
-    margin: 20% auto;
+    margin: 8% auto;
     width: 80%;
     padding: 10%;
   }
 
   .logincontainer {
     width: 100%;
-    padding: 10%;
+    padding: 5%;
   }
 
   .logincontainer input {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .logincontainer h2{
+    text-align: center;
   }
 }
 
 @media (max-width: 500px) {
   .maincontainer {
-    margin: 30% auto;
+    margin: 15% auto;
+    padding: 8%;
   }
 
-  .logincontainer input {
-    font-size: 1.2rem;
+  .logincontainer {
+    padding: 2%;
   }
 }
 
 @media (max-width: 400px) {
   .maincontainer {
     width: 90%;
-    padding: 13% 5%;
+    padding: 13% 6%;
+  }
+  .logincontainer input {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 350px) {
   .maincontainer {
-    margin: 40% auto;
-  }
-  .logincontainer input {
-    font-size: 1rem;
+    margin: 25% auto;
+    padding: 10% 4%;
   }
 }
