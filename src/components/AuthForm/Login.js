@@ -1,34 +1,26 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
+import useInput from "../../hooks/use-input";
 
 const LoginForm = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [emailTouched, setEmailTouched] = useState(false);
-  const [passwordTouched, setPasswordTouched] = useState(false);
+  const {
+    value: enteredEmail,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    onBlurHandler: emailBlurHandler,
+    isValid: emailIsValid,
+    reset: resetEmail,
+  } = useInput((value) => value.includes("@"));
 
-  const emailIsValid = enteredEmail.includes("@");
-  const emailHasError = !emailIsValid && emailTouched;
-
-  const passwordIsValid = enteredPassword.trim().length >= 7;
-  const passwordHasError = !passwordIsValid && passwordTouched;
-
-  const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
-  };
-
-  const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
-  };
-
-  const emailBlurHandler = () => {
-    setEmailTouched(true);
-  };
-
-  const passwordBlurHandler = () => {
-    setPasswordTouched(true);
-  };
+  const {
+    value: enteredPassword,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    onBlurHandler: passwordBlurHandler,
+    isValid: passwordIsValid,
+    reset: resetPassword,
+  } = useInput((value) => value.trim().length >= 7);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -36,10 +28,8 @@ const LoginForm = (props) => {
       return;
     }
     console.log(enteredEmail, enteredPassword);
-    setEmailTouched(false);
-    setPasswordTouched(false);
-    setEnteredEmail("");
-    setEnteredPassword("");
+    resetEmail();
+    resetPassword();
   };
 
   const emailClasses = emailHasError ? classes.invalid : "";
