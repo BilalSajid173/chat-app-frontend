@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
@@ -73,7 +74,7 @@ const LoginForm = (props) => {
             </div>
             <button type="submit">Sign In</button>
             <h4>
-              Not a member?<a href="#"> Sign up</a>
+              Not a member? <Link to="/signup">Sign Up</Link>
             </h4>
           </form>
         </div>

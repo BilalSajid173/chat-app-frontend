@@ -1,9 +1,10 @@
 import { Fragment } from "react";
+import SignupForm from "../components/AuthForm/Signup"
 
 const Signup = (props) => {
   return (
     <Fragment>
-      <h1>Hello</h1>
+      <SignupForm />
     </Fragment>
   );
 };
