@@ -16,6 +16,7 @@ const LoginForm = (props) => {
     <Fragment>
       <div className={classes.maincontainer}>
         <div className={classes.logincontainer}>
+          <h2>Sign In</h2>
           <form onSubmit={formSubmitHandler}>
             <div className={classes.username}>
               <input
@@ -36,8 +37,8 @@ const LoginForm = (props) => {
                 ref={passwordInputRef}
               />
             </div>
-            <button type="submit">Login</button>
-            <h4>New here? SignUp</h4>
+            <button type="submit">Sign In</button>
+            <h4>Not a member?<a href="#">Sign up</a></h4>  
           </form>
         </div>
         <div className={classes.loginimg}>

@@ -14,7 +14,9 @@ html {
 
 body {
   font-family: "Varela Round", sans-serif;
-  background-image: linear-gradient(blue, pink);
+  /* background-image: linear-gradient(#eec0c6, #7ee8fa); */
+  background-image: linear-gradient(#7ee8fa, #eec0c6);
+  /* background-color: #ffcec6; */
 }
 
 .maincontainer {
@@ -22,7 +24,7 @@ body {
   flex-wrap: wrap;
   margin: 6% 18%;
   padding: 5%;
-  border-radius: 20px;
+  border-radius: 8px;
   background-color: white;
   justify-content: center;
   box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.004),
@@ -35,7 +37,14 @@ body {
   width: 50%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+  flex-direction: column;
+}
+
+.logincontainer h2{
+  text-align: left;
+  margin-left: 5rem;
+  margin-bottom: 2rem;
 }
 
 .logincontainer h4 {
@@ -55,7 +64,8 @@ body {
   outline: 0;
   border-bottom: 2px solid gray;
   margin: 1.5rem 0;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
+  width: 290px;
 }
 
 .logincontainer button {
@@ -63,18 +73,31 @@ body {
   border: 0;
   outline: 0;
   background-color: black;
-  color: rgb(255, 255, 255);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  width: 80%;
-  font-size: 1.9rem;
+  color: white;
+  margin: 2rem 0;
+  width: 290px;
+  font-size: 0.9rem;
+  padding: 9px 20px;
 }
 
 .logincontainer button:hover {
   cursor: pointer;
-  background-color: rgb(146, 146, 219);
+  background-color: #484848;
 }
 
+.logincontainer a{
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Varela Round", sans-serif;
+  color: black;
+  font-size: 0.7rem;
+}
+.logincontainer h4{
+  font-weight: lighter;
+  font-family: "Varela Round", sans-serif;
+  color: #484848;
+  font-size: 0.7rem;
+}
 .loginimg {
   width: 50%;
 }
