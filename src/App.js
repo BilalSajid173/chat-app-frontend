@@ -3,12 +3,14 @@ import React from "react";
 import Login from "./pages/Login";
 import { Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
+import FetchAllPosts from "./pages/AllPosts";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/allposts" element={<FetchAllPosts />} />
     </Routes>
   );
 }

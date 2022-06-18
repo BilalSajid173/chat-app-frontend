@@ -1,0 +1,14 @@
+.singlepost{
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    background-color: bisque;
+    justify-content: center;
+    margin: 2% 0;
+}
+
+.actions{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2% 0;
+}
