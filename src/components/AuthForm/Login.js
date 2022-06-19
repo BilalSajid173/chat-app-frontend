@@ -33,11 +33,35 @@ const LoginForm = (props) => {
     if (!emailIsValid || !passwordIsValid) {
       return;
     }
-    console.log(enteredEmail, enteredPassword);
-    const remainingMilliseconds = 60 * 1000;
-    const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
-    authCtx.login("Hello", expiryDate.toISOString());
-    navigate("/allposts");
+    fetch("http://localhost:8080/auth/login", {
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Please try again");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const remainingMilliseconds = 10 * 1000;
+        const expiryDate = new Date(
+          new Date().getTime() + remainingMilliseconds
+        );
+        authCtx.login(data.token, expiryDate.toISOString());
+        navigate("/allposts");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     resetEmail();
     resetPassword();
   };

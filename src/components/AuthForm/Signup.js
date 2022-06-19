@@ -1,10 +1,11 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
 
 const SignupForm = (props) => {
+  const navigate = useNavigate();
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -56,6 +57,7 @@ const SignupForm = (props) => {
         return res.json();
       })
       .then((data) => {
+        navigate("/");
         console.log(data);
       })
       .catch((err) => {
