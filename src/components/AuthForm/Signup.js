@@ -32,12 +32,36 @@ const SignupForm = (props) => {
     reset: resetPassword,
   } = useInput((value) => value.trim().length >= 7);
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     if (!emailIsValid || !passwordIsValid || !nameIsValid) {
       return;
     }
-    console.log(enteredEmail, enteredPassword, enteredName);
+    fetch("http://localhost:8080/auth/signup/", {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        name: enteredName,
+        password: enteredPassword,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Something went wrong");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     resetName();
     resetEmail();
     resetPassword();

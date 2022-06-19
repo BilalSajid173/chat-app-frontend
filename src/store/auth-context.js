@@ -23,7 +23,6 @@ const retrieveStoredToken = () => {
   const storedExpTime = localStorage.getItem("expirationTime");
 
   const remTime = remainingDuraton(storedExpTime);
-  console.log("hello")
   if (remTime < 0) {
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
