@@ -1,10 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
+import AuthContext from "../../store/auth-context";
 
 const LoginForm = (props) => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -29,6 +34,10 @@ const LoginForm = (props) => {
       return;
     }
     console.log(enteredEmail, enteredPassword);
+    const remainingMilliseconds = 60 * 1000;
+    const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+    authCtx.login("Hello", expiryDate.toISOString());
+    navigate("/allposts");
     resetEmail();
     resetPassword();
   };

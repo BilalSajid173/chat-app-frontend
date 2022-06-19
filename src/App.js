@@ -1,16 +1,21 @@
 import "./App.css";
-import React from "react";
+import React, { useContext } from "react";
 import Login from "./pages/Login";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
+import AuthContext from "./store/auth-context";
 
 function App() {
+  const authCtx = useContext(AuthContext);
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/allposts" element={<FetchAllPosts />} />
+      {authCtx.isLoggedIn && (
+        <Route path="/allposts" element={<FetchAllPosts />} />
+      )}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
