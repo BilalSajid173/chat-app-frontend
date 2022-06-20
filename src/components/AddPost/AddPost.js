@@ -1,8 +1,11 @@
 import classes from "./AddPost.module.css";
 import useInput from "../../hooks/use-input";
 import { useNavigate } from "react-router";
+import AuthContext from "../../store/auth-context";
+import { useContext } from "react";
 
 const AddPost = () => {
+  const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
   const {
     value: enteredTitle,
@@ -28,6 +31,31 @@ const AddPost = () => {
       return;
     }
     console.log(enteredTitle, enteredContent);
+    fetch("http://localhost:8080/post/addpost", {
+      method: "POST",
+      body: JSON.stringify({
+        title: enteredTitle,
+        content: enteredContent,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Post Creation failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        navigate("/allposts");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     resetTitle();
     resetContent();
   };
