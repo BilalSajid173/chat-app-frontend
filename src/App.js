@@ -5,6 +5,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
+import AddNewPost from "./pages/AddPost";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -14,6 +15,9 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       {authCtx.isLoggedIn && (
         <Route path="/allposts" element={<FetchAllPosts />} />
+      )}
+      {authCtx.isLoggedIn && (
+        <Route path="/add-post" element={<AddNewPost />} />
       )}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
