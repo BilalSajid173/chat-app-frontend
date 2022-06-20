@@ -4,8 +4,8 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  padding: 5px 10px;
-  box-shadow: 0px 0px 6px #ccc;
+  padding: 5px 8px;
+  box-shadow: 0px 0px 6px rgb(152, 152, 152);
 }
 
 .nav_left {
@@ -17,9 +17,9 @@ nav {
   display: flex;
   align-items: center;
   background-color: #f1f2f6;
-  padding: 15px;
+  padding: 12px;
   border-radius: 50px;
-  height: 40px;
+  height: 35px;
 }
 
 .search input {
@@ -34,7 +34,7 @@ nav {
 }
 
 .icons {
-  padding: 10px 2.8vw;
+  padding: 10px 2.5vw;
   border-radius: 5px;
   color: #66676c;
 }
@@ -67,13 +67,14 @@ nav {
 }
 
 .buttons span {
-  padding: 10px;
+  padding: 8px;
   margin: 0 1px;
   border-radius: 50%;
-  background: #f1f2f6;
+  background: #E4E6EB;
 }
 
 .buttons span:hover {
   background-color: #d8d9dd;
   transition: ease-in-out 0.3s;
+  cursor: pointer;
 }

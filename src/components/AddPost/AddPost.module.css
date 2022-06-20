@@ -1,43 +1,44 @@
 .addPostWrapper {
-  background-color: rgb(255, 220, 220);
-  padding: 2% 10%;
+  background-color: #f1f2f6;
+  padding: 1% 10%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   min-height: 90vh;
 }
 
 .addpostform {
-  width: 75%;
-  padding: 3% 10%;
+  width: 55%;
+  padding: 2% 10%;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.015),
-    0 1px 8.5px rgba(0, 0, 0, 0.09), 0 1.9px 15.7px rgba(0, 0, 0, 0.089),
-    0 3.4px 28.2px rgba(0, 0, 0, 0.1), 0 6.3px 54.4px rgba(0, 0, 0, 0.1),
-    0 15px 137px rgba(0, 0, 0, 0.23);
+  box-shadow: 0px 0px 6px #ccc;
+  height: 40vh;
 }
 
 .addpostform label {
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   margin: 0.5rem 0;
   display: block;
 }
 
 .addpostform input,
 .addpostform textarea {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   width: 100%;
-  border: 0;
-  outline: 0;
-  border-bottom: 1px solid pink;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  border: none;
+  background: transparent;
   margin-bottom: 1rem;
 }
 
 .addpostform textarea {
-  border: 1px solid pink;
+  border: none;
+  background-color: #e7e9ef;
+  resize: none;
+  border-radius: 6px;
 }
 
 .actions {
@@ -50,9 +51,9 @@
   border: 0;
   outline: 0;
   margin: 5px;
-  padding: 10px;
-  font-size: 1.1rem;
-  background-color: rgb(3, 3, 61);
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  background-color: black;
   color: white;
   cursor: pointer;
 }
