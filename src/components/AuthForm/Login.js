@@ -1,10 +1,15 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
+import AuthContext from "../../store/auth-context";
 
 const LoginForm = (props) => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -28,7 +33,35 @@ const LoginForm = (props) => {
     if (!emailIsValid || !passwordIsValid) {
       return;
     }
-    console.log(enteredEmail, enteredPassword);
+    fetch("http://localhost:8080/auth/login", {
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Please try again");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const remainingMilliseconds = 10 * 1000;
+        const expiryDate = new Date(
+          new Date().getTime() + remainingMilliseconds
+        );
+        authCtx.login(data.token, expiryDate.toISOString());
+        navigate("/allposts");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     resetEmail();
     resetPassword();
   };

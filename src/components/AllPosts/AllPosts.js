@@ -39,6 +39,7 @@ const AllPosts = () => {
       <div className={classes.container}>
         {dummyposts.map((post) => (
           <PostItem
+            key={post.id}
             id={post.id}
             author={post.author}
             content={post.content}

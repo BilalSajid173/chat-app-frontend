@@ -1,10 +1,11 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
 
 const SignupForm = (props) => {
+  const navigate = useNavigate();
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -32,12 +33,37 @@ const SignupForm = (props) => {
     reset: resetPassword,
   } = useInput((value) => value.trim().length >= 7);
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     if (!emailIsValid || !passwordIsValid || !nameIsValid) {
       return;
     }
-    console.log(enteredEmail, enteredPassword, enteredName);
+    fetch("http://localhost:8080/auth/signup/", {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        name: enteredName,
+        password: enteredPassword,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Something went wrong");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        navigate("/");
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     resetName();
     resetEmail();
     resetPassword();
