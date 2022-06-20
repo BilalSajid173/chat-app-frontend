@@ -1,7 +1,9 @@
 import classes from "./AddPost.module.css";
 import useInput from "../../hooks/use-input";
+import { useNavigate } from "react-router";
 
 const AddPost = () => {
+  const navigate = useNavigate();
   const {
     value: enteredTitle,
     hasError: titleHasError,
@@ -20,12 +22,26 @@ const AddPost = () => {
     reset: resetContent,
   } = useInput((value) => value.trim() !== "");
 
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    if (!titleIsValid || !contentIsValid) {
+      return;
+    }
+    console.log(enteredTitle, enteredContent);
+    resetTitle();
+    resetContent();
+  };
+
+  const cancelHandler = () => {
+    navigate("/allposts");
+  };
+
   const titleClasses = titleHasError ? classes.invalid : "";
   const contentClasses = contentHasError ? classes.invalid : "";
   return (
     <div className={classes.addPostWrapper}>
       <div className={classes.addpostform}>
-        <form>
+        <form onSubmit={formSubmitHandler}>
           <div className={titleClasses}>
             <label htmlFor="title">Title</label>
             {titleHasError && (
@@ -56,7 +72,9 @@ const AddPost = () => {
           </div>
           <div className={classes.actions}>
             <button type="submit">Add Post</button>
-            <button>Cancel</button>
+            <button type="button" onClick={cancelHandler}>
+              Cancel
+            </button>
           </div>
         </form>
       </div>
