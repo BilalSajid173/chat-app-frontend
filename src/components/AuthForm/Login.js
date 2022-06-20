@@ -52,7 +52,7 @@ const LoginForm = (props) => {
       })
       .then((data) => {
         console.log(data);
-        const remainingMilliseconds = 10 * 1000;
+        const remainingMilliseconds = 60 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
         );
