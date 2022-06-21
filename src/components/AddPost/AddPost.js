@@ -69,11 +69,15 @@ const AddPost = () => {
   return (
     <div className={classes.addPostWrapper}>
       <div className={classes.addpostform}>
+      <button type="button" onClick={cancelHandler}>
+        <span class="material-symbols-outlined">
+          cancel
+        </span>
+      </button>
         <form onSubmit={formSubmitHandler}>
           <div className={titleClasses}>
-            <label htmlFor="title">Title</label>
             {titleHasError && (
-              <p className={classes.error}>Please Enter a title.</p>
+              <p className={classes.error}>Enter Title</p>
             )}
             <input
               id="title"
@@ -82,12 +86,12 @@ const AddPost = () => {
               value={enteredTitle}
               onChange={titleChangeHandler}
               onBlur={titleBlurHandler}
+              placeholder="Title"
             />
           </div>
           <div className={contentClasses}>
-            <label htmlFor="content">What do you wanna say?</label>
             {contentHasError && (
-              <p className={classes.error}>Please Enter some content.</p>
+              <p className={classes.error}>Dont leave this empty</p>
             )}
             <textarea
               rows="8"
@@ -96,13 +100,11 @@ const AddPost = () => {
               value={enteredContent}
               onChange={contentChangeHandler}
               onBlur={contentBlurHandler}
+              placeholder="What's on your mind?"
             ></textarea>
           </div>
           <div className={classes.actions}>
-            <button type="submit">Add Post</button>
-            <button type="button" onClick={cancelHandler}>
-              Cancel
-            </button>
+            <button type="submit">Post</button>
           </div>
         </form>
       </div>

@@ -1,8 +1,9 @@
 import classes from "../Navbar/navbar.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 
 const Navbar = (props) => {
+
   return (
     <Fragment>
       <nav>
@@ -13,15 +14,19 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className={classes.nav_mid}>
-          <Link to="" className={classes.icons}>
-            <span className="material-symbols-outlined">home</span>
-          </Link>
-          <Link to="" className={classes.icons}>
-            <span className="material-symbols-outlined">groups</span>
-          </Link>
-          <Link to="" className={classes.icons}>
-            <span className="material-symbols-outlined">home</span>
-          </Link>
+          <div className={classes.icons}>
+            <NavLink className={({isActive}) => isActive?`${classes.activeicon}`:""} to="/allposts">
+              <span className="material-symbols-outlined">home</span>
+            </NavLink>
+          </div>
+          <div className={classes.icons}>
+          <NavLink className={({isActive}) => isActive?`${classes.activeicon}`:""} to="/friendlist">
+              <span className="material-symbols-outlined">groups</span>
+            </NavLink>
+          </div>
+          <div className={classes.icons}>
+            <span className="material-symbols-outlined">account_circle</span>
+          </div>
         </div>
         <div className={classes.nav_right}>
           <div className={classes.avatar}>
@@ -30,9 +35,9 @@ const Navbar = (props) => {
             </span>
           </div>
           <div className={classes.buttons}>
-            <Link to="/add-post">
+            <NavLink className={({isActive}) => isActive?`${classes.active}`:""} to="/add-post">      
               <span className="material-symbols-outlined">add</span>
-            </Link>
+            </NavLink>
             <span className="material-symbols-outlined">chat</span>
             <span className="material-symbols-outlined">arrow_drop_down</span>
           </div>
