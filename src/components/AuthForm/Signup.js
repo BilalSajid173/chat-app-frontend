@@ -74,64 +74,66 @@ const SignupForm = (props) => {
   const passwordClasses = passwordHasError ? classes.invalid : "";
   return (
     <Fragment>
-      <div className={classes.maincontainer}>
-        <div className={classes.logincontainer}>
-          <h2>Create Account</h2>
-          <form onSubmit={formSubmitHandler} noValidate>
-            <div className={nameClasses}>
-              {nameHasError && (
-                <p className={classes.error}>Please Enter a name.</p>
-              )}
-              <input
-                placeholder="Name"
-                type="text"
-                id="name"
-                autoComplete="off"
-                required
-                value={enteredName}
-                onChange={nameChangeHandler}
-                onBlur={nameBlurHandler}
-              />
-            </div>
-            <div className={emailClasses}>
-              {emailHasError && (
-                <p className={classes.error}>Please Enter a valid email.</p>
-              )}
-              <input
-                placeholder="Email"
-                type="email"
-                id="email"
-                autoComplete="off"
-                required
-                value={enteredEmail}
-                onChange={emailChangeHandler}
-                onBlur={emailBlurHandler}
-              />
-            </div>
-            <div className={passwordClasses}>
-              {passwordHasError && (
-                <p className={classes.error}>
-                  Min passsword length is 7 characters.
-                </p>
-              )}
-              <input
-                placeholder="Password"
-                type="password"
-                id="password"
-                required
-                value={enteredPassword}
-                onChange={passwordChangeHandler}
-                onBlur={passwordBlurHandler}
-              />
-            </div>
-            <button type="submit">Sign Up</button>
-            <h4>
-              Already a member? <Link to="/">Log In</Link>
-            </h4>
-          </form>
-        </div>
-        <div className={classes.loginimg}>
-          <img src={image} alt="img" />
+      <div className={classes.bodygradient}>
+        <div className={classes.maincontainer}>
+          <div className={classes.logincontainer}>
+            <h2>Create Account</h2>
+            <form onSubmit={formSubmitHandler} noValidate>
+              <div className={nameClasses}>
+                {nameHasError && (
+                  <p className={classes.error}>Please Enter a name.</p>
+                )}
+                <input
+                  placeholder="Name"
+                  type="text"
+                  id="name"
+                  autoComplete="off"
+                  required
+                  value={enteredName}
+                  onChange={nameChangeHandler}
+                  onBlur={nameBlurHandler}
+                />
+              </div>
+              <div className={emailClasses}>
+                {emailHasError && (
+                  <p className={classes.error}>Please Enter a valid email.</p>
+                )}
+                <input
+                  placeholder="Email"
+                  type="email"
+                  id="email"
+                  autoComplete="off"
+                  required
+                  value={enteredEmail}
+                  onChange={emailChangeHandler}
+                  onBlur={emailBlurHandler}
+                />
+              </div>
+              <div className={passwordClasses}>
+                {passwordHasError && (
+                  <p className={classes.error}>
+                    Min passsword length is 7 characters.
+                  </p>
+                )}
+                <input
+                  placeholder="Password"
+                  type="password"
+                  id="password"
+                  required
+                  value={enteredPassword}
+                  onChange={passwordChangeHandler}
+                  onBlur={passwordBlurHandler}
+                />
+              </div>
+              <button type="submit">Sign Up</button>
+              <h4>
+                Already a member? <Link to="/">Log In</Link>
+              </h4>
+            </form>
+          </div>
+          <div className={classes.loginimg}>
+            <img src={image} alt="img" />
+          </div>
         </div>
       </div>
     </Fragment>

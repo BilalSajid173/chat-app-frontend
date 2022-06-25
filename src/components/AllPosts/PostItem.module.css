@@ -1,65 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 
 .postbg {
-    background-color: #f1f2f6;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: -75%;
+  width: 100%;
+  padding: 3%;
 }
 
 .postContainer {
-    top: 0;
-    bottom: 0;
-    margin-top: 2%;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    justify-content: center;
-    width: 40vw;
-    height: 40vh;
-    border-radius: 7px;
-    box-shadow: 0px 0px 6px #ccc;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  border-radius: 7px;
+  box-shadow: 0px 0px 6px #ccc;
 }
 
 .singlepost {
-    padding: 5%;
+  padding: 5%;
 }
 
 .singlepost h3 {
-    padding: 3%;
+  margin-bottom: 2%;
 }
+
+.singlepost span {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .actions {
-    display: flex;
-    padding: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 5%;
+  padding-bottom: 2%;
 }
 
 .actions button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: #f1f2f6;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1rem;
-    color: grey;
-    padding: 10%;
-    border-radius: 12px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #f1f2f6;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 1rem;
+  color: grey;
+  padding: 2% 5%;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-right: 1%;
 }
 
 .actions button span {
-    font-size: 1.2rem;
-    padding-right: 9%;
+  font-size: 1.2rem;
+  padding-right: 9%;
 }
 
-.like button {
+/* .like button {
     padding: 19%;
-}
+} */
 
-.comment {
+/* .comment {
     padding-left: 4%;
-}
+} */
 
+@media (max-width: 500px) {
+  .postContainer {
+    font-size: 0.9rem;
+  }
+}
