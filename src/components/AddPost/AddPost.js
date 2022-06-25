@@ -69,16 +69,12 @@ const AddPost = () => {
   return (
     <div className={classes.addPostWrapper}>
       <div className={classes.addpostform}>
-      <button type="button" onClick={cancelHandler}>
-        <span class="material-symbols-outlined">
-          cancel
-        </span>
-      </button>
+        <button type="button" onClick={cancelHandler}>
+          <span className="material-symbols-outlined">cancel</span>
+        </button>
         <form onSubmit={formSubmitHandler}>
           <div className={titleClasses}>
-            {titleHasError && (
-              <p className={classes.error}>Enter Title</p>
-            )}
+            {titleHasError && <p className={classes.error}>Enter Title</p>}
             <input
               id="title"
               name="title"

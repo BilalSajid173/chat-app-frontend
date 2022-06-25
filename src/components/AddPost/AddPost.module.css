@@ -1,10 +1,10 @@
 .addPostWrapper {
   background-color: #f1f2f6;
-  padding: 1% 10%;
+  min-height: 90.5vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  min-height: 90vh;
+  align-items: center;
 }
 
 .addpostform {
@@ -13,16 +13,15 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 0px 6px #ccc;
-  height: 50vh;
 }
 
 .addpostform button {
   /* border-radius: 100px; */
   border: none;
   margin-bottom: 5%;
+  cursor: pointer;
   float: right;
-  padding: 1%;
-  background-color: #f1f2f6;
+  /* background-color: #f1f2f6; */
   color: black;
 }
 
@@ -38,34 +37,30 @@
   margin-bottom: 1rem;
   padding: 3%;
   cursor: text;
+  border-radius: 6px;
 }
 
 .addpostform textarea {
-  border: none;
   background-color: #f1f1f6;
   resize: none;
-  border-radius: 6px;
 }
 
 .addpostform input {
-  border: none;
   background-color: whitesmoke;
-  border-radius: 6px;
 }
 
 .actions {
-  float: right;
   padding: 2% 0;
-  margin-right: 0;
 }
 
 .actions button {
   border: 0;
   outline: 0;
-  margin: 5px;
-  padding: 12px 13.7rem;
+  padding: 2% 0;
+  margin: 0;
+  width: 100%;
   font-size: 0.8rem;
-  background-color: #1B74E4;
+  background-color: #1b74e4;
   color: white;
   cursor: pointer;
   font-weight: bolder;
@@ -94,21 +89,14 @@
 }
 
 @media (max-width: 1200px) {
-  .addPostWrapper {
-    padding: 2% 5%;
-  }
-
   .addpostform {
-    width: 80%;
+    width: 75%;
   }
 }
 
 @media (max-width: 800px) {
   .addpostform {
     width: 90%;
-  }
-  .addpostform label {
-    font-size: 1.2rem;
   }
 }
 
@@ -117,28 +105,22 @@
     padding: 5%;
   }
 
+  .addPostWrapper {
+    min-height: 83vh;
+  }
+
   .actions button {
-    padding: 5px;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 400px) {
   .addpostform {
-    padding: 7% 3%;
+    padding: 10% 3%;
   }
 
   .addPostWrapper {
     padding: 2%;
-  }
-
-  .addpostform label {
-    font-size: 1rem;
-  }
-
-  .addpostform input,
-  .addpostform textarea {
-    font-size: 0.8rem;
   }
 
   .actions button {
