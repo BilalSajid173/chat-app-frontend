@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
 import AddNewPost from "./pages/AddPost";
-import FriendList from "./components/friendlist/friendlist";
+import FriendList from "./pages/Friendlist";
 
 function App() {
   const authCtx = useContext(AuthContext);
