@@ -1,14 +1,14 @@
 import React from "react";
-import FriendList from "../components/friendlist/friendlist";
+import friendList from "../components/friendlist/friendlist";
 import Navbar from "../components/Navbar/navbar";
 
-const friendlist = (props) => {
+const Friendlist = (props) => {
   return (
     <>
       <Navbar />
-      <FriendList />
+      <friendList />
     </>
   );
 };
 
-export default friendlist;
+export default Friendlist;
