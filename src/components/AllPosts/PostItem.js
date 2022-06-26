@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import classes from "./PostItem.module.css";
+import AuthContext from "../../store/auth-context";
 
 const PostItem = (props) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const authCtx = useContext(AuthContext);
+  const [isLiked, setIsLiked] = useState(props.isLiked);
 
   const onLikeChangeHandler = () => {
-    setIsLiked((prevState) => {
-      return !prevState;
-    });
+    fetch("http://localhost:8080/post/likepost/" + props.id, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Liking post unsuccessful");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setIsLiked((prevState) => {
+          return !prevState;
+        });
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

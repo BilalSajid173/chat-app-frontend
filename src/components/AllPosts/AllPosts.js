@@ -24,8 +24,10 @@ const AllPosts = () => {
         return res.json();
       })
       .then((data) => {
+        const likedposts = data.likedPosts ? data.likedPosts : [];
         const posts = data.posts.map((post) => {
           return {
+            isLiked: likedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
             content: post.content,
@@ -37,7 +39,9 @@ const AllPosts = () => {
         setUser(data.user.name);
         console.log(data);
       })
-      .catch();
+      .catch((err) => {
+        console.log(err);
+      });
   }, [authCtx.token]);
 
   return (
@@ -47,6 +51,7 @@ const AllPosts = () => {
       <div className={classes.container}>
         {allPosts.map((post) => (
           <PostItem
+            isLiked={post.isLiked}
             authorId={post.authorId}
             key={post.id}
             id={post.id}
