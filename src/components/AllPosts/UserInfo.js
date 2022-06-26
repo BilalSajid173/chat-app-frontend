@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   return (
     <Fragment>
       <div className={classes.container}>
         <img src={image} alt="userimg"></img>
-        <h2>Hey Bilal!</h2>
+        <h2>Hey {props.name}!</h2>
         <div className={classes.buttons}>
           <Link className={classes.links} to="">
             <button>View Profile</button>
