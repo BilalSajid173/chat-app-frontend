@@ -47,8 +47,8 @@
   box-shadow: 0px 0px 6px #ccc;
 }
 
-/* @media (max-width: 1025px) {
+@media (max-width: 1025px) {
   .container {
     display: none;
   }
-} */
+}

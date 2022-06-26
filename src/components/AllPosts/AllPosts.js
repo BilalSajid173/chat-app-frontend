@@ -2,6 +2,7 @@ import classes from "./AllPosts.module.css";
 import { Fragment } from "react";
 import PostItem from "./PostItem";
 import UserInfo from "./UserInfo";
+import FriendSection from "./FriendSection";
 
 const dummyposts = [
   {
@@ -38,6 +39,7 @@ const AllPosts = () => {
   return (
     <Fragment>
       <UserInfo />
+      <FriendSection />
       <div className={classes.container}>
         {dummyposts.map((post) => (
           <PostItem
