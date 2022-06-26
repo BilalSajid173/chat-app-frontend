@@ -1,48 +1,58 @@
 import classes from "./AllPosts.module.css";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import PostItem from "./PostItem";
 import UserInfo from "./UserInfo";
 import FriendSection from "./FriendSection";
-
-const dummyposts = [
-  {
-    id: "1",
-    author: "Bilal Sajid",
-    createdAt: "21:20 18-06-2022",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    id: "2",
-    author: "Nasrul Huda",
-    createdAt: "21:20 18-06-2022",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    id: "3",
-    author: "Bilal Sajid",
-    createdAt: "21:20 18-06-2022",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    id: "4",
-    author: "Nasrul Huda",
-    createdAt: "21:20 18-06-2022",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-];
+import AuthContext from "../../store/auth-context";
 
 const AllPosts = () => {
+  const authCtx = useContext(AuthContext);
+  const [allPosts, setAllPosts] = useState([]);
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:8080/post/allposts", {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Getting Posts Failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        const likedposts = data.likedPosts ? data.likedPosts : [];
+        const posts = data.posts.map((post) => {
+          return {
+            isLiked: likedposts.includes(post._id) ? true : false,
+            id: post._id,
+            author: post.author.name,
+            content: post.content,
+            createdAt: new Date(post.createdAt).toDateString(),
+            authorId: post.author._id,
+          };
+        });
+        setAllPosts(posts);
+        setUser(data.user.name);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [authCtx.token]);
+
   return (
     <Fragment>
-      <UserInfo />
+      <UserInfo name={user} />
       <FriendSection />
       <div className={classes.container}>
-        {dummyposts.map((post) => (
+        {allPosts.map((post) => (
           <PostItem
+            isLiked={post.isLiked}
+            authorId={post.authorId}
             key={post.id}
             id={post.id}
             author={post.author}
