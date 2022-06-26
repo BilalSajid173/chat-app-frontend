@@ -1,6 +1,7 @@
 import classes from "./AllPosts.module.css";
 import { Fragment } from "react";
 import PostItem from "./PostItem";
+import UserInfo from "./UserInfo";
 
 const dummyposts = [
   {
@@ -36,6 +37,7 @@ const dummyposts = [
 const AllPosts = () => {
   return (
     <Fragment>
+      <UserInfo />
       <div className={classes.container}>
         {dummyposts.map((post) => (
           <PostItem
