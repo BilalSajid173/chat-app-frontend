@@ -1,6 +1,8 @@
 import { useState, useContext } from "react";
 import classes from "./PostItem.module.css";
 import AuthContext from "../../store/auth-context";
+import image from "../../images/userimg.png";
+import { Link } from "react-router-dom";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -35,9 +37,31 @@ const PostItem = (props) => {
       <div className={classes.postbg}>
         <div className={classes.postContainer}>
           <div className={classes.singlepost}>
-            <h3>{props.author}</h3>
-            <p>{props.content}</p>
-            <span>{props.createdAt}</span>
+            <div className={classes.userinfo}>
+              <div>
+                <img src={image} alt="img"></img>
+              </div>
+              <div>
+                <h3>{props.author}</h3>
+                <span>{props.createdAt}</span>
+              </div>
+              <div className={classes.bookmark}>
+                <i
+                  className={`${
+                    isLiked ? "fa-solid" : "fa-regular"
+                  } fa-bookmark`}
+                ></i>
+              </div>
+            </div>
+            <p>
+              {props.content}
+              <Link
+                className={classes.viewpostlink}
+                to={`/singlepost/${props.id}`}
+              >
+                Read More
+              </Link>
+            </p>
           </div>
           <div className={classes.actions}>
             <button onClick={onLikeChangeHandler}>

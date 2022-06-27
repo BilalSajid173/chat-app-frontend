@@ -1,0 +1,160 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 3%;
+  background-color: #f1f2f6;
+  min-height: 91vh;
+}
+
+.postContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  border-radius: 7px;
+  box-shadow: 0px 0px 6px #ccc;
+}
+
+.singlepost {
+  padding: 3% 5%;
+  margin-bottom: 1%;
+}
+
+.singlepost p {
+  font-size: 1.1rem;
+}
+
+.userinfo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+}
+
+.userinfo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  background-color: #f1f2f6;
+  margin-right: 1.5rem;
+}
+
+.userinfo h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5%;
+  font-weight: 500;
+}
+
+.userinfo span {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.comments {
+  padding: 3% 0;
+  width: 60%;
+}
+.comments h2 {
+  margin-bottom: 1rem;
+}
+
+.comments input {
+  border: 0;
+  outline: 0;
+  padding: 10px;
+  font-size: 1rem;
+  width: 75%;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  margin-right: 2%;
+  transition: all 0.3s ease-in;
+}
+
+.comments input:focus {
+  box-shadow: 0px 0px 6px #ccc;
+  background-color: rgb(149, 228, 255);
+}
+
+.comments button {
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+  padding: 10px;
+  width: 23%;
+  background-color: rgb(149, 228, 255);
+  border-radius: 5px;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+.comments button:hover {
+  background-color: darkviolet;
+}
+
+.morePosts {
+  position: fixed;
+  top: 14%;
+  right: 1%;
+  padding-right: 1%;
+  width: 33%;
+  overflow-y: scroll;
+}
+
+.morePosts h2 {
+  padding-left: 2%;
+}
+
+@media (max-width: 1024px) {
+  .morePosts {
+    width: 37%;
+  }
+}
+
+@media (max-width: 768px) {
+  .morePosts {
+    display: none;
+  }
+
+  .postContainer {
+    width: 80%;
+  }
+
+  .container {
+    align-items: center;
+    padding-top: 5%;
+  }
+
+  .comments {
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  .postContainer {
+    width: 90%;
+  }
+
+  .comments {
+    margin-top: 2%;
+    width: 90%;
+  }
+
+  .singlepost p {
+    font-size: 1rem;
+  }
+
+  .userinfo img {
+    width: 70px;
+    height: 70px;
+    margin-right: 1.3rem;
+  }
+
+  .userinfo h3 {
+    font-size: 1.5rem;
+  }
+
+  .userinfo span {
+    font-size: 0.9rem;
+  }
+}
