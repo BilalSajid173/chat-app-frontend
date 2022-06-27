@@ -37,7 +37,6 @@ const AllPosts = () => {
         });
         setAllPosts(posts);
         setUser(data.user.name);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);

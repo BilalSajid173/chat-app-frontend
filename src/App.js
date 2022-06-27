@@ -7,6 +7,7 @@ import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
 import AddNewPost from "./pages/AddPost";
 import FriendList from "./pages/Friendlist";
+import ViewPost from "./pages/SinglePost";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -22,6 +23,9 @@ function App() {
       )}
       {authCtx.isLoggedIn && (
         <Route path="/friendlist" element={<FriendList />} />
+      )}
+      {authCtx.isLoggedIn && (
+        <Route path="/singlepost/:postId" element={<ViewPost />} />
       )}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

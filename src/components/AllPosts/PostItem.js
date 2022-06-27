@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import classes from "./PostItem.module.css";
 import AuthContext from "../../store/auth-context";
 import image from "../../images/userimg.png";
+import { Link } from "react-router-dom";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -52,7 +53,15 @@ const PostItem = (props) => {
                 ></i>
               </div>
             </div>
-            <p>{props.content}</p>
+            <p>
+              {props.content}
+              <Link
+                className={classes.viewpostlink}
+                to={`/singlepost/${props.id}`}
+              >
+                Read More
+              </Link>
+            </p>
           </div>
           <div className={classes.actions}>
             <button onClick={onLikeChangeHandler}>

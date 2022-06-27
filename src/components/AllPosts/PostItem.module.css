@@ -85,6 +85,10 @@
   padding-right: 9%;
 }
 
+.viewpostlink {
+  text-decoration: none;
+}
+
 /* .like button {
     padding: 19%;
 } */
