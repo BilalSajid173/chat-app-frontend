@@ -15,16 +15,42 @@
 }
 
 .singlepost {
-  padding: 5%;
+  padding: 3% 5%;
+  margin-bottom: 1%;
 }
 
-.singlepost h3 {
-  margin-bottom: 2%;
+.userinfo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
 }
 
-.singlepost span {
+.userinfo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #f1f2f6;
+  margin-right: 10px;
+}
+
+.userinfo h3 {
+  margin-bottom: 0.5%;
+  font-weight: 500;
+}
+
+.userinfo span {
   font-size: 0.8rem;
   font-weight: 500;
+}
+
+.bookmark {
+  margin-left: auto;
+  font-size: 1.5rem;
+  color: rgb(219, 166, 174);
+}
+
+.bookmark i {
+  cursor: pointer;
 }
 
 .actions {
@@ -54,7 +80,7 @@
   padding-right: 9%;
 }
 
-.likebutton{
+.likebutton {
   font-size: 1.2rem;
   padding-right: 9%;
 }
