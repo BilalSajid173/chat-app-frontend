@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { Fragment } from "react";
 
 const Navbar = (props) => {
-
   return (
     <Fragment>
       <nav>
@@ -14,19 +13,36 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className={classes.nav_mid}>
-          <div className={classes.icons}>
-            <NavLink className={({isActive}) => isActive?`${classes.activeicon}`:""} to="/allposts">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${classes.activeicon}` : ""
+            }
+            to="/allposts"
+          >
+            <div className={classes.icons}>
               <span className="material-symbols-outlined">home</span>
-            </NavLink>
-          </div>
-          <div className={classes.icons}>
-          <NavLink className={({isActive}) => isActive?`${classes.activeicon}`:""} to="/friendlist">
+            </div>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${classes.activeicon}` : ""
+            }
+            to="/friendlist"
+          >
+            <div className={classes.icons}>
               <span className="material-symbols-outlined">groups</span>
-            </NavLink>
-          </div>
-          <div className={classes.icons}>
-            <span className="material-symbols-outlined">account_circle</span>
-          </div>
+            </div>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${classes.activeicon}` : ""
+            }
+            to="/user_account"
+          >
+            <div className={classes.icons}>
+              <span className="material-symbols-outlined">account_circle</span>
+            </div>
+          </NavLink>
         </div>
         <div className={classes.nav_right}>
           <div className={classes.avatar}>
@@ -35,7 +51,12 @@ const Navbar = (props) => {
             </span>
           </div>
           <div className={classes.buttons}>
-            <NavLink className={({isActive}) => isActive?`${classes.active}`:""} to="/add-post">      
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : ""
+              }
+              to="/add-post"
+            >
               <span className="material-symbols-outlined">add</span>
             </NavLink>
             <span className="material-symbols-outlined">chat</span>

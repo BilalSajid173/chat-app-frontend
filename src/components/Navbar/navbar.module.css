@@ -83,13 +83,15 @@ nav {
   cursor: pointer;
 }
 
-.active {
-  color: white;
-  background-color: #1B74E4;
+.active span {
+  color: #ffffff;
+  background-color: #1b74e4;
 }
 
 .activeicon {
-  color: #1B74E4;
-  border-bottom: 4px solid #1B74E4;
+  border-bottom: 4px solid #1b74e4;
 }
 
+.activeicon span {
+  color: #1b74e4;
+}
