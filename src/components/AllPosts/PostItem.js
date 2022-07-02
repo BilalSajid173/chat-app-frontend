@@ -48,7 +48,10 @@ const PostItem = (props) => {
                       {props.author}
                     </Link>
                   ) : (
-                    <Link to="/friendlist" className={classes.link}>
+                    <Link
+                      to={`/user/${props.authorId}`}
+                      className={classes.link}
+                    >
                       {props.author}
                     </Link>
                   )}
