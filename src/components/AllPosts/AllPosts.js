@@ -8,7 +8,7 @@ import AuthContext from "../../store/auth-context";
 const AllPosts = () => {
   const authCtx = useContext(AuthContext);
   const [allPosts, setAllPosts] = useState([]);
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:8080/post/allposts/", {
@@ -30,13 +30,13 @@ const AllPosts = () => {
             isLiked: likedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
-            content: post.content.slice(0,250) + "...",
+            content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
           };
         });
         setAllPosts(posts);
-        setUser(data.user.name);
+        setUser(data.user);
       })
       .catch((err) => {
         console.log(err);
@@ -45,11 +45,12 @@ const AllPosts = () => {
 
   return (
     <Fragment>
-      <UserInfo name={user} />
+      <UserInfo name={user.name} />
       <FriendSection />
       <div className={classes.container}>
         {allPosts.map((post) => (
           <PostItem
+            userId={user._id}
             isLiked={post.isLiked}
             authorId={post.authorId}
             key={post.id}

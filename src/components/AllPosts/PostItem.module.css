@@ -38,6 +38,11 @@
   font-weight: 500;
 }
 
+.link {
+  color: black;
+  text-decoration: none;
+}
+
 .userinfo span {
   font-size: 0.8rem;
   font-weight: 500;

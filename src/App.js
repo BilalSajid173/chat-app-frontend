@@ -9,6 +9,7 @@ import AddNewPost from "./pages/AddPost";
 import FriendList from "./pages/Friendlist";
 import ViewPost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/ViewProfile";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -30,6 +31,9 @@ function App() {
       )}
       {authCtx.isLoggedIn && (
         <Route path="/user_account" element={<Profile />} />
+      )}
+      {authCtx.isLoggedIn && (
+        <Route path="/user/:userId" element={<UserProfile />} />
       )}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

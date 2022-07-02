@@ -1,7 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import classes from "./UserAccount.module.css";
 import userimg from "../../images/userimg.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PostItem from "../AllPosts/PostItem";
 import AuthContext from "../../store/auth-context";
 
@@ -9,9 +9,12 @@ const UserAccount = () => {
   const authCtx = useContext(AuthContext);
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
+  const [loggedInUserId, setLoggedInUserId] = useState("");
+  const params = useParams();
+  const userId = params.userId;
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/account/", {
+    fetch("http://localhost:8080/post/user/" + userId, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -36,13 +39,14 @@ const UserAccount = () => {
             authorId: post.author,
           };
         });
+        setLoggedInUserId(loggedInUserId);
         setAllPosts(posts);
         setUser(data.user);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [authCtx.token]);
+  }, [authCtx.token, userId, loggedInUserId]);
   return (
     <Fragment>
       <div className={classes.main_container}>
@@ -67,14 +71,11 @@ const UserAccount = () => {
               </div>
             </div>
             <div className={classes.actions}>
-              <Link to="/friendlist">
-                <i className="fa-solid fa-user-group"></i>
-              </Link>
               <button>
-                <i className="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-square-plus"></i>
               </button>
               <Link to="">
-                <i className="fa-solid fa-bookmark"></i>
+                <i class="fa-solid fa-message"></i>
               </Link>
             </div>
             <div className={classes.userimg}>
@@ -139,7 +140,7 @@ const UserAccount = () => {
             <h2>Your Posts</h2>
             {allPosts.map((post) => (
               <PostItem
-                userId={user._id}
+                userId={loggedInUserId}
                 isLiked={post.isLiked}
                 authorId={post.authorId}
                 key={post.id}

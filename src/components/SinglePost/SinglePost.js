@@ -14,6 +14,7 @@ const SinglePost = (props) => {
   const [comments, setComments] = useState([]);
   const [post, setPost] = useState({});
   const [allPosts, setAllPosts] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     fetch("http://localhost:8080/post/singlepost/" + postId, {
@@ -38,6 +39,7 @@ const SinglePost = (props) => {
           author_id: data.post.author._id,
         };
         setPost(curPost);
+        setUser(data.user);
         setComments(data.post.comments);
         const likedposts = data.likedPosts ? data.likedPosts : [];
         const posts = data.posts.map((post) => {
@@ -135,6 +137,7 @@ const SinglePost = (props) => {
         <h2>More</h2>
         {allPosts.map((post) => (
           <PostItem
+            userId={user._id}
             isLiked={post.isLiked}
             authorId={post.authorId}
             key={post.id}
