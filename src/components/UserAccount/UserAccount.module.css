@@ -15,6 +15,10 @@
   box-shadow: 0px 0px 6px #ccc;
 }
 
+.userinfo_mobile {
+  display: none;
+}
+
 .nameaddress {
   margin-left: 33%;
   text-align: left;
@@ -50,6 +54,17 @@
 .userimg h4 {
   text-align: left;
   margin-left: 4%;
+}
+
+.userimg_mobile {
+  display: none;
+}
+
+.userimg_mobile img {
+  width: 34%;
+  height: 220px;
+  border-radius: 50%;
+  background-color: white;
 }
 
 .socials {
@@ -89,4 +104,150 @@
 
 .userposts h2 {
   margin-top: 1rem;
+}
+
+.mobile_bio {
+  display: none;
+  padding: 0 2%;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .main_container {
+    padding: 1% 10%;
+  }
+
+  .userimg {
+    left: 12%;
+    width: 22%;
+  }
+
+  .userposts {
+    margin-left: 32%;
+  }
+
+  .nameaddress {
+    margin-left: 30%;
+  }
+
+  .userimg img {
+    height: 220px;
+  }
+}
+
+@media (max-width: 1025px) {
+  .main_container {
+    padding: 1% 5%;
+  }
+
+  .userimg {
+    left: 7%;
+    width: 25%;
+  }
+
+  .userimg img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main_container {
+    padding: 1% 5%;
+  }
+
+  .userinfo {
+    display: none;
+  }
+
+  .userimg_mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 0;
+  }
+
+  .mobile_bio {
+    display: block;
+  }
+
+  .userinfo_mobile {
+    display: flex;
+  }
+
+  .nameaddress {
+    margin-left: 0%;
+    padding: 2%;
+  }
+
+  .userposts {
+    margin-left: 0;
+  }
+
+  .userposts h2 {
+    margin-left: 2%;
+  }
+}
+
+@media (max-width: 650px) {
+  .userimg_mobile img {
+    width: 40%;
+  }
+}
+
+@media (max-width: 580px) {
+  .userimg_mobile img {
+    width: 45%;
+  }
+}
+
+@media (max-width: 500px) {
+  .actions i,
+  .socials i {
+    font-size: 1.5rem;
+  }
+
+  .userimg_mobile img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 440px) {
+  .userimg_mobile img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .userimg_mobile img {
+    width: 55%;
+  }
+
+  .actions i,
+  .socials i {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .userimg_mobile img {
+    width: 67%;
+  }
+
+  .actions i,
+  .socials i {
+    font-size: 1rem;
+  }
+
+  .actions i {
+    margin: 0.2rem;
+  }
+
+  .nameaddress h1 {
+    font-size: 1.3rem;
+  }
+
+  .nameaddress p,
+  .mobile_bio p {
+    font-size: 0.9rem;
+  }
 }
