@@ -1,45 +1,80 @@
-import { Fragment } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import classes from "./UserAccount.module.css";
 import userimg from "../../images/userimg.png";
 import { Link } from "react-router-dom";
+import PostItem from "../AllPosts/PostItem";
+import AuthContext from "../../store/auth-context";
 
 const UserAccount = () => {
+  const authCtx = useContext(AuthContext);
+  const [allPosts, setAllPosts] = useState([]);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:8080/post/account/", {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const likedposts = data.likedPosts ? data.likedPosts : [];
+        const posts = data.posts.map((post) => {
+          return {
+            isLiked: likedposts.includes(post._id) ? true : false,
+            id: post._id,
+            author: data.user.name,
+            content: post.content.slice(0, 250) + "...",
+            createdAt: new Date(post.createdAt).toDateString(),
+            authorId: post.author._id,
+          };
+        });
+        setAllPosts(posts);
+        setUser(data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [authCtx.token]);
   return (
     <Fragment>
       <div className={classes.main_container}>
         <div className={classes.user_profile}>
           <div className={classes.userinfo}>
             <div className={classes.nameaddress}>
-              <h1>Bilal Sajid</h1>
-              <h4>San Francisco, California</h4>
+              <h1>{user.name}</h1>
+              {user.address && <h4>{user.address}</h4>}
               <p>bsajid173@gmail.com</p>
-              <p>7310587987</p>
+              {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  href="https://www.linkedin.com/in/bilal-sajid-5b1218219/"
-                >
-                  <i class="fa-brands fa-linkedin"></i>
-                </a>
-                <a
-                  rel="noreferrer"
-                  target="_blank"
-                  href="https://github.com/BilalSajid173"
-                >
-                  <i class="fa-brands fa-github"></i>
-                </a>
+                {user.linkedin && (
+                  <a rel="noreferrer" target="_blank" href={user.linkedin}>
+                    <i className="fa-brands fa-linkedin"></i>
+                  </a>
+                )}
+                {user.github && (
+                  <a rel="noreferrer" target="_blank" href={user.github}>
+                    <i className="fa-brands fa-github"></i>
+                  </a>
+                )}
               </div>
             </div>
             <div className={classes.actions}>
               <Link to="/friendlist">
-                <i class="fa-solid fa-user-group"></i>
+                <i className="fa-solid fa-user-group"></i>
               </Link>
               <button>
-                <i class="fa-solid fa-pen-to-square"></i>
+                <i className="fa-solid fa-pen-to-square"></i>
               </button>
               <Link to="">
-                <i class="fa-solid fa-bookmark"></i>
+                <i className="fa-solid fa-bookmark"></i>
               </Link>
             </div>
             <div className={classes.userimg}>
@@ -52,7 +87,20 @@ const UserAccount = () => {
               </p>
             </div>
           </div>
-          <div className={classes.userposts}></div>
+          <div className={classes.userposts}>
+            <h2>Your Posts</h2>
+            {allPosts.map((post) => (
+              <PostItem
+                isLiked={post.isLiked}
+                authorId={post.authorId}
+                key={post.id}
+                id={post.id}
+                author={post.author}
+                content={post.content}
+                createdAt={post.createdAt}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </Fragment>
