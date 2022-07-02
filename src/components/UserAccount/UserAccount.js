@@ -51,7 +51,7 @@ const UserAccount = () => {
             <div className={classes.nameaddress}>
               <h1>{user.name}</h1>
               {user.address && <h4>{user.address}</h4>}
-              <p>bsajid173@gmail.com</p>
+              <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
                 {user.linkedin && (
@@ -94,7 +94,7 @@ const UserAccount = () => {
             <div className={classes.nameaddress}>
               <h1>{user.name}</h1>
               {user.address && <h4>{user.address}</h4>}
-              <p>bsajid173@gmail.com</p>
+              <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
                 {user.linkedin && (
