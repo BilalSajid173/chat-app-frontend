@@ -8,6 +8,7 @@ import AuthContext from "./store/auth-context";
 import AddNewPost from "./pages/AddPost";
 import FriendList from "./pages/Friendlist";
 import ViewPost from "./pages/SinglePost";
+import Profile from "./pages/Profile";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -26,6 +27,9 @@ function App() {
       )}
       {authCtx.isLoggedIn && (
         <Route path="/singlepost/:postId" element={<ViewPost />} />
+      )}
+      {authCtx.isLoggedIn && (
+        <Route path="/user_account" element={<Profile />} />
       )}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

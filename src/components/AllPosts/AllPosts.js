@@ -11,7 +11,7 @@ const AllPosts = () => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/allposts", {
+    fetch("http://localhost:8080/post/allposts/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
