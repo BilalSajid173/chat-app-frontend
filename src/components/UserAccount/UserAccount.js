@@ -33,7 +33,7 @@ const UserAccount = () => {
             author: data.user.name,
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
-            authorId: post.author._id,
+            authorId: post.author,
           };
         });
         setAllPosts(posts);
@@ -139,6 +139,7 @@ const UserAccount = () => {
             <h2>Your Posts</h2>
             {allPosts.map((post) => (
               <PostItem
+                userId={user._id}
                 isLiked={post.isLiked}
                 authorId={post.authorId}
                 key={post.id}
