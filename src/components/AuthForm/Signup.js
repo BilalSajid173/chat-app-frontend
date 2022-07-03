@@ -1,11 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
+import ErrorModal from "../UI/ErrorModal";
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
+  const [error, setError] = useState();
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -61,6 +63,10 @@ const SignupForm = (props) => {
         console.log(data);
       })
       .catch((err) => {
+        setError({
+          title: "Failed to sign up!",
+          message: "Please try again.",
+        });
         console.log(err);
       });
 
@@ -69,11 +75,22 @@ const SignupForm = (props) => {
     resetPassword();
   };
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   const nameClasses = nameHasError ? classes.invalid : "";
   const emailClasses = emailHasError ? classes.invalid : "";
   const passwordClasses = passwordHasError ? classes.invalid : "";
   return (
     <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <div className={classes.bodygradient}>
         <div className={classes.maincontainer}>
           <div className={classes.logincontainer}>

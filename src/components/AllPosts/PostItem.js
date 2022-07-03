@@ -1,12 +1,14 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import classes from "./PostItem.module.css";
 import AuthContext from "../../store/auth-context";
 import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
+import ErrorModal from "../UI/ErrorModal";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
   const [isLiked, setIsLiked] = useState(props.isLiked);
+  const [error, setError] = useState();
 
   const onLikeChangeHandler = () => {
     fetch("http://localhost:8080/post/likepost/" + props.id, {
@@ -28,12 +30,27 @@ const PostItem = (props) => {
         console.log(data);
       })
       .catch((err) => {
+        setError({
+          title: "Liking post unsuccessful",
+          message: "Please try again.",
+        });
         console.log(err);
       });
   };
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
-    <>
+    <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <div className={classes.postbg}>
         <div className={classes.postContainer}>
           <div className={classes.singlepost}>
@@ -93,7 +110,7 @@ const PostItem = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 

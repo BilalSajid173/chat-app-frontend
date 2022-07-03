@@ -33,7 +33,7 @@ const AddPost = () => {
       return;
     }
     console.log(enteredTitle, enteredContent);
-    fetch("http://localhost:8080/post/addpos", {
+    fetch("http://localhost:8080/post/addpost", {
       method: "POST",
       body: JSON.stringify({
         title: enteredTitle,
