@@ -4,6 +4,7 @@ import userimg from "../../images/userimg.png";
 import { Link, useParams } from "react-router-dom";
 import PostItem from "../AllPosts/PostItem";
 import AuthContext from "../../store/auth-context";
+import ErrorModal from "../UI/ErrorModal";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -12,6 +13,7 @@ const UserAccount = () => {
   const [loggedInUserId, setLoggedInUserId] = useState("");
   const params = useParams();
   const userId = params.userId;
+  const [error, setError] = useState();
 
   useEffect(() => {
     fetch("http://localhost:8080/post/user/" + userId, {
@@ -44,11 +46,27 @@ const UserAccount = () => {
         setUser(data.user);
       })
       .catch((err) => {
+        setError({
+          title: "Profile not loaded!",
+          message: "Please try again.",
+        });
         console.log(err);
       });
   }, [authCtx.token, userId, loggedInUserId]);
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <div className={classes.main_container}>
         <div className={classes.user_profile}>
           <div className={classes.userinfo}>

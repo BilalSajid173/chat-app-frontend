@@ -4,9 +4,11 @@ import PostItem from "./PostItem";
 import UserInfo from "./UserInfo";
 import FriendSection from "./FriendSection";
 import AuthContext from "../../store/auth-context";
+import ErrorModal from "../UI/ErrorModal";
 
 const AllPosts = () => {
   const authCtx = useContext(AuthContext);
+  const [error, setError] = useState();
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
 
@@ -39,28 +41,45 @@ const AllPosts = () => {
         setUser(data.user);
       })
       .catch((err) => {
+        setError({
+          title: "Failed to load posts",
+          message: "Please try again later.",
+        });
         console.log(err);
       });
   }, [authCtx.token]);
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
-      <UserInfo name={user.name} />
-      <FriendSection />
-      <div className={classes.container}>
-        {allPosts.map((post) => (
-          <PostItem
-            userId={user._id}
-            isLiked={post.isLiked}
-            authorId={post.authorId}
-            key={post.id}
-            id={post.id}
-            author={post.author}
-            content={post.content}
-            createdAt={post.createdAt}
-          />
-        ))}
-      </div>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      {!error && <UserInfo name={user.name} />}
+      {!error && <FriendSection />}
+      {!error && (
+        <div className={classes.container}>
+          {allPosts.map((post) => (
+            <PostItem
+              userId={user._id}
+              isLiked={post.isLiked}
+              authorId={post.authorId}
+              key={post.id}
+              id={post.id}
+              author={post.author}
+              content={post.content}
+              createdAt={post.createdAt}
+            />
+          ))}
+        </div>
+      )}
     </Fragment>
   );
 };

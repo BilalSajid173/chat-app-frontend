@@ -5,6 +5,7 @@ import image from "../../images/userimg.png";
 import SingleComment from "./Comment";
 import AuthContext from "../../store/auth-context";
 import PostItem from "../AllPosts/PostItem";
+import ErrorModal from "../UI/ErrorModal";
 
 const SinglePost = (props) => {
   const authCtx = useContext(AuthContext);
@@ -15,6 +16,7 @@ const SinglePost = (props) => {
   const [post, setPost] = useState({});
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
+  const [error, setError] = useState();
 
   useEffect(() => {
     fetch("http://localhost:8080/post/singlepost/" + postId, {
@@ -54,8 +56,18 @@ const SinglePost = (props) => {
         });
         setAllPosts(posts);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setError({
+          title: "Failed to load post!",
+          message: "Please try again.",
+        });
+        console.log(err);
+      });
   }, [authCtx.token, postId]);
+
+  const errorHandler = () => {
+    setError(null);
+  };
 
   const commentSubmitHandler = (event) => {
     event.preventDefault();
@@ -91,11 +103,25 @@ const SinglePost = (props) => {
         });
         cmtRef.current.value = "";
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setError({
+          title: "Comment not added!",
+          message: "Please try again.",
+        });
+        cmtRef.current.value = "";
+        console.log(err);
+      });
   };
 
   return (
     <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <div className={classes.container}>
         <div className={classes.postContainer}>
           <div className={classes.singlepost}>

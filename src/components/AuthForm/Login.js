@@ -1,14 +1,16 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
 import AuthContext from "../../store/auth-context";
+import ErrorModal from "../UI/ErrorModal";
 
 const LoginForm = (props) => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const [error, setError] = useState();
 
   const {
     value: enteredEmail,
@@ -60,16 +62,31 @@ const LoginForm = (props) => {
         navigate("/allposts");
       })
       .catch((err) => {
+        setError({
+          title: "Login Failed!",
+          message: "Please try again.",
+        });
         console.log(err);
       });
     resetEmail();
     resetPassword();
   };
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   const emailClasses = emailHasError ? classes.invalid : "";
   const passwordClasses = passwordHasError ? classes.invalid : "";
   return (
     <Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <div className={classes.bodygradient}>
         <div className={classes.maincontainer}>
           <div className={classes.logincontainer}>
