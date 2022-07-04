@@ -14,6 +14,7 @@ const UserAccount = () => {
   const params = useParams();
   const userId = params.userId;
   const [error, setError] = useState();
+  const [isFriend, setIsFriend] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/post/user/" + userId, {
@@ -41,6 +42,7 @@ const UserAccount = () => {
             authorId: post.author,
           };
         });
+        setIsFriend(data.isFriend);
         setLoggedInUserId(loggedInUserId);
         setAllPosts(posts);
         setUser(data.user);
@@ -53,6 +55,30 @@ const UserAccount = () => {
         console.log(err);
       });
   }, [authCtx.token, userId, loggedInUserId]);
+
+  const friendHandler = () => {
+    fetch("http://localhost:8080/post/add-friend/" + isFriend + "/" + userId, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setIsFriend((prev) => {
+          return !prev;
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const errorHandler = () => {
     setError(null);
@@ -89,11 +115,12 @@ const UserAccount = () => {
               </div>
             </div>
             <div className={classes.actions}>
-              <button>
-                <i class="fa-solid fa-square-plus"></i>
+              <button onClick={friendHandler}>
+                {!isFriend && <i className="fa-solid fa-square-plus"></i>}
+                {isFriend && <i className="fa-solid fa-trash"></i>}
               </button>
               <Link to="">
-                <i class="fa-solid fa-message"></i>
+                <i className="fa-solid fa-message"></i>
               </Link>
             </div>
             <div className={classes.userimg}>
@@ -125,14 +152,12 @@ const UserAccount = () => {
               </div>
             </div>
             <div className={classes.actions}>
-              <Link to="/friendlist">
-                <i className="fa-solid fa-user-group"></i>
-              </Link>
-              <button>
-                <i className="fa-solid fa-pen-to-square"></i>
+              <button onClick={friendHandler}>
+                {isFriend && <i className="fa-solid fa-square-plus"></i>}
+                {!isFriend && <i className="fa-solid fa-trash"></i>}
               </button>
               <Link to="">
-                <i className="fa-solid fa-bookmark"></i>
+                <i className="fa-solid fa-message"></i>
               </Link>
             </div>
           </div>
