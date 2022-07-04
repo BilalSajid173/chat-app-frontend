@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import PostItem from "../AllPosts/PostItem";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
+import EditProfile from "./EditProfile";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
   const [error, setError] = useState();
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8080/post/account/", {
@@ -54,8 +56,27 @@ const UserAccount = () => {
     setError(null);
   };
 
+  const editFormHandler = () => {
+    setEdit(true);
+  };
+
+  const editSetUser = (userData) => {
+    setUser(userData);
+  };
+
+  const closeEditForm = () => {
+    setEdit(false);
+  };
+
   return (
     <Fragment>
+      {edit && (
+        <EditProfile
+          saveEdit={editSetUser}
+          onClick={closeEditForm}
+          closeForm={closeEditForm}
+        />
+      )}
       {error && (
         <ErrorModal
           title={error.title}
@@ -72,8 +93,8 @@ const UserAccount = () => {
               <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
-                {user.linkedin && (
-                  <a rel="noreferrer" target="_blank" href={user.linkedin}>
+                {user.linkedIn && (
+                  <a rel="noreferrer" target="_blank" href={user.linkedIn}>
                     <i className="fa-brands fa-linkedin"></i>
                   </a>
                 )}
@@ -88,7 +109,7 @@ const UserAccount = () => {
               <Link to="/friendlist">
                 <i className="fa-solid fa-user-group"></i>
               </Link>
-              <button>
+              <button onClick={editFormHandler}>
                 <i className="fa-solid fa-pen-to-square"></i>
               </button>
               <Link to="">
@@ -98,11 +119,7 @@ const UserAccount = () => {
             <div className={classes.userimg}>
               <img src={userimg} alt="img"></img>
               <h4>Bio</h4>
-              <p>
-                Nec ullamcorper sit amet risus nullam eget felis. Integer vitae
-                justo eget magna fermentum iaculis eu non diam. Laoreet sit amet
-                cursus sit amet. Blandit turpis cursus in hac habitasse.
-              </p>
+              <p>{user.bio}</p>
             </div>
           </div>
           <div className={classes.userimg_mobile}>
@@ -115,8 +132,8 @@ const UserAccount = () => {
               <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
-                {user.linkedin && (
-                  <a rel="noreferrer" target="_blank" href={user.linkedin}>
+                {user.linkedIn && (
+                  <a rel="noreferrer" target="_blank" href={user.linkedIn}>
                     <i className="fa-brands fa-linkedin"></i>
                   </a>
                 )}
@@ -131,7 +148,7 @@ const UserAccount = () => {
               <Link to="/friendlist">
                 <i className="fa-solid fa-user-group"></i>
               </Link>
-              <button>
+              <button onClick={editFormHandler}>
                 <i className="fa-solid fa-pen-to-square"></i>
               </button>
               <Link to="">
@@ -141,17 +158,7 @@ const UserAccount = () => {
           </div>
           <div className={classes.mobile_bio}>
             <h4>Bio</h4>
-            <p>
-              Nec ullamcorper sit amet risus nullam eget felis. Integer vitae
-              justo eget magna fermentum iaculis eu non diam. Laoreet sit amet
-              cursus sit amet. Blandit turpis cursus in hac habitasse. Nec
-              ullamcorper sit amet risus nullam eget felis. Integer vitae justo
-              eget magna fermentum iaculis eu non diam. Laoreet sit amet cursus
-              sit amet. Blandit turpis cursus in hac habitasse. Nec ullamcorper
-              sit amet risus nullam eget felis. Integer vitae justo eget magna
-              fermentum iaculis eu non diam. Laoreet sit amet cursus sit amet.
-              Blandit turpis cursus in hac habitasse.
-            </p>
+            <p>{user.bio}</p>
           </div>
           <div className={classes.userposts}>
             <h2>Your Posts</h2>
