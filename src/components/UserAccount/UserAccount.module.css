@@ -222,8 +222,7 @@
     width: 55%;
   }
 
-  .actions i,
-  .socials i {
+  .actions i {
     font-size: 1.2rem;
   }
 }
@@ -233,8 +232,7 @@
     width: 67%;
   }
 
-  .actions i,
-  .socials i {
+  .actions i {
     font-size: 1rem;
   }
 

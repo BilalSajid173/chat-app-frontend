@@ -76,8 +76,8 @@ const UserAccount = () => {
               <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
-                {user.linkedin && (
-                  <a rel="noreferrer" target="_blank" href={user.linkedin}>
+                {user.linkedIn && (
+                  <a rel="noreferrer" target="_blank" href={user.linkedIn}>
                     <i className="fa-brands fa-linkedin"></i>
                   </a>
                 )}
@@ -99,11 +99,7 @@ const UserAccount = () => {
             <div className={classes.userimg}>
               <img src={userimg} alt="img"></img>
               <h4>Bio</h4>
-              <p>
-                Nec ullamcorper sit amet risus nullam eget felis. Integer vitae
-                justo eget magna fermentum iaculis eu non diam. Laoreet sit amet
-                cursus sit amet. Blandit turpis cursus in hac habitasse.
-              </p>
+              <p>{user.bio}</p>
             </div>
           </div>
           <div className={classes.userimg_mobile}>
@@ -116,8 +112,8 @@ const UserAccount = () => {
               <p>{user.email}</p>
               {user.number && <p>{user.number}</p>}
               <div className={classes.socials}>
-                {user.linkedin && (
-                  <a rel="noreferrer" target="_blank" href={user.linkedin}>
+                {user.linkedIn && (
+                  <a rel="noreferrer" target="_blank" href={user.linkedIn}>
                     <i className="fa-brands fa-linkedin"></i>
                   </a>
                 )}
@@ -142,17 +138,7 @@ const UserAccount = () => {
           </div>
           <div className={classes.mobile_bio}>
             <h4>Bio</h4>
-            <p>
-              Nec ullamcorper sit amet risus nullam eget felis. Integer vitae
-              justo eget magna fermentum iaculis eu non diam. Laoreet sit amet
-              cursus sit amet. Blandit turpis cursus in hac habitasse. Nec
-              ullamcorper sit amet risus nullam eget felis. Integer vitae justo
-              eget magna fermentum iaculis eu non diam. Laoreet sit amet cursus
-              sit amet. Blandit turpis cursus in hac habitasse. Nec ullamcorper
-              sit amet risus nullam eget felis. Integer vitae justo eget magna
-              fermentum iaculis eu non diam. Laoreet sit amet cursus sit amet.
-              Blandit turpis cursus in hac habitasse.
-            </p>
+            <p>{user.bio}</p>
           </div>
           <div className={classes.userposts}>
             <h2>Your Posts</h2>
