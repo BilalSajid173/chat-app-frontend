@@ -58,7 +58,7 @@ const LoginForm = (props) => {
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
         );
-        authCtx.login(data.token, expiryDate.toISOString());
+        authCtx.login(data.name, data.token, expiryDate.toISOString());
         navigate("/allposts");
       })
       .catch((err) => {

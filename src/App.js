@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
 import AddNewPost from "./pages/AddPost";
-import FriendList from "./pages/Friendlist";
+import FriendList from "./pages/FriendList";
 import ViewPost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import UserProfile from "./pages/ViewProfile";
