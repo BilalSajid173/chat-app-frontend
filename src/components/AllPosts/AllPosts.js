@@ -11,6 +11,7 @@ const AllPosts = () => {
   const [error, setError] = useState();
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
+  const [friendlist, setFriendlist] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8080/post/allposts/", {
@@ -37,6 +38,7 @@ const AllPosts = () => {
             authorId: post.author._id,
           };
         });
+        setFriendlist(data.user.friends);
         setAllPosts(posts);
         setUser(data.user);
       })
@@ -63,7 +65,7 @@ const AllPosts = () => {
         />
       )}
       {!error && <UserInfo name={user.name} />}
-      {!error && <FriendSection />}
+      {!error && <FriendSection friends={friendlist} />}
       {!error && (
         <div className={classes.container}>
           {allPosts.map((post) => (

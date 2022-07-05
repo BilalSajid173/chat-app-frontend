@@ -8,35 +8,11 @@
   padding-top: 10px;
   flex-direction: column;
   border-top: 1px solid rgb(184, 184, 184);
+  overflow-y: scroll;
 }
 
 .container h2 {
   margin-bottom: 1rem;
-}
-
-.friend {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 2px 0;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.friend img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  margin-right: 5px;
-  background-color: white;
-}
-
-.friend h3 {
-  padding-top: 10px;
-}
-
-.friend:hover {
-  box-shadow: 0px 0px 6px #ccc;
 }
 
 @media (max-width: 1025px) {
