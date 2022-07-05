@@ -153,8 +153,8 @@ const UserAccount = () => {
             </div>
             <div className={classes.actions}>
               <button onClick={friendHandler}>
-                {isFriend && <i className="fa-solid fa-square-plus"></i>}
-                {!isFriend && <i className="fa-solid fa-trash"></i>}
+                {!isFriend && <i className="fa-solid fa-square-plus"></i>}
+                {isFriend && <i className="fa-solid fa-trash"></i>}
               </button>
               <Link to="">
                 <i className="fa-solid fa-message"></i>

@@ -1,0 +1,105 @@
+.listcontainer {
+  position: fixed;
+  top: 15%;
+  left: 2%;
+  width: 25%;
+  display: flex;
+  padding-left: 5px;
+  padding-right: 1.5rem;
+  padding-top: 1%;
+  overflow-y: scroll;
+  flex-direction: column;
+  height: 80vh;
+  border-top: 1px solid rgb(184, 184, 184);
+  background-color: #f1f2f6;
+}
+
+.listcontainer h2 {
+  margin-bottom: 1rem;
+}
+
+.container {
+  min-height: 90vh;
+  width: 100%;
+  padding: 1% 0;
+  padding-left: 30%;
+  padding-right: 2%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #f1f2f6;
+}
+
+.nopost {
+  margin-left: 20%;
+  font-size: 3rem;
+}
+
+.nofriends {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 1025px) {
+  .container {
+    padding-top: 1.5%;
+  }
+}
+
+@media (max-width: 850px) {
+  .container {
+    padding-top: 2%;
+    padding-right: 0;
+    padding-left: 32%;
+  }
+
+  .listcontainer {
+    left: 1%;
+    width: 30%;
+  }
+
+  .listcontainer h2 {
+    font-size: 1.3rem;
+  }
+
+  .listcontainer h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
+
+  .mobile {
+    padding: 2% 20%;
+    background-color: rgb(240, 240, 240);
+  }
+
+  .listcontainer {
+    position: static;
+    width: 100%;
+    min-height: 90vh;
+    padding: 5%;
+    align-items: center;
+    border-radius: 5px;
+    border-top: 0;
+    box-shadow: 0px 0px 6px #ccc;
+  }
+
+  .listcontainer a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile {
+    padding: 3% 10%;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile {
+    padding: 5%;
+  }
+}
