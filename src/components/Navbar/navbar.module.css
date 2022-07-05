@@ -19,21 +19,23 @@ nav {
 .search {
   display: flex;
   align-items: center;
-  background-color: #f1f2f6;
-  padding: 12px;
+  padding: 6px;
   border-radius: 50px;
   height: 35px;
+  font-size: 1.5rem;
 }
 
-.search input {
-  outline: none;
-  border: none;
-  background: transparent;
-  padding: 0 10px;
-}
 .nav_mid {
   display: flex;
   align-items: center;
+}
+
+.activeicon {
+  border-bottom: 4px solid #1b74e4;
+}
+
+.activeicon span {
+  color: #1b74e4;
 }
 
 .icons {
@@ -42,13 +44,15 @@ nav {
   color: #66676c;
 }
 
-.icons span {
+.icons span,
+.icons i {
   font-size: 32px;
 }
 
 .icons:hover {
   background-color: #f1f2f6;
   transition: ease-in-out 0.3s;
+  cursor: pointer;
 }
 
 .nav_right {
@@ -60,9 +64,10 @@ nav {
 .avatar {
   display: flex;
   align-items: center;
-  margin-right: 20px;
-  border-radius: 50px;
-  padding: 5px 10px;
+  margin-right: 15px;
+  padding: 5px 0px;
+  justify-content: space-between;
+  font-size: 1.5rem;
 }
 
 .buttons {
@@ -88,10 +93,86 @@ nav {
   background-color: #1b74e4;
 }
 
-.activeicon {
-  border-bottom: 4px solid #1b74e4;
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
-.activeicon span {
-  color: #1b74e4;
+.mobile_nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 80%;
+  margin-left: 20%;
+  background: #e4e6eb;
+  padding: 1rem;
+  z-index: 30;
+  animation: slide-left 300ms ease-out forwards;
+  height: 100vh;
+}
+
+.nav_right_mobile {
+  align-items: center;
+  /* padding-right: 10px; */
+  display: none;
+}
+
+.links_mobile {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.links_mobile .link {
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link .icons {
+  display: flex;
+  align-items: center;
+}
+
+.link h2 {
+  margin-left: 1rem;
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav_mid,
+  .nav_right {
+    display: none;
+  }
+
+  .nav_right_mobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 440px) {
+  .icons span,
+  .icons i {
+    font-size: 24px;
+  }
+  .link h2 {
+    font-size: 1.2rem;
+  }
 }
