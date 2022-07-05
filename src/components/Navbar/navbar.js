@@ -1,8 +1,10 @@
 import classes from "../Navbar/navbar.module.css";
 import { NavLink } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import AuthContext from "../../store/auth-context";
 
 const Navbar = (props) => {
+  const authCtx = useContext(AuthContext);
   return (
     <Fragment>
       <nav>
@@ -47,7 +49,7 @@ const Navbar = (props) => {
         <div className={classes.nav_right}>
           <div className={classes.avatar}>
             <span>
-              <strong>Name</strong>
+              <strong>{authCtx.name}</strong>
             </span>
           </div>
           <div className={classes.buttons}>
