@@ -1,0 +1,51 @@
+.wrapper {
+  padding: 2% 30%;
+  background-color: #f1f2f6;
+  min-height: 100vh;
+}
+
+.msgwrapper {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 6px #ccc;
+  padding: 2%;
+  min-height: 85vh;
+}
+
+.msgform {
+  position: fixed;
+  top: 90%;
+  width: 100%;
+  padding: 5px 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.msgform form {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #e2e2e2;
+}
+
+.msgform input {
+  border: 0;
+  outline: 0;
+  font-size: 1.5rem;
+  padding: 1.1rem 5px;
+  width: 85%;
+  background-color: #e2e2e2;
+}
+
+.msgform button {
+  border: 0;
+  outline: 0;
+  font-size: 1.5rem;
+  padding: 1.1rem;
+  background-color: #ffe0e0;
+  cursor: pointer;
+}
+
+.msgform button:hover {
+  background-color: #ffbaba;
+}

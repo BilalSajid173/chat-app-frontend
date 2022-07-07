@@ -5,7 +5,7 @@ import ChatItem from "./ChatItem";
 const dummyChats = [
   { name: "Bilal Sajid", id: "1" },
   { name: "Bilal Sajid", id: "2" },
-  { name: "Bilal Sajid", id: "3" },
+  // { name: "Bilal Sajid", id: "3" },
 ];
 
 const EveryChat = () => {

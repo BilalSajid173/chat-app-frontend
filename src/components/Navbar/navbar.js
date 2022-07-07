@@ -17,7 +17,7 @@ const Navbar = () => {
       <nav>
         <div className={classes.nav_left}>
           <div className={classes.search}>
-            <i class="fa-solid fa-comment"></i>
+            <i className="fa-solid fa-comment"></i>
             <h2>Konnect</h2>
           </div>
         </div>
@@ -86,7 +86,7 @@ const Navbar = () => {
             </div>
           </NavLink>
           <div onClick={openMenuHandler} className={classes.icons}>
-            <i class="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </div>
         </div>
       </nav>
@@ -98,7 +98,7 @@ const Navbar = () => {
               <span>
                 <strong>{authCtx.name}</strong>
               </span>
-              <i onClick={openMenuHandler} class="fa-solid fa-xmark"></i>
+              <i onClick={openMenuHandler} className="fa-solid fa-xmark"></i>
             </div>
             <div className={classes.links_mobile}>
               <NavLink className={classes.link} to="/allposts">
