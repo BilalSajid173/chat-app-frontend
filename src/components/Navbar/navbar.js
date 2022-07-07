@@ -68,12 +68,19 @@ const Navbar = () => {
             >
               <span className="material-symbols-outlined">add</span>
             </NavLink>
-            <span className="material-symbols-outlined">chat</span>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : ""
+              }
+              to="/allchats"
+            >
+              <span className="material-symbols-outlined">chat</span>
+            </NavLink>
             <span className="material-symbols-outlined">arrow_drop_down</span>
           </div>
         </div>
         <div className={classes.nav_right_mobile}>
-          <NavLink className={classes.link} to="">
+          <NavLink className={classes.link} to="/allchats">
             <div className={classes.icons}>
               <span className="material-symbols-outlined">chat</span>
             </div>

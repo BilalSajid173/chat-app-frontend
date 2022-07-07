@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import AuthContext from "../../store/auth-context";
 import { Fragment, useContext, useState } from "react";
 import ErrorModal from "../UI/ErrorModal";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:8080/");
 
 const AddPost = () => {
   const authCtx = useContext(AuthContext);
