@@ -12,11 +12,16 @@
   min-height: 85vh;
 }
 
+.msgwrapper h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .msgform {
   position: fixed;
-  top: 90%;
+  top: 93%;
   width: 100%;
-  padding: 5px 20%;
+  padding: 0 20%;
   display: flex;
   justify-content: center;
 }
@@ -31,8 +36,8 @@
 .msgform input {
   border: 0;
   outline: 0;
-  font-size: 1.5rem;
-  padding: 1.1rem 5px;
+  font-size: 1rem;
+  padding: 0.7rem 5px;
   width: 85%;
   background-color: #e2e2e2;
 }
@@ -41,11 +46,47 @@
   border: 0;
   outline: 0;
   font-size: 1.5rem;
-  padding: 1.1rem;
+  padding: 0.7rem;
   background-color: #ffe0e0;
   cursor: pointer;
 }
 
 .msgform button:hover {
   background-color: #ffbaba;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    padding: 2% 20%;
+  }
+
+  .msgform {
+    padding: 0 10%;
+  }
+}
+
+@media (max-width: 1025px) {
+  .wrapper {
+    padding: 4% 10%;
+    padding-bottom: 7%;
+  }
+
+  .msgform {
+    padding: 0 4%;
+  }
+
+  .msgform form {
+    width: 95%;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper {
+    padding: 7% 3%;
+    padding-bottom: 15%;
+  }
+
+  .msgform {
+    padding: 0;
+  }
 }

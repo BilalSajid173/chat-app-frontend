@@ -9,7 +9,10 @@ const dummyMessages = [
   { message: "Hiii :)" },
   { message: "How are you?" },
   { message: "I am fine thnx, wbu?" },
-  { message: "I am also fine thank you!" },
+  {
+    message:
+      "I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you!",
+  },
 ];
 
 const socket = io("http://localhost:8080/");
@@ -51,6 +54,7 @@ const ChatRoom = () => {
     <Fragment>
       <div className={classes.wrapper}>
         <div className={classes.msgwrapper}>
+          <h2>Nasrul</h2>
           {msgs.map((msg) => {
             return <Message message={msg.message} />;
           })}
