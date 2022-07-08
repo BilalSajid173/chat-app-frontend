@@ -1,35 +1,44 @@
-import { Fragment, useState, useRef, useEffect } from "react";
+import { Fragment, useState, useRef, useEffect, useContext } from "react";
 import classes from "./ChatRoom.module.css";
 import Message from "./Message";
 import { io } from "socket.io-client";
 import { useParams } from "react-router";
-
-const dummyMessages = [
-  { message: "Hello :)" },
-  { message: "Hiii :)" },
-  { message: "How are you?" },
-  { message: "I am fine thnx, wbu?" },
-  {
-    message:
-      "I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you! I am also fine thank you!",
-  },
-];
+import AuthContext from "../../store/auth-context";
 
 const socket = io("http://localhost:8080/");
 const ChatRoom = () => {
+  const authCtx = useContext(AuthContext);
   const params = useParams();
   const roomId = params.chatId;
-  const [msgs, setmsgs] = useState(dummyMessages);
+  const userId = params.userId;
+  const [msgs, setmsgs] = useState([]);
   const msgref = useRef();
+  const [name, setName] = useState("");
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
     socket.on("sendmsg", (msg) => {
       setmsgs((prevState) => {
-        return prevState.concat({ message: msg });
+        return prevState.concat({ content: msg, to: false });
       });
     });
   }, [roomId]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/post/chat/" + roomId + "/" + userId, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setmsgs(data.messages);
+        setName(data.username);
+      });
+  }, [roomId, userId, authCtx.token]);
 
   const msgSubmitHandler = (event) => {
     event.preventDefault();
@@ -38,15 +47,26 @@ const ChatRoom = () => {
       return;
     }
 
+    fetch("http://localhost:8080/post/addmessage", {
+      body: JSON.stringify({
+        roomId,
+        userId,
+        content: newmsg,
+      }),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => console.log(data));
+
     socket.emit("message", newmsg, roomId);
-    // socket.on("hello", (msg) => {
-    //   console.log("in");
-    //   setmsgs((prevState) => {
-    //     return prevState.concat({ message: msg });
-    //   });
-    // });
     setmsgs((prevState) => {
-      return prevState.concat({ message: newmsg });
+      return prevState.concat({ content: newmsg, to: true });
     });
     msgref.current.value = "";
   };
@@ -54,9 +74,9 @@ const ChatRoom = () => {
     <Fragment>
       <div className={classes.wrapper}>
         <div className={classes.msgwrapper}>
-          <h2>Nasrul</h2>
+          <h2>{name}</h2>
           {msgs.map((msg) => {
-            return <Message message={msg.message} />;
+            return <Message message={msg.content} to={msg.to} />;
           })}
         </div>
       </div>
@@ -71,7 +91,7 @@ const ChatRoom = () => {
             ref={msgref}
           />
           <button>
-            <i class="fa-solid fa-paper-plane"></i>
+            <i className="fa-solid fa-paper-plane"></i>
           </button>
         </form>
       </div>

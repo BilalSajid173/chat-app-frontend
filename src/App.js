@@ -38,7 +38,7 @@ function App() {
         <Route path="/user/:userId" element={<UserProfile />} />
       )}
       {authCtx.isLoggedIn && (
-        <Route path="/chat/:chatId" element={<PrivateChat />} />
+        <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
       )}
       {authCtx.isLoggedIn && <Route path="/allchats" element={<AllChats />} />}
       <Route path="*" element={<Navigate to="/" replace />} />

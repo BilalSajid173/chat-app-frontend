@@ -15,6 +15,7 @@ const UserAccount = () => {
   const userId = params.userId;
   const [error, setError] = useState();
   const [isFriend, setIsFriend] = useState(false);
+  const [roomId, setRoomId] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8080/post/user/" + userId, {
@@ -46,6 +47,7 @@ const UserAccount = () => {
         setLoggedInUserId(loggedInUserId);
         setAllPosts(posts);
         setUser(data.user);
+        setRoomId(data.roomId);
       })
       .catch((err) => {
         setError({
@@ -119,7 +121,7 @@ const UserAccount = () => {
                 {!isFriend && <i className="fa-solid fa-square-plus"></i>}
                 {isFriend && <i className="fa-solid fa-trash"></i>}
               </button>
-              <Link to="">
+              <Link to={`/chat/${roomId}/${userId}`}>
                 <i className="fa-solid fa-message"></i>
               </Link>
             </div>
@@ -156,7 +158,7 @@ const UserAccount = () => {
                 {!isFriend && <i className="fa-solid fa-square-plus"></i>}
                 {isFriend && <i className="fa-solid fa-trash"></i>}
               </button>
-              <Link to="">
+              <Link to={`/chat/${roomId}/${userId}`}>
                 <i className="fa-solid fa-message"></i>
               </Link>
             </div>

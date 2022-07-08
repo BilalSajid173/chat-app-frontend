@@ -1,5 +1,6 @@
 .wrapper {
   padding: 2% 30%;
+  padding-bottom: 5%;
   background-color: #f1f2f6;
   min-height: 100vh;
 }
@@ -58,6 +59,7 @@
 @media (max-width: 1200px) {
   .wrapper {
     padding: 2% 20%;
+    padding-bottom: 6%;
   }
 
   .msgform {
@@ -68,7 +70,7 @@
 @media (max-width: 1025px) {
   .wrapper {
     padding: 4% 10%;
-    padding-bottom: 7%;
+    padding-bottom: 9%;
   }
 
   .msgform {
