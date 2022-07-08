@@ -3,14 +3,17 @@
   padding-bottom: 5%;
   background-color: #f1f2f6;
   min-height: 100vh;
+  z-index: -5;
 }
 
 .msgwrapper {
+  z-index: -2;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 6px #ccc;
   padding: 2%;
   min-height: 85vh;
+  animation: slide-down 500ms ease-out;
 }
 
 .msgwrapper h2 {
@@ -25,13 +28,15 @@
   padding: 0 20%;
   display: flex;
   justify-content: center;
+  animation: slide-up 300ms ease-out forwards;
 }
 
 .msgform form {
+  box-shadow: 0px 0px 6px rgb(154, 154, 154);
   width: 90%;
   display: flex;
   justify-content: space-between;
-  background-color: #e2e2e2;
+  background-color: #c3c2c2;
 }
 
 .msgform input {
@@ -40,7 +45,7 @@
   font-size: 1rem;
   padding: 0.7rem 5px;
   width: 85%;
-  background-color: #e2e2e2;
+  background-color: #c3c2c3;
 }
 
 .msgform button {
@@ -53,7 +58,29 @@
 }
 
 .msgform button:hover {
-  background-color: #ffbaba;
+  background-color: #d4c2c2;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(15vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 1200px) {
