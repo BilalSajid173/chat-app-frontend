@@ -1,14 +1,34 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useContext, useState } from "react";
 import classes from "./EveryChat.module.css";
 import ChatItem from "./ChatItem";
-
-const dummyChats = [
-  { name: "Bilal Sajid", id: "1" },
-  { name: "Bilal Sajid", id: "2" },
-  // { name: "Bilal Sajid", id: "3" },
-];
+import AuthContext from "../../store/auth-context";
 
 const EveryChat = () => {
+  const [chats, setChats] = useState([]);
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/post/allchats", {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setChats(data.userData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [authCtx.token]);
+
   return (
     <Fragment>
       <div className={classes.maincontainer}>
@@ -16,8 +36,13 @@ const EveryChat = () => {
           <h2>Your Conversations</h2>
         </div>
         <div className={classes.chatscontainer}>
-          {dummyChats.map((chat) => (
-            <ChatItem name={chat.name} id={chat.id} key={chat.key} />
+          {chats.map((chat) => (
+            <ChatItem
+              name={chat.with.name}
+              roomId={chat.roomId}
+              key={chat.roomId}
+              userId={chat.with.userId}
+            />
           ))}
         </div>
       </div>

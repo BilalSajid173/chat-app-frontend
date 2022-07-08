@@ -76,7 +76,9 @@ const ChatRoom = () => {
         <div className={classes.msgwrapper}>
           <h2>{name}</h2>
           {msgs.map((msg) => {
-            return <Message message={msg.content} to={msg.to} />;
+            return (
+              <Message message={msg.content} to={msg.to} key={Math.random()} />
+            );
           })}
         </div>
       </div>
