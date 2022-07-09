@@ -4,6 +4,7 @@ import Message from "./Message";
 import { io } from "socket.io-client";
 import { useParams } from "react-router";
 import AuthContext from "../../store/auth-context";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const socket = io("http://localhost:8080/");
 const ChatRoom = () => {
@@ -14,6 +15,7 @@ const ChatRoom = () => {
   const [msgs, setmsgs] = useState([]);
   const msgref = useRef();
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
@@ -25,6 +27,7 @@ const ChatRoom = () => {
   }, [roomId]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8080/post/chat/" + roomId + "/" + userId, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
@@ -37,6 +40,7 @@ const ChatRoom = () => {
         console.log(data);
         setmsgs(data.messages);
         setName(data.username);
+        setIsLoading(false);
       });
   }, [roomId, userId, authCtx.token]);
 
@@ -72,31 +76,40 @@ const ChatRoom = () => {
   };
   return (
     <Fragment>
-      <div className={classes.wrapper}>
-        <div className={classes.msgwrapper}>
-          <h2>{name}</h2>
-          {msgs.map((msg) => {
-            return (
-              <Message message={msg.content} to={msg.to} key={Math.random()} />
-            );
-          })}
-        </div>
-      </div>
-      <div className={classes.msgform}>
-        <form onSubmit={msgSubmitHandler}>
-          <input
-            placeholder="Type something"
-            type="text"
-            id="msg"
-            autoComplete="off"
-            required
-            ref={msgref}
-          />
-          <button>
-            <i className="fa-solid fa-paper-plane"></i>
-          </button>
-        </form>
-      </div>
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && (
+        <Fragment>
+          <div className={classes.wrapper}>
+            <div className={classes.msgwrapper}>
+              <h2>{name}</h2>
+              {msgs.map((msg) => {
+                return (
+                  <Message
+                    message={msg.content}
+                    to={msg.to}
+                    key={Math.random()}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className={classes.msgform}>
+            <form onSubmit={msgSubmitHandler}>
+              <input
+                placeholder="Type something"
+                type="text"
+                id="msg"
+                autoComplete="off"
+                required
+                ref={msgref}
+              />
+              <button>
+                <i className="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
