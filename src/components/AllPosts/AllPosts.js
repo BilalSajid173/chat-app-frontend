@@ -85,6 +85,9 @@ const AllPosts = () => {
       {!error && <FriendSection friends={friendlist} />}
       {!error && (
         <div className={classes.container}>
+          <div className={classes.username_mobile}>
+            <h2>Welcome {user.name}👋👋</h2>
+          </div>
           <Paginator
             onPrevious={prevHandler}
             onNext={nextHandler}

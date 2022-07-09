@@ -10,7 +10,7 @@ const UserInfo = (props) => {
         <img src={image} alt="userimg"></img>
         <h2>Hey {props.name}!</h2>
         <div className={classes.buttons}>
-          <Link className={classes.links} to="">
+          <Link className={classes.links} to="/user_account">
             <button>View Profile</button>
           </Link>
         </div>
@@ -20,8 +20,8 @@ const UserInfo = (props) => {
           </Link>
         </div>
         <div className={classes.buttons}>
-          <Link className={classes.links} to="">
-            <button>Start a Chat</button>
+          <Link className={classes.links} to="/allchats">
+            <button>Chat</button>
           </Link>
         </div>
       </div>
