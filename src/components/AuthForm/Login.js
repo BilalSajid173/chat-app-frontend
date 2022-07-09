@@ -10,6 +10,7 @@ import ErrorModal from "../UI/ErrorModal";
 const LoginForm = (props) => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState();
 
   const {
@@ -76,6 +77,12 @@ const LoginForm = (props) => {
     setError(null);
   };
 
+  const showPassword = () => {
+    setShowPass((prev) => {
+      return !prev;
+    });
+  };
+
   const emailClasses = emailHasError ? classes.invalid : "";
   const passwordClasses = passwordHasError ? classes.invalid : "";
   return (
@@ -113,15 +120,23 @@ const LoginForm = (props) => {
                     Min passsword length is 7 characters.
                   </p>
                 )}
-                <input
-                  placeholder="Password"
-                  type="password"
-                  id="password"
-                  required
-                  value={enteredPassword}
-                  onChange={passwordChangeHandler}
-                  onBlur={passwordBlurHandler}
-                />
+                <div className={classes.showpasswrap}>
+                  <input
+                    placeholder="Password"
+                    type={showPass ? "text" : "password"}
+                    id="password"
+                    required
+                    value={enteredPassword}
+                    onChange={passwordChangeHandler}
+                    onBlur={passwordBlurHandler}
+                  />
+                  <i
+                    onClick={showPassword}
+                    className={`fa-solid ${
+                      showPass ? "fa-eye-slash" : "fa-eye"
+                    }`}
+                  ></i>
+                </div>
               </div>
               <button type="submit">Sign In</button>
               <h4>
