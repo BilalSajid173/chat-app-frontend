@@ -12,6 +12,10 @@ const Navbar = () => {
       return !prevState;
     });
   };
+
+  const logoutHandler = () => {
+    authCtx.logout();
+  };
   return (
     <Fragment>
       <nav>
@@ -76,7 +80,9 @@ const Navbar = () => {
             >
               <span className="material-symbols-outlined">chat</span>
             </NavLink>
-            <span className="material-symbols-outlined">arrow_drop_down</span>
+            <span onClick={logoutHandler} className="material-symbols-outlined">
+              Logout
+            </span>
           </div>
         </div>
         <div className={classes.nav_right_mobile}>
@@ -134,26 +140,10 @@ const Navbar = () => {
                 </div>
               </NavLink>
             </div>
-            <div className={classes.links_mobile}>
+            <div onClick={logoutHandler} className={classes.links_mobile}>
               <NavLink className={classes.link} to="">
                 <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
-                  <h2>About</h2>
-                </div>
-              </NavLink>
-            </div>
-            <div className={classes.links_mobile}>
-              <NavLink className={classes.link} to="">
-                <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
-                  <h2>Contact Us</h2>
-                </div>
-              </NavLink>
-            </div>
-            <div className={classes.links_mobile}>
-              <NavLink className={classes.link} to="">
-                <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
+                  <span className="material-symbols-outlined">Logout</span>
                   <h2>Logout</h2>
                 </div>
               </NavLink>
