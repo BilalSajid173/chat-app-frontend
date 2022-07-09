@@ -5,6 +5,7 @@ import UserInfo from "./UserInfo";
 import FriendSection from "./FriendSection";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
+import Paginator from "../Paginator/Paginator";
 
 const AllPosts = () => {
   const authCtx = useContext(AuthContext);
@@ -12,9 +13,11 @@ const AllPosts = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
   const [friendlist, setFriendlist] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/allposts/", {
+    fetch("http://localhost:8080/post/allposts/?page=" + page, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -38,6 +41,7 @@ const AllPosts = () => {
             authorId: post.author._id,
           };
         });
+        setTotalPosts(data.totalItems);
         setFriendlist(data.user.friends);
         setAllPosts(posts);
         setUser(data.user);
@@ -49,7 +53,20 @@ const AllPosts = () => {
         });
         console.log(err);
       });
-  }, [authCtx.token]);
+  }, [authCtx.token, page]);
+
+  const prevHandler = () => {
+    setPage((prev) => {
+      return prev - 1;
+    });
+  };
+
+  const nextHandler = () => {
+    console.log(page);
+    setPage((prev) => {
+      return prev + 1;
+    });
+  };
 
   const errorHandler = () => {
     setError(null);
@@ -68,18 +85,25 @@ const AllPosts = () => {
       {!error && <FriendSection friends={friendlist} />}
       {!error && (
         <div className={classes.container}>
-          {allPosts.map((post) => (
-            <PostItem
-              userId={user._id}
-              isLiked={post.isLiked}
-              authorId={post.authorId}
-              key={post.id}
-              id={post.id}
-              author={post.author}
-              content={post.content}
-              createdAt={post.createdAt}
-            />
-          ))}
+          <Paginator
+            onPrevious={prevHandler}
+            onNext={nextHandler}
+            currentPage={page}
+            lastPage={Math.ceil(totalPosts / 5)}
+          >
+            {allPosts.map((post) => (
+              <PostItem
+                userId={user._id}
+                isLiked={post.isLiked}
+                authorId={post.authorId}
+                key={post.id}
+                id={post.id}
+                author={post.author}
+                content={post.content}
+                createdAt={post.createdAt}
+              />
+            ))}
+          </Paginator>
         </div>
       )}
     </Fragment>
