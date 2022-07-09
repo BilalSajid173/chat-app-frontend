@@ -8,14 +8,19 @@ import ErrorModal from "../UI/ErrorModal";
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
   const [isLiked, setIsLiked] = useState(props.isLiked);
+  const [isSaved, setIsSaved] = useState(props.isSaved);
   const [error, setError] = useState();
 
-  const onLikeChangeHandler = () => {
-    fetch("http://localhost:8080/post/likepost/" + props.id, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+  const onLikeChangeHandler = (like) => {
+    fetch(
+      `http://localhost:8080/post/${like ? "likepost" : "savepost"}/` +
+        props.id,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Liking post unsuccessful");
@@ -24,9 +29,13 @@ const PostItem = (props) => {
         return res.json();
       })
       .then((data) => {
-        setIsLiked((prevState) => {
-          return !prevState;
-        });
+        like
+          ? setIsLiked((prevState) => {
+              return !prevState;
+            })
+          : setIsSaved((prevState) => {
+              return !prevState;
+            });
         console.log(data);
       })
       .catch((err) => {
@@ -77,8 +86,9 @@ const PostItem = (props) => {
               </div>
               <div className={classes.bookmark}>
                 <i
+                  onClick={onLikeChangeHandler.bind(null, false)}
                   className={`${
-                    isLiked ? "fa-solid" : "fa-regular"
+                    isSaved ? "fa-solid" : "fa-regular"
                   } fa-bookmark`}
                 ></i>
               </div>
@@ -94,7 +104,7 @@ const PostItem = (props) => {
             </p>
           </div>
           <div className={classes.actions}>
-            <button onClick={onLikeChangeHandler}>
+            <button onClick={onLikeChangeHandler.bind(null, true)}>
               {!isLiked && (
                 <span className="material-symbols-outlined">favorite</span>
               )}

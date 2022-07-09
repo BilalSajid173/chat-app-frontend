@@ -28,6 +28,7 @@ const FriendPage = () => {
       .then((data) => {
         setFriends(data.user.friends);
         const likedposts = data.user.likedPosts ? data.user.likedPosts : [];
+        const savedposts = data.user.savedPosts ? data.user.savedPosts : [];
         let allPosts = [];
         data.user.friends.forEach((friend) => {
           friend.posts.forEach((post) => {
@@ -39,6 +40,7 @@ const FriendPage = () => {
           allPosts.map((post) => {
             return {
               isLiked: likedposts.includes(post._id) ? true : false,
+              isSaved: savedposts.includes(post._id) ? true : false,
               id: post._id,
               author: post.author.name,
               content: post.content.slice(0, 250) + "...",
@@ -95,6 +97,7 @@ const FriendPage = () => {
             <PostItem
               userId={user._id}
               isLiked={post.isLiked}
+              isSaved={post.isSaved}
               authorId={post.authorId}
               key={post.id}
               id={post.id}

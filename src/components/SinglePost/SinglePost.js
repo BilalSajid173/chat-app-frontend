@@ -44,9 +44,11 @@ const SinglePost = (props) => {
         setUser(data.user);
         setComments(data.post.comments);
         const likedposts = data.likedPosts ? data.likedPosts : [];
+        const savedposts = data.savedPosts ? data.savedPosts : [];
         const posts = data.posts.map((post) => {
           return {
             isLiked: likedposts.includes(post._id) ? true : false,
+            isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
             content: post.content.slice(0, 250) + "...",
@@ -165,6 +167,7 @@ const SinglePost = (props) => {
           <PostItem
             userId={user._id}
             isLiked={post.isLiked}
+            isSaved={post.isSaved}
             authorId={post.authorId}
             key={post.id}
             id={post.id}
