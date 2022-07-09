@@ -6,6 +6,7 @@ import FriendSection from "./FriendSection";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import Paginator from "../Paginator/Paginator";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const AllPosts = () => {
   const authCtx = useContext(AuthContext);
@@ -15,8 +16,10 @@ const AllPosts = () => {
   const [friendlist, setFriendlist] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8080/post/allposts/?page=" + page, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
@@ -47,12 +50,14 @@ const AllPosts = () => {
         setFriendlist(data.user.friends);
         setAllPosts(posts);
         setUser(data.user);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
           title: "Failed to load posts",
           message: "Please try again later.",
         });
+        setIsLoading(false);
         console.log(err);
       });
   }, [authCtx.token, page]);
@@ -83,9 +88,10 @@ const AllPosts = () => {
           onConfirm={errorHandler}
         />
       )}
-      {!error && <UserInfo name={user.name} />}
-      {!error && <FriendSection friends={friendlist} />}
-      {!error && (
+      {!error && isLoading && <LoadingSpinner />}
+      {!error && !isLoading && <UserInfo name={user.name} />}
+      {!error && !isLoading && <FriendSection friends={friendlist} />}
+      {!error && !isLoading && (
         <div className={classes.container}>
           <div className={classes.username_mobile}>
             <h2>Welcome {user.name}👋👋</h2>
