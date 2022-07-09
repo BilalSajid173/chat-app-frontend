@@ -12,12 +12,16 @@ const Navbar = () => {
       return !prevState;
     });
   };
+
+  const logoutHandler = () => {
+    authCtx.logout();
+  };
   return (
     <Fragment>
       <nav>
         <div className={classes.nav_left}>
           <div className={classes.search}>
-            <i class="fa-solid fa-comment"></i>
+            <i className="fa-solid fa-comment"></i>
             <h2>Konnect</h2>
           </div>
         </div>
@@ -68,18 +72,27 @@ const Navbar = () => {
             >
               <span className="material-symbols-outlined">add</span>
             </NavLink>
-            <span className="material-symbols-outlined">chat</span>
-            <span className="material-symbols-outlined">arrow_drop_down</span>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `${classes.active}` : ""
+              }
+              to="/allchats"
+            >
+              <span className="material-symbols-outlined">chat</span>
+            </NavLink>
+            <span onClick={logoutHandler} className="material-symbols-outlined">
+              Logout
+            </span>
           </div>
         </div>
         <div className={classes.nav_right_mobile}>
-          <NavLink className={classes.link} to="">
+          <NavLink className={classes.link} to="/allchats">
             <div className={classes.icons}>
               <span className="material-symbols-outlined">chat</span>
             </div>
           </NavLink>
           <div onClick={openMenuHandler} className={classes.icons}>
-            <i class="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </div>
         </div>
       </nav>
@@ -91,7 +104,7 @@ const Navbar = () => {
               <span>
                 <strong>{authCtx.name}</strong>
               </span>
-              <i onClick={openMenuHandler} class="fa-solid fa-xmark"></i>
+              <i onClick={openMenuHandler} className="fa-solid fa-xmark"></i>
             </div>
             <div className={classes.links_mobile}>
               <NavLink className={classes.link} to="/allposts">
@@ -127,26 +140,10 @@ const Navbar = () => {
                 </div>
               </NavLink>
             </div>
-            <div className={classes.links_mobile}>
+            <div onClick={logoutHandler} className={classes.links_mobile}>
               <NavLink className={classes.link} to="">
                 <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
-                  <h2>About</h2>
-                </div>
-              </NavLink>
-            </div>
-            <div className={classes.links_mobile}>
-              <NavLink className={classes.link} to="">
-                <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
-                  <h2>Contact Us</h2>
-                </div>
-              </NavLink>
-            </div>
-            <div className={classes.links_mobile}>
-              <NavLink className={classes.link} to="">
-                <div className={classes.icons}>
-                  <span className="material-symbols-outlined">chat</span>
+                  <span className="material-symbols-outlined">Logout</span>
                   <h2>Logout</h2>
                 </div>
               </NavLink>

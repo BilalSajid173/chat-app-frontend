@@ -12,6 +12,7 @@ nav {
 }
 
 .nav_left {
+  margin-left: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -25,6 +26,9 @@ nav {
   font-size: 1.5rem;
 }
 
+.search h2{
+  margin-bottom: 5px;
+}
 .nav_mid {
   display: flex;
   align-items: center;

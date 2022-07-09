@@ -10,6 +10,8 @@ import FriendList from "./pages/FriendList";
 import ViewPost from "./pages/SinglePost";
 import Profile from "./pages/Profile";
 import UserProfile from "./pages/ViewProfile";
+import AllChats from "./pages/AllChats";
+import PrivateChat from "./pages/PrivateChat";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -35,6 +37,10 @@ function App() {
       {authCtx.isLoggedIn && (
         <Route path="/user/:userId" element={<UserProfile />} />
       )}
+      {authCtx.isLoggedIn && (
+        <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
+      )}
+      {authCtx.isLoggedIn && <Route path="/allchats" element={<AllChats />} />}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

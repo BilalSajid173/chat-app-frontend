@@ -30,10 +30,10 @@ body {
   justify-content: center;
   box-shadow: 0 0.4px 3.6px rgba(0, 0, 0, 0.015),
     0 1px 8.5px rgba(0, 0, 0, 0.09), 0 1.9px 15.7px rgba(0, 0, 0, 0.089),
-    0 3.4px 28.2px rgba(0, 0, 0, 0.10), 0 6.3px 54.4px rgba(0, 0, 0, 0.1),
+    0 3.4px 28.2px rgba(0, 0, 0, 0.1), 0 6.3px 54.4px rgba(0, 0, 0, 0.1),
     0 15px 137px rgba(0, 0, 0, 0.23);
 }
-   
+
 .logincontainer {
   width: 50%;
   display: flex;
@@ -41,7 +41,7 @@ body {
   flex-direction: column;
 }
 
-.logincontainer h2{
+.logincontainer h2 {
   text-align: left;
   margin-bottom: 2rem;
 }
@@ -53,7 +53,7 @@ body {
   flex-direction: column;
 }
 
-.logincontainer div{
+.logincontainer div {
   width: 100%;
 }
 
@@ -66,6 +66,20 @@ body {
   border-bottom: 2px solid gray;
   margin: 1.5rem 0;
   font-size: 0.9rem;
+}
+
+.showpasswrap {
+  display: flex;
+  align-items: center;
+}
+
+.logincontainer i {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  height: 1.9rem;
+  border-bottom: 2px solid gray;
 }
 
 .logincontainer button {
@@ -85,14 +99,14 @@ body {
   background-color: #484848;
 }
 
-.logincontainer h4{
+.logincontainer h4 {
   font-weight: lighter;
   font-family: "Varela Round", sans-serif;
   color: #484848;
   font-size: 0.7rem;
 }
 
-.logincontainer a{
+.logincontainer a {
   text-decoration: none;
   font-weight: bold;
   font-family: "Varela Round", sans-serif;
@@ -114,11 +128,10 @@ body {
 }
 
 .invalid input:focus {
-  border-color: #ff8800;
   background-color: #fbe8d2;
 }
 
-.error{
+.error {
   font-size: 0.9rem;
   color: red;
 }
@@ -140,20 +153,18 @@ body {
   .bodygradient {
     padding: 8% 5%;
   }
-  
 
-  .logincontainer{
+  .logincontainer {
     width: 40%;
   }
 
-  .loginimg{
+  .loginimg {
     width: 60%;
   }
 
   .logincontainer button {
     font-size: 1rem;
   }
-
 }
 
 @media (max-width: 700px) {
@@ -185,7 +196,11 @@ body {
     font-size: 1.2rem;
   }
 
-  .logincontainer h2{
+  .logincontainer i {
+    height: 2.2rem;
+  }
+
+  .logincontainer h2 {
     text-align: center;
   }
 }

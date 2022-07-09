@@ -6,8 +6,10 @@ import SingleComment from "./Comment";
 import AuthContext from "../../store/auth-context";
 import PostItem from "../AllPosts/PostItem";
 import ErrorModal from "../UI/ErrorModal";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const SinglePost = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(AuthContext);
   const cmtRef = useRef();
   const params = useParams();
@@ -19,6 +21,7 @@ const SinglePost = (props) => {
   const [error, setError] = useState();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:8080/post/singlepost/" + postId, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
@@ -44,9 +47,11 @@ const SinglePost = (props) => {
         setUser(data.user);
         setComments(data.post.comments);
         const likedposts = data.likedPosts ? data.likedPosts : [];
+        const savedposts = data.savedPosts ? data.savedPosts : [];
         const posts = data.posts.map((post) => {
           return {
             isLiked: likedposts.includes(post._id) ? true : false,
+            isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
             content: post.content.slice(0, 250) + "...",
@@ -55,12 +60,14 @@ const SinglePost = (props) => {
           };
         });
         setAllPosts(posts);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
           title: "Failed to load post!",
           message: "Please try again.",
         });
+        setIsLoading(false);
         console.log(err);
       });
   }, [authCtx.token, postId]);
@@ -122,58 +129,64 @@ const SinglePost = (props) => {
           onConfirm={errorHandler}
         />
       )}
-      <div className={classes.container}>
-        <div className={classes.postContainer}>
-          <div className={classes.singlepost}>
-            <div className={classes.userinfo}>
-              <div>
-                <img src={image} alt="img"></img>
-              </div>
-              <div>
-                <h3>{post.author}</h3>
-                <span>{post.createdAt}</span>
+      {isLoading && <LoadingSpinner />}
+      {!isLoading && !error && (
+        <Fragment>
+          <div className={classes.container}>
+            <div className={classes.postContainer}>
+              <div className={classes.singlepost}>
+                <div className={classes.userinfo}>
+                  <div>
+                    <img src={image} alt="img"></img>
+                  </div>
+                  <div>
+                    <h3>{post.author}</h3>
+                    <span>{post.createdAt}</span>
+                  </div>
+                </div>
+                <p>{post.content}</p>
               </div>
             </div>
-            <p>{post.content}</p>
+            <div className={classes.comments}>
+              <h2>Comments</h2>
+              <form onSubmit={commentSubmitHandler}>
+                <input
+                  type="text"
+                  placeholder="Say Something!"
+                  ref={cmtRef}
+                  id="comment"
+                />
+                <button>Add</button>
+              </form>
+              {comments.map((comment) => {
+                return (
+                  <SingleComment
+                    key={comment._id}
+                    author={comment.name}
+                    comment={comment.comment}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className={classes.comments}>
-          <h2>Comments</h2>
-          <form onSubmit={commentSubmitHandler}>
-            <input
-              type="text"
-              placeholder="Say Something!"
-              ref={cmtRef}
-              id="comment"
-            />
-            <button>Add</button>
-          </form>
-          {comments.map((comment) => {
-            return (
-              <SingleComment
-                key={comment._id}
-                author={comment.name}
-                comment={comment.comment}
+          <div className={classes.morePosts}>
+            <h2>More</h2>
+            {allPosts.map((post) => (
+              <PostItem
+                userId={user._id}
+                isLiked={post.isLiked}
+                isSaved={post.isSaved}
+                authorId={post.authorId}
+                key={post.id}
+                id={post.id}
+                author={post.author}
+                content={post.content}
+                createdAt={post.createdAt}
               />
-            );
-          })}
-        </div>
-      </div>
-      <div className={classes.morePosts}>
-        <h2>More</h2>
-        {allPosts.map((post) => (
-          <PostItem
-            userId={user._id}
-            isLiked={post.isLiked}
-            authorId={post.authorId}
-            key={post.id}
-            id={post.id}
-            author={post.author}
-            content={post.content}
-            createdAt={post.createdAt}
-          />
-        ))}
-      </div>
+            ))}
+          </div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
