@@ -178,7 +178,7 @@ const UserAccount = () => {
               <p>{user.bio}</p>
             </div>
             <div className={classes.userposts}>
-              <h2>Your Posts</h2>
+              <h2>{user.name}'s Posts</h2>
               {allPosts.map((post) => (
                 <PostItem
                   userId={loggedInUserId}

@@ -21,7 +21,7 @@
 .container {
   min-height: 90vh;
   width: 100%;
-  padding: 1% 0;
+  padding: 2% 0;
   padding-left: 30%;
   padding-right: 2%;
   display: flex;
@@ -41,15 +41,15 @@
 
 @media (max-width: 1025px) {
   .container {
-    padding-top: 1.5%;
+    padding-top: 2.8%;
   }
 }
 
 @media (max-width: 850px) {
   .container {
-    padding-top: 2%;
+    padding-top: 3.5%;
     padding-right: 0;
-    padding-left: 32%;
+    padding-left: 33%;
   }
 
   .listcontainer {
@@ -77,6 +77,7 @@
   }
 
   .listcontainer {
+    margin-top: 1rem;
     position: static;
     width: 100%;
     min-height: 90vh;
@@ -89,6 +90,10 @@
 
   .listcontainer a {
     width: 100%;
+  }
+
+  .listcontainer h2 {
+    margin-top: 1rem;
   }
 }
 

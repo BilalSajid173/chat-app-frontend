@@ -101,6 +101,7 @@ const FriendPage = () => {
             </div>
           </div>
           <div className={classes.container}>
+            <h2>Recent Posts</h2>
             {posts.length > 0 ? (
               posts.map((post) => (
                 <PostItem
