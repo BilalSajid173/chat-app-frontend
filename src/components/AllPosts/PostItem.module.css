@@ -36,6 +36,7 @@
 
 .singlepost h3 {
   margin: 0.3rem 0;
+  text-decoration: underline;
 }
 
 .userinfo {

@@ -18,8 +18,8 @@ function App() {
   const authCtx = useContext(AuthContext);
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      {!authCtx.isLoggedIn && <Route path="/" element={<Login />} />}
+      {!authCtx.isLoggedIn && <Route path="/signup" element={<Signup />} />}
       {authCtx.isLoggedIn && (
         <Route path="/allposts" element={<FetchAllPosts />} />
       )}

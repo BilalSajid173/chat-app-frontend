@@ -73,7 +73,6 @@
 
 .comments input:focus {
   box-shadow: 0px 0px 6px #ccc;
-  background-color: rgb(149, 228, 255);
 }
 
 .comments button {
@@ -84,12 +83,12 @@
   width: 23%;
   background-color: rgb(149, 228, 255);
   border-radius: 5px;
-  transition: all 0.3s ease-in;
+  transition: all 0.1s ease-in;
   cursor: pointer;
 }
 
 .comments button:hover {
-  background-color: darkviolet;
+  background-color: rgb(233, 182, 255);
 }
 
 .morePosts {

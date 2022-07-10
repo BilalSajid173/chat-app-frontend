@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 
 .comment {
-  margin: 1% 0;
+  margin: 0;
   padding: 1%;
-  border-radius: 5px;
-  background-color: rgb(244, 244, 244);
-  box-shadow: 0px 0px 6px #ccc;
+  background-color: #f1f2f6;
+  /* box-shadow: 0px 0px 6px #ccc; */
   font-family: "Source Sans Pro", sans-serif;
+  border-bottom: 1px solid rgb(196, 196, 196);
 }
 .comment p {
   margin-top: 5px;
