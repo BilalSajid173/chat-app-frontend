@@ -124,7 +124,7 @@ const PostItem = (props) => {
                 <img src={image} alt="img"></img>
               </div>
               <div>
-                <h3>
+                <h4>
                   {props.userId === props.authorId ? (
                     <Link to="/user_account" className={classes.link}>
                       {props.author}
@@ -137,7 +137,7 @@ const PostItem = (props) => {
                       {props.author}
                     </Link>
                   )}
-                </h3>
+                </h4>
                 <span>{props.createdAt}</span>
               </div>
               <div className={classes.bookmark}>
@@ -149,6 +149,7 @@ const PostItem = (props) => {
                 ></i>
               </div>
             </div>
+            <h3>{props.title}</h3>
             <p>
               {props.content}
               <Link

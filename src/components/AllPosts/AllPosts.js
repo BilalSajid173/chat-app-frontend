@@ -33,6 +33,7 @@ const AllPosts = () => {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         const likedposts = data.likedPosts ? data.likedPosts : [];
         const savedposts = data.savedPosts ? data.savedPosts : [];
         const posts = data.posts.map((post) => {
@@ -44,6 +45,7 @@ const AllPosts = () => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
+            title: post.title,
           };
         });
         setTotalPosts(data.totalItems);
@@ -104,6 +106,7 @@ const AllPosts = () => {
           >
             {allPosts.map((post) => (
               <PostItem
+                title={post.title}
                 userId={user._id}
                 isLiked={post.isLiked}
                 isSaved={post.isSaved}

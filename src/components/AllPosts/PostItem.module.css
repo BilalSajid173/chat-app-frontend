@@ -34,6 +34,10 @@
   margin-bottom: 1%;
 }
 
+.singlepost h3 {
+  margin: 0.3rem 0;
+}
+
 .userinfo {
   display: flex;
   flex-wrap: wrap;
@@ -48,7 +52,7 @@
   margin-right: 10px;
 }
 
-.userinfo h3 {
+.userinfo h4 {
   margin-bottom: 0.5%;
   font-weight: 500;
 }

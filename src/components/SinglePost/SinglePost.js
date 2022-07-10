@@ -57,6 +57,7 @@ const SinglePost = (props) => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
+            title: post.title,
           };
         });
         setAllPosts(posts);
@@ -182,6 +183,7 @@ const SinglePost = (props) => {
                 author={post.author}
                 content={post.content}
                 createdAt={post.createdAt}
+                title={post.title}
               />
             ))}
           </div>
