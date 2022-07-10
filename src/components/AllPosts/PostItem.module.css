@@ -5,6 +5,21 @@
   padding: 2%;
 }
 
+.close {
+  float: right;
+  background-color: rgb(237, 218, 255);
+  border: 0;
+  outline: 0;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.nocomments {
+  margin-top: 15rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
 .postContainer {
   display: flex;
   flex-direction: column;
