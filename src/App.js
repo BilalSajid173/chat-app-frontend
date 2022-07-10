@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useContext } from "react";
 import Login from "./pages/Login";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import UserProfile from "./pages/ViewProfile";
 import AllChats from "./pages/AllChats";
 import PrivateChat from "./pages/PrivateChat";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -41,7 +42,7 @@ function App() {
         <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
       )}
       {authCtx.isLoggedIn && <Route path="/allchats" element={<AllChats />} />}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
