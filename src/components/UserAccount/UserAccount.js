@@ -44,6 +44,7 @@ const UserAccount = () => {
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
             title: post.title,
+            imageId: post.publicId,
           };
         });
         setAllPosts(posts);
@@ -184,6 +185,7 @@ const UserAccount = () => {
                   content={post.content}
                   createdAt={post.createdAt}
                   title={post.title}
+                  imageId={post.imageId}
                 />
               ))}
             </div>

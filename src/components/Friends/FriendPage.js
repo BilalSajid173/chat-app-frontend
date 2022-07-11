@@ -50,6 +50,7 @@ const FriendPage = () => {
               createdAt: new Date(post.createdAt).toDateString(),
               authorId: post.author._id,
               title: post.title,
+              imageId: post.publicId,
             };
           })
         );
@@ -115,6 +116,7 @@ const FriendPage = () => {
                   content={post.content}
                   createdAt={post.createdAt}
                   title={post.title}
+                  imageId={post.imageId}
                 />
               ))
             ) : (

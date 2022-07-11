@@ -26,7 +26,11 @@
   background-color: white;
   justify-content: center;
   border-radius: 7px;
-  box-shadow: 0px 0px 6px #ccc;
+  transition: all 0.3s ease-in;
+}
+
+.postContainer:hover {
+  box-shadow: 0px 0px 6px rgb(182, 182, 182);
 }
 
 .singlepost {
@@ -45,8 +49,7 @@
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 1rem;
-  border-bottom: 1px solid grey;
-  border-top: 1px solid grey;
+  background-color: black;
 }
 
 .userinfo {
@@ -91,11 +94,13 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 5%;
-  padding-bottom: 2%;
+  padding: 1% 5%;
+  padding-bottom: 3%;
+  justify-content: center;
 }
 
 .actions button {
+  width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +109,7 @@
   font-family: "Source Sans Pro", sans-serif;
   font-size: 1rem;
   color: grey;
-  padding: 2% 5%;
+  padding: 3% 5%;
   border-radius: 12px;
   cursor: pointer;
   margin-right: 1%;
@@ -132,6 +137,16 @@
     padding-left: 4%;
 } */
 
+@media (max-width: 600px) {
+  .actions button {
+    width: 45%;
+  }
+
+  .actions {
+    padding: 1% 2%;
+    padding-bottom: 4%;
+  }
+}
 @media (max-width: 500px) {
   .postContainer {
     font-size: 0.9rem;

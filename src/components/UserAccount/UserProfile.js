@@ -47,6 +47,7 @@ const UserAccount = () => {
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
             title: post.title,
+            imageId: post.publicId,
           };
         });
         setIsFriend(data.isFriend);
@@ -191,6 +192,7 @@ const UserAccount = () => {
                   content={post.content}
                   createdAt={post.createdAt}
                   title={post.title}
+                  imageId={post.imageId}
                 />
               ))}
             </div>

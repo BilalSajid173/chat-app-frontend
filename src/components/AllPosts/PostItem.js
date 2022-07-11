@@ -165,8 +165,7 @@ const PostItem = (props) => {
               <Image
                 cloudName="dntn0wocu"
                 publicId={props.imageId}
-                width="400"
-                height="300"
+                width="300"
                 crop="scale"
               />
             </div>

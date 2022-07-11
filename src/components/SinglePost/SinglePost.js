@@ -42,6 +42,7 @@ const SinglePost = (props) => {
           createdAt: new Date(data.post.createdAt).toDateString(),
           id: data.post._id,
           author_id: data.post.author._id,
+          imageId: data.post.imageId
         };
         setPost(curPost);
         setUser(data.user);
@@ -58,6 +59,7 @@ const SinglePost = (props) => {
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
             title: post.title,
+            imageId: post.publicId
           };
         });
         setAllPosts(posts);
@@ -184,6 +186,7 @@ const SinglePost = (props) => {
                 content={post.content}
                 createdAt={post.createdAt}
                 title={post.title}
+                imageId={post.imageId}
               />
             ))}
           </div>
