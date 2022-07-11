@@ -31,12 +31,22 @@
 
 .singlepost {
   padding: 3% 5%;
-  margin-bottom: 1%;
+  /* margin-bottom: 0.3%; */
 }
 
 .singlepost h3 {
   margin: 0.3rem 0;
   text-decoration: underline;
+}
+
+.uploadedimage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
 }
 
 .userinfo {
@@ -94,7 +104,7 @@
   font-family: "Source Sans Pro", sans-serif;
   font-size: 1rem;
   color: grey;
-  padding: 1% 5%;
+  padding: 2% 5%;
   border-radius: 12px;
   cursor: pointer;
   margin-right: 1%;

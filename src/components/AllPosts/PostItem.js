@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
 import CommentModal from "../UI/CommentModal";
 import SingleComment from "../SinglePost/Comment";
+import { Image } from "cloudinary-react";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -149,7 +150,6 @@ const PostItem = (props) => {
                 ></i>
               </div>
             </div>
-            <h3>{props.title}</h3>
             <p>
               {props.content}
               <Link
@@ -160,6 +160,17 @@ const PostItem = (props) => {
               </Link>
             </p>
           </div>
+          {props.imageId && (
+            <div className={classes.uploadedimage}>
+              <Image
+                cloudName="dntn0wocu"
+                publicId={props.imageId}
+                width="400"
+                height="300"
+                crop="scale"
+              />
+            </div>
+          )}
           <div className={classes.actions}>
             <button onClick={onLikeChangeHandler.bind(null, true)}>
               {!isLiked && (

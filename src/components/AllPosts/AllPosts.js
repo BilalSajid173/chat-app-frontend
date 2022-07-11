@@ -46,6 +46,7 @@ const AllPosts = () => {
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
             title: post.title,
+            imageId: post.publicId,
           };
         });
         setTotalPosts(data.totalItems);
@@ -116,6 +117,7 @@ const AllPosts = () => {
                 author={post.author}
                 content={post.content}
                 createdAt={post.createdAt}
+                imageId={post.imageId}
               />
             ))}
           </Paginator>
