@@ -1,9 +1,10 @@
 import classes from "../Navbar/navbar.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Fragment, useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -15,6 +16,7 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     authCtx.logout();
+    navigate("/");
   };
   return (
     <Fragment>

@@ -1,12 +1,13 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import classes from "./UserAccount.module.css";
-import userimg from "../../images/userimg.png";
 import { Link } from "react-router-dom";
 import PostItem from "../AllPosts/PostItem";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import EditProfile from "./EditProfile";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import ProfilePicModal from "../UI/ProfilePicModal";
+import { Image } from "cloudinary-react";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -15,6 +16,10 @@ const UserAccount = () => {
   const [error, setError] = useState();
   const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [imageId, setImageId] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,10 +48,13 @@ const UserAccount = () => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
+            title: post.title,
+            imageId: post.publicId,
           };
         });
         setAllPosts(posts);
         setUser(data.user);
+        setImageId(data.user.imageId);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -75,6 +83,69 @@ const UserAccount = () => {
     setEdit(false);
   };
 
+  const showModalForm = () => {
+    setShowModal(true);
+  };
+
+  const closeModalForm = () => {
+    setShowModal(false);
+    setFileInputState("");
+    setPreviewSource("");
+  };
+
+  const fileInputHandler = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setFileInputState(e.target.value);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      console.log(reader.result);
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const imageSubmitHandler = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (!previewSource) return;
+    fetch("http://localhost:8080/post/addimage", {
+      method: "POST",
+      body: JSON.stringify({
+        image: previewSource,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setImageId(data.publicId);
+        setShowModal(false);
+        setFileInputState("");
+        setPreviewSource("");
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError({
+          title: "Profile not loaded!",
+          message: "Please try again.",
+        });
+        console.log(err);
+      });
+  };
+
   return (
     <Fragment>
       {edit && (
@@ -90,6 +161,39 @@ const UserAccount = () => {
           message={error.message}
           onConfirm={errorHandler}
         />
+      )}
+      {showModal && (
+        <ProfilePicModal onClose={closeModalForm}>
+          <form onSubmit={imageSubmitHandler}>
+            <div className={classes.imagepicker}>
+              <label htmlFor="upload-photo">
+                <span>Choose</span>
+              </label>
+              <p>Select an image</p>
+              <input
+                type="file"
+                name="photo"
+                id="upload-photo"
+                className={classes.upload}
+                onChange={fileInputHandler}
+                value={fileInputState}
+              />
+            </div>
+            <div className={classes.imgprev}>
+              {previewSource ? (
+                <img src={previewSource} alt="preview_img"></img>
+              ) : (
+                "No Image Selected"
+              )}
+            </div>
+            <div className={classes.modalbtns}>
+              <button>Submit</button>
+              <button type="button" onClick={closeModalForm}>
+                Close
+              </button>
+            </div>
+          </form>
+        </ProfilePicModal>
       )}
       {isLoading && <LoadingSpinner />}
       {!isLoading && !error && (
@@ -126,13 +230,27 @@ const UserAccount = () => {
                 </Link>
               </div>
               <div className={classes.userimg}>
-                <img src={userimg} alt="img"></img>
-                <h4>Bio</h4>
+                <Image
+                  cloudName="dntn0wocu"
+                  publicId={imageId}
+                  width="200"
+                  height="200"
+                  crop="scale"
+                />
+                <i onClick={showModalForm} className="fa-solid fa-camera"></i>
+                <h3>Bio</h3>
                 <p>{user.bio}</p>
               </div>
             </div>
             <div className={classes.userimg_mobile}>
-              <img src={userimg} alt="img"></img>
+              <Image
+                cloudName="dntn0wocu"
+                publicId={imageId}
+                width="200"
+                height="200"
+                crop="scale"
+              />
+              <i onClick={showModalForm} className="fa-solid fa-camera"></i>
             </div>
             <div className={classes.userinfo_mobile}>
               <div className={classes.nameaddress}>
@@ -182,6 +300,9 @@ const UserAccount = () => {
                   author={post.author}
                   content={post.content}
                   createdAt={post.createdAt}
+                  title={post.title}
+                  imageId={post.imageId}
+                  userimgId={imageId}
                 />
               ))}
             </div>

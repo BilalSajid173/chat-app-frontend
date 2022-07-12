@@ -6,16 +6,16 @@ const LoadingSpinner = () => {
     //   <div className={classes.spinner}></div>
     // </div>
     <div className={classes.center}>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
-      <div class={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
+      <div className={classes.wave}></div>
     </div>
   );
 };

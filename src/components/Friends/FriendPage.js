@@ -49,6 +49,9 @@ const FriendPage = () => {
               content: post.content.slice(0, 250) + "...",
               createdAt: new Date(post.createdAt).toDateString(),
               authorId: post.author._id,
+              title: post.title,
+              imageId: post.publicId,
+              userimgId: post.author.imageId,
             };
           })
         );
@@ -90,6 +93,8 @@ const FriendPage = () => {
                     key={friend._id}
                     name={friend.name}
                     id={friend._id}
+                    userimgId={friend.imageId}
+                    address={friend.address}
                   />
                 ))
               ) : (
@@ -100,6 +105,7 @@ const FriendPage = () => {
             </div>
           </div>
           <div className={classes.container}>
+            <h2>Recent Posts</h2>
             {posts.length > 0 ? (
               posts.map((post) => (
                 <PostItem
@@ -112,6 +118,9 @@ const FriendPage = () => {
                   author={post.author}
                   content={post.content}
                   createdAt={post.createdAt}
+                  title={post.title}
+                  imageId={post.imageId}
+                  userimgId={post.userimgId}
                 />
               ))
             ) : (

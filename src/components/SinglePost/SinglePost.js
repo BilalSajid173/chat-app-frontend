@@ -1,12 +1,12 @@
 import classes from "./SinglePost.module.css";
 import { Fragment, useContext, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import image from "../../images/userimg.png";
 import SingleComment from "./Comment";
 import AuthContext from "../../store/auth-context";
 import PostItem from "../AllPosts/PostItem";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { Image } from "cloudinary-react";
 
 const SinglePost = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +42,8 @@ const SinglePost = (props) => {
           createdAt: new Date(data.post.createdAt).toDateString(),
           id: data.post._id,
           author_id: data.post.author._id,
+          imageId: data.post.publicId,
+          userimgId: data.post.author.imageId,
         };
         setPost(curPost);
         setUser(data.user);
@@ -57,6 +59,9 @@ const SinglePost = (props) => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
+            title: post.title,
+            imageId: post.publicId,
+            userimgId: post.author.imageId,
           };
         });
         setAllPosts(posts);
@@ -137,7 +142,13 @@ const SinglePost = (props) => {
               <div className={classes.singlepost}>
                 <div className={classes.userinfo}>
                   <div>
-                    <img src={image} alt="img"></img>
+                    <Image
+                      cloudName="dntn0wocu"
+                      publicId={post.userimgId}
+                      width="80"
+                      height="80"
+                      crop="scale"
+                    />
                   </div>
                   <div>
                     <h3>{post.author}</h3>
@@ -145,6 +156,14 @@ const SinglePost = (props) => {
                   </div>
                 </div>
                 <p>{post.content}</p>
+                <div className={classes.uploadedimage}>
+                  <Image
+                    cloudName="dntn0wocu"
+                    publicId={post.imageId}
+                    width="300"
+                    crop="scale"
+                  />
+                </div>
               </div>
             </div>
             <div className={classes.comments}>
@@ -170,7 +189,7 @@ const SinglePost = (props) => {
             </div>
           </div>
           <div className={classes.morePosts}>
-            <h2>More</h2>
+            <h2>More Posts</h2>
             {allPosts.map((post) => (
               <PostItem
                 userId={user._id}
@@ -182,6 +201,9 @@ const SinglePost = (props) => {
                 author={post.author}
                 content={post.content}
                 createdAt={post.createdAt}
+                title={post.title}
+                imageId={post.imageId}
+                userimgId={post.userimgId}
               />
             ))}
           </div>

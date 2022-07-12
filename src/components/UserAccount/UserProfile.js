@@ -1,11 +1,11 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import classes from "./UserAccount.module.css";
-import userimg from "../../images/userimg.png";
 import { Link, useParams } from "react-router-dom";
 import PostItem from "../AllPosts/PostItem";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { Image } from "cloudinary-react";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -18,6 +18,7 @@ const UserAccount = () => {
   const [isFriend, setIsFriend] = useState(false);
   const [roomId, setRoomId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [imageId, setImageId] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,8 +47,11 @@ const UserAccount = () => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
+            title: post.title,
+            imageId: post.publicId,
           };
         });
+        setImageId(data.user.imageId);
         setIsFriend(data.isFriend);
         setLoggedInUserId(loggedInUserId);
         setAllPosts(posts);
@@ -135,13 +139,25 @@ const UserAccount = () => {
                 </Link>
               </div>
               <div className={classes.userimg}>
-                <img src={userimg} alt="img"></img>
-                <h4>Bio</h4>
+                <Image
+                  cloudName="dntn0wocu"
+                  publicId={imageId}
+                  width="200"
+                  height="200"
+                  crop="scale"
+                />
+                <h3>Bio</h3>
                 <p>{user.bio}</p>
               </div>
             </div>
             <div className={classes.userimg_mobile}>
-              <img src={userimg} alt="img"></img>
+              <Image
+                cloudName="dntn0wocu"
+                publicId={imageId}
+                width="200"
+                height="200"
+                crop="scale"
+              />
             </div>
             <div className={classes.userinfo_mobile}>
               <div className={classes.nameaddress}>
@@ -177,7 +193,7 @@ const UserAccount = () => {
               <p>{user.bio}</p>
             </div>
             <div className={classes.userposts}>
-              <h2>Your Posts</h2>
+              <h2>{user.name}'s Posts</h2>
               {allPosts.map((post) => (
                 <PostItem
                   userId={loggedInUserId}
@@ -189,6 +205,9 @@ const UserAccount = () => {
                   author={post.author}
                   content={post.content}
                   createdAt={post.createdAt}
+                  title={post.title}
+                  imageId={post.imageId}
+                  userimgId={imageId}
                 />
               ))}
             </div>

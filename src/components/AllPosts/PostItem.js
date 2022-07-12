@@ -1,15 +1,19 @@
 import { useState, useContext, Fragment } from "react";
 import classes from "./PostItem.module.css";
 import AuthContext from "../../store/auth-context";
-import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
+import CommentModal from "../UI/CommentModal";
+import SingleComment from "../SinglePost/Comment";
+import { Image } from "cloudinary-react";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [isSaved, setIsSaved] = useState(props.isSaved);
   const [error, setError] = useState();
+  const [comments, setComments] = useState([]);
+  const [showComments, setShowComments] = useState(false);
 
   const onLikeChangeHandler = (like) => {
     fetch(
@@ -47,6 +51,37 @@ const PostItem = (props) => {
       });
   };
 
+  const fetchComments = () => {
+    setShowComments(true);
+    fetch("http://localhost:8080/post/getComments/" + props.id, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Comments not fetched");
+          throw error;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setComments(data.comments);
+      })
+      .catch((err) => {
+        setError({
+          title: "Liking post unsuccessful",
+          message: "Please try again.",
+        });
+        console.log(err);
+      });
+  };
+
+  const hideComments = () => {
+    setShowComments(false);
+  };
+
   const errorHandler = () => {
     setError(null);
   };
@@ -60,15 +95,42 @@ const PostItem = (props) => {
           onConfirm={errorHandler}
         />
       )}
+      {showComments && (
+        <CommentModal onClose={hideComments}>
+          <button onClick={hideComments} className={classes.close}>
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+          <h2>All Comments</h2>
+          {comments.length > 0 ? (
+            comments.map((comment) => {
+              return (
+                <SingleComment
+                  key={comment._id}
+                  author={comment.name}
+                  comment={comment.comment}
+                />
+              );
+            })
+          ) : (
+            <p className={classes.nocomments}>No comments yet!</p>
+          )}
+        </CommentModal>
+      )}
       <div className={classes.postbg}>
         <div className={classes.postContainer}>
           <div className={classes.singlepost}>
             <div className={classes.userinfo}>
               <div>
-                <img src={image} alt="img"></img>
+                <Image
+                  cloudName="dntn0wocu"
+                  publicId={props.userimgId}
+                  width="50"
+                  height="50"
+                  crop="scale"
+                />
               </div>
               <div>
-                <h3>
+                <h4>
                   {props.userId === props.authorId ? (
                     <Link to="/user_account" className={classes.link}>
                       {props.author}
@@ -81,7 +143,7 @@ const PostItem = (props) => {
                       {props.author}
                     </Link>
                   )}
-                </h3>
+                </h4>
                 <span>{props.createdAt}</span>
               </div>
               <div className={classes.bookmark}>
@@ -103,6 +165,16 @@ const PostItem = (props) => {
               </Link>
             </p>
           </div>
+          {props.imageId && (
+            <div className={classes.uploadedimage}>
+              <Image
+                cloudName="dntn0wocu"
+                publicId={props.imageId}
+                width="300"
+                crop="scale"
+              />
+            </div>
+          )}
           <div className={classes.actions}>
             <button onClick={onLikeChangeHandler.bind(null, true)}>
               {!isLiked && (
@@ -113,7 +185,7 @@ const PostItem = (props) => {
               )}
               {isLiked ? "Liked" : "Like"}
             </button>
-            <button>
+            <button onClick={fetchComments}>
               <span className="material-symbols-outlined">comment</span>
               Comments
             </button>

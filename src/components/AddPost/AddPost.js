@@ -10,6 +10,8 @@ const AddPost = () => {
   const authCtx = useContext(AuthContext);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState();
   const navigate = useNavigate();
   const {
     value: enteredTitle,
@@ -31,7 +33,7 @@ const AddPost = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    if (!titleIsValid || !contentIsValid) {
+    if (!titleIsValid || !contentIsValid || !previewSource) {
       return;
     }
     setIsLoading(true);
@@ -40,6 +42,7 @@ const AddPost = () => {
       body: JSON.stringify({
         title: enteredTitle,
         content: enteredContent,
+        image: previewSource,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -78,6 +81,21 @@ const AddPost = () => {
     setError(null);
   };
 
+  const fileInputHandler = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setFileInputState(e.target.value);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      console.log(reader.result);
+      setPreviewSource(reader.result);
+    };
+  };
+
   const titleClasses = titleHasError ? classes.invalid : "";
   const contentClasses = contentHasError ? classes.invalid : "";
   return (
@@ -97,6 +115,27 @@ const AddPost = () => {
               <span className="material-symbols-outlined">cancel</span>
             </button>
             <form onSubmit={formSubmitHandler}>
+              <div className={classes.imagepicker}>
+                <label htmlFor="upload-photo">
+                  <span>Choose</span>
+                </label>
+                <p>Select an image</p>
+                <input
+                  type="file"
+                  name="photo"
+                  id="upload-photo"
+                  className={classes.upload}
+                  onChange={fileInputHandler}
+                  value={fileInputState}
+                />
+              </div>
+              <div className={classes.imgprev}>
+                {previewSource ? (
+                  <img src={previewSource} alt="preview_img"></img>
+                ) : (
+                  "No Image Selected"
+                )}
+              </div>
               <div className={titleClasses}>
                 {titleHasError && <p className={classes.error}>Enter Title</p>}
                 <input

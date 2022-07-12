@@ -13,10 +13,7 @@
 }
 
 .container img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50px;
-  background-color: white;
+  border-radius: 50%;
   margin-bottom: 1rem;
 }
 

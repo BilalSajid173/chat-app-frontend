@@ -33,6 +33,7 @@ const AllPosts = () => {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         const likedposts = data.likedPosts ? data.likedPosts : [];
         const savedposts = data.savedPosts ? data.savedPosts : [];
         const posts = data.posts.map((post) => {
@@ -44,6 +45,9 @@ const AllPosts = () => {
             content: post.content.slice(0, 250) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
+            title: post.title,
+            imageId: post.publicId,
+            userimgId: post.author.imageId,
           };
         });
         setTotalPosts(data.totalItems);
@@ -89,7 +93,9 @@ const AllPosts = () => {
         />
       )}
       {!error && isLoading && <LoadingSpinner />}
-      {!error && !isLoading && <UserInfo name={user.name} />}
+      {!error && !isLoading && (
+        <UserInfo name={user.name} userimgId={user.imageId} />
+      )}
       {!error && !isLoading && <FriendSection friends={friendlist} />}
       {!error && !isLoading && (
         <div className={classes.container}>
@@ -104,6 +110,7 @@ const AllPosts = () => {
           >
             {allPosts.map((post) => (
               <PostItem
+                title={post.title}
                 userId={user._id}
                 isLiked={post.isLiked}
                 isSaved={post.isSaved}
@@ -113,6 +120,8 @@ const AllPosts = () => {
                 author={post.author}
                 content={post.content}
                 createdAt={post.createdAt}
+                imageId={post.imageId}
+                userimgId={post.userimgId}
               />
             ))}
           </Paginator>

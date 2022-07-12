@@ -1,13 +1,19 @@
 import classes from "./UserInfo.module.css";
 import { Fragment } from "react";
-import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 const UserInfo = (props) => {
   return (
     <Fragment>
       <div className={classes.container}>
-        <img src={image} alt="userimg"></img>
+        <Image
+          cloudName="dntn0wocu"
+          publicId={props.userimgId}
+          width="150"
+          height="150"
+          crop="scale"
+        />
         <h2>Hey {props.name}!</h2>
         <div className={classes.buttons}>
           <Link className={classes.links} to="/user_account">

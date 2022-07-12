@@ -45,10 +45,12 @@ const EveryChat = () => {
           <div className={classes.chatscontainer}>
             {chats.map((chat) => (
               <ChatItem
-                name={chat.with.name}
+                name={chat.withUser.name}
                 roomId={chat.roomId}
                 key={chat.roomId}
-                userId={chat.with.userId}
+                userId={chat.withUser.userId}
+                imageId={chat.imageId}
+                address={chat.address}
               />
             ))}
           </div>

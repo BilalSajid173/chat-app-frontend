@@ -78,7 +78,7 @@ body {
   align-items: center;
   font-size: 1.2rem;
   cursor: pointer;
-  height: 1.9rem;
+  padding: 4px 0;
   border-bottom: 2px solid gray;
 }
 
@@ -197,7 +197,7 @@ body {
   }
 
   .logincontainer i {
-    height: 2.2rem;
+    padding: 7px 0;
   }
 
   .logincontainer h2 {
@@ -230,6 +230,10 @@ body {
   }
   .logincontainer input {
     font-size: 1rem;
+  }
+
+  .logincontainer i {
+    padding: 5px 0;
   }
 }
 
