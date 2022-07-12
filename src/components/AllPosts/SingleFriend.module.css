@@ -5,6 +5,7 @@
   width: 100%;
   margin: 3px 0;
   cursor: pointer;
+  padding: 1%;
   transition: all 0.3s ease-in-out;
 }
 
@@ -16,9 +17,9 @@
   background-color: white;
 }
 
-.friend h3 {
+/* .friend h3 {
   padding-top: 10px;
-}
+} */
 
 .friend:hover {
   background-color: white;

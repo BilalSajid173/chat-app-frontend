@@ -110,7 +110,7 @@ const UserAccount = () => {
 
   const imageSubmitHandler = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     if (!previewSource) return;
     fetch("http://localhost:8080/post/addimage", {
       method: "POST",
@@ -135,6 +135,7 @@ const UserAccount = () => {
         setShowModal(false);
         setFileInputState("");
         setPreviewSource("");
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
@@ -301,6 +302,7 @@ const UserAccount = () => {
                   createdAt={post.createdAt}
                   title={post.title}
                   imageId={post.imageId}
+                  userimgId={imageId}
                 />
               ))}
             </div>

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import classes from "./ChatItem.module.css";
-import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
+import { Image } from "cloudinary-react";
 
 const ChatItem = (props) => {
   return (
@@ -11,8 +11,17 @@ const ChatItem = (props) => {
         className={classes.link}
       >
         <div className={classes.chatcontainer}>
-          <img src={image} alt="img"></img>
-          <h3>{props.name}</h3>
+          <Image
+            cloudName="dntn0wocu"
+            publicId={props.imageId}
+            width="50"
+            height="50"
+            crop="scale"
+          />
+          <div>
+            <h3>{props.name}</h3>
+            <p>{props.address}</p>
+          </div>
         </div>
       </Link>
     </Fragment>

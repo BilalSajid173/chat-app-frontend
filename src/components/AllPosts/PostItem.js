@@ -1,7 +1,6 @@
 import { useState, useContext, Fragment } from "react";
 import classes from "./PostItem.module.css";
 import AuthContext from "../../store/auth-context";
-import image from "../../images/userimg.png";
 import { Link } from "react-router-dom";
 import ErrorModal from "../UI/ErrorModal";
 import CommentModal from "../UI/CommentModal";
@@ -122,7 +121,13 @@ const PostItem = (props) => {
           <div className={classes.singlepost}>
             <div className={classes.userinfo}>
               <div>
-                <img src={image} alt="img"></img>
+                <Image
+                  cloudName="dntn0wocu"
+                  publicId={props.userimgId}
+                  width="50"
+                  height="50"
+                  crop="scale"
+                />
               </div>
               <div>
                 <h4>

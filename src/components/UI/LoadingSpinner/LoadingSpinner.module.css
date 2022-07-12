@@ -36,6 +36,7 @@
   justify-content: center;
   align-items: center;
   background-color: #f1f2f6;
+  z-index: 40;
 }
 .wave {
   width: 5px;
@@ -44,6 +45,7 @@
   margin: 10px;
   animation: wave 1s linear infinite;
   border-radius: 20px;
+  z-index: 50;
 }
 .wave:nth-child(2) {
   animation-delay: 0.1s;

@@ -47,6 +47,7 @@ const AllPosts = () => {
             authorId: post.author._id,
             title: post.title,
             imageId: post.publicId,
+            userimgId: post.author.imageId,
           };
         });
         setTotalPosts(data.totalItems);
@@ -92,7 +93,9 @@ const AllPosts = () => {
         />
       )}
       {!error && isLoading && <LoadingSpinner />}
-      {!error && !isLoading && <UserInfo name={user.name} />}
+      {!error && !isLoading && (
+        <UserInfo name={user.name} userimgId={user.imageId} />
+      )}
       {!error && !isLoading && <FriendSection friends={friendlist} />}
       {!error && !isLoading && (
         <div className={classes.container}>
@@ -118,6 +121,7 @@ const AllPosts = () => {
                 content={post.content}
                 createdAt={post.createdAt}
                 imageId={post.imageId}
+                userimgId={post.userimgId}
               />
             ))}
           </Paginator>

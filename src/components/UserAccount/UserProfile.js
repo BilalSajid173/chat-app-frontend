@@ -207,6 +207,7 @@ const UserAccount = () => {
                   createdAt={post.createdAt}
                   title={post.title}
                   imageId={post.imageId}
+                  userimgId={imageId}
                 />
               ))}
             </div>

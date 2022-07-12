@@ -51,6 +51,7 @@ const FriendPage = () => {
               authorId: post.author._id,
               title: post.title,
               imageId: post.publicId,
+              userimgId: post.author.imageId,
             };
           })
         );
@@ -92,6 +93,8 @@ const FriendPage = () => {
                     key={friend._id}
                     name={friend.name}
                     id={friend._id}
+                    userimgId={friend.imageId}
+                    address={friend.address}
                   />
                 ))
               ) : (
@@ -117,6 +120,7 @@ const FriendPage = () => {
                   createdAt={post.createdAt}
                   title={post.title}
                   imageId={post.imageId}
+                  userimgId={post.userimgId}
                 />
               ))
             ) : (
