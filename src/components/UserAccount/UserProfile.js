@@ -49,6 +49,7 @@ const UserAccount = () => {
             authorId: post.author,
             title: post.title,
             imageId: post.publicId,
+            comments: post.comments.length,
           };
         });
         setImageId(data.user.imageId);
@@ -208,6 +209,7 @@ const UserAccount = () => {
                   title={post.title}
                   imageId={post.imageId}
                   userimgId={imageId}
+                  comments={post.comments}
                 />
               ))}
             </div>

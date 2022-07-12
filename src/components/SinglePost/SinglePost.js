@@ -62,6 +62,7 @@ const SinglePost = (props) => {
             title: post.title,
             imageId: post.publicId,
             userimgId: post.author.imageId,
+            comments: post.comments.length,
           };
         });
         setAllPosts(posts);
@@ -204,6 +205,7 @@ const SinglePost = (props) => {
                 title={post.title}
                 imageId={post.imageId}
                 userimgId={post.userimgId}
+                comments={post.comments}
               />
             ))}
           </div>

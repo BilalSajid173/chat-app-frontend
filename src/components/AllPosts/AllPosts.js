@@ -48,6 +48,7 @@ const AllPosts = () => {
             title: post.title,
             imageId: post.publicId,
             userimgId: post.author.imageId,
+            comments: post.comments.length,
           };
         });
         setTotalPosts(data.totalItems);
@@ -122,6 +123,7 @@ const AllPosts = () => {
                 createdAt={post.createdAt}
                 imageId={post.imageId}
                 userimgId={post.userimgId}
+                comments={post.comments}
               />
             ))}
           </Paginator>

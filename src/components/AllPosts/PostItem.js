@@ -187,7 +187,9 @@ const PostItem = (props) => {
             </button>
             <button onClick={fetchComments}>
               <span className="material-symbols-outlined">comment</span>
-              Comments
+              {props.comments === 1
+                ? props.comments + " Comment"
+                : props.comments + " Comments"}
             </button>
           </div>
         </div>

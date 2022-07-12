@@ -29,6 +29,7 @@ const FriendPage = () => {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         setFriends(data.user.friends);
         const likedposts = data.user.likedPosts ? data.user.likedPosts : [];
         const savedposts = data.user.savedPosts ? data.user.savedPosts : [];
@@ -52,6 +53,7 @@ const FriendPage = () => {
               title: post.title,
               imageId: post.publicId,
               userimgId: post.author.imageId,
+              comments: post.comments.length,
             };
           })
         );
@@ -121,6 +123,7 @@ const FriendPage = () => {
                   title={post.title}
                   imageId={post.imageId}
                   userimgId={post.userimgId}
+                  comments={post.comments}
                 />
               ))
             ) : (

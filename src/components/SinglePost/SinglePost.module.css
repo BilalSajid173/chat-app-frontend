@@ -109,6 +109,11 @@
   overflow-y: scroll;
 }
 
+.morePosts button {
+  width: 47%;
+  padding: 3%;
+}
+
 .morePosts h2 {
   padding-left: 2%;
 }
