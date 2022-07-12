@@ -52,7 +52,7 @@ const AllPosts = () => {
           };
         });
         setTotalPosts(data.totalItems);
-        setFriendlist(data.user.friends);
+        setFriendlist(data.randompeople);
         setAllPosts(posts);
         setUser(data.user);
         setIsLoading(false);

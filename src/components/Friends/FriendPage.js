@@ -5,6 +5,7 @@ import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import PostItem from "../AllPosts/PostItem";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const FriendPage = () => {
   const authCtx = useContext(AuthContext);
@@ -30,7 +31,24 @@ const FriendPage = () => {
       })
       .then((data) => {
         console.log(data);
-        setFriends(data.user.friends);
+        setFriends(
+          data.user.friends.map((friend) => {
+            const roomId =
+              friend.chats.filter((chat) => chat.with.userId === data.user._id)
+                .length > 0
+                ? friend.chats.filter(
+                    (chat) => chat.with.userId === data.user._id
+                  )[0].roomId
+                : "_" + Math.random().toString(36).substr(2, 11);
+            return {
+              name: friend.name,
+              address: friend.address,
+              _id: friend._id,
+              imageId: friend.imageId,
+              roomId: roomId,
+            };
+          })
+        );
         const likedposts = data.user.likedPosts ? data.user.likedPosts : [];
         const savedposts = data.user.savedPosts ? data.user.savedPosts : [];
         let allPosts = [];
@@ -91,13 +109,20 @@ const FriendPage = () => {
               <h2>Your Friends</h2>
               {friends.length > 0 ? (
                 friends.map((friend) => (
-                  <SingleFriend
-                    key={friend._id}
-                    name={friend.name}
-                    id={friend._id}
-                    userimgId={friend.imageId}
-                    address={friend.address}
-                  />
+                  <div className={classes.friendcont}>
+                    <SingleFriend
+                      key={friend._id}
+                      name={friend.name}
+                      id={friend._id}
+                      userimgId={friend.imageId}
+                      address={friend.address}
+                    />
+                    <div className={classes.msgchat}>
+                      <Link to={`/chat/${friend.roomId}/${friend._id}`}>
+                        <i className="fa-solid fa-message"></i>
+                      </Link>
+                    </div>
+                  </div>
                 ))
               ) : (
                 <p className={classes.nofriends}>

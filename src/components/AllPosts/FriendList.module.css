@@ -9,7 +9,7 @@
   padding-right: 0.1rem;
   flex-direction: column;
   border-top: 1px solid rgb(184, 184, 184);
-  overflow-y: scroll;
+  overflow: auto;
 }
 
 .container h2 {

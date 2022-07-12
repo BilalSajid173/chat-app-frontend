@@ -6,7 +6,7 @@ const FriendSection = (props) => {
   return (
     <Fragment>
       <div className={classes.container}>
-        <h2>Your Friends</h2>
+        <h2>People you may know</h2>
         {props.friends.map((friend) => (
           <SingleFriend
             key={friend._id}
