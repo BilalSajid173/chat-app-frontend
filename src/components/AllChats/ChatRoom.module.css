@@ -66,6 +66,14 @@
   background-color: #d4c2c2;
 }
 
+.nomsgs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 1.5rem;
+}
+
 @keyframes slide-up {
   from {
     opacity: 0;

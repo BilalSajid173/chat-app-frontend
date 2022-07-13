@@ -90,15 +90,21 @@ const ChatRoom = () => {
                 {name}
                 {online ? <i class="fa-solid fa-circle"></i> : ""}
               </h2>
-              {msgs.map((msg) => {
-                return (
-                  <Message
-                    message={msg.content}
-                    to={msg.to}
-                    key={Math.random()}
-                  />
-                );
-              })}
+              {msgs.length > 0 ? (
+                msgs.map((msg) => {
+                  return (
+                    <Message
+                      message={msg.content}
+                      to={msg.to}
+                      key={Math.random()}
+                    />
+                  );
+                })
+              ) : (
+                <div className={classes.nomsgs}>
+                  <p>Wave to {name}👋</p>
+                </div>
+              )}
             </div>
           </div>
           <div className={classes.msgform}>
