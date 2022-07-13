@@ -11,6 +11,7 @@ const FriendPage = () => {
   const authCtx = useContext(AuthContext);
   const [error, setError] = useState();
   const [friends, setFriends] = useState([]);
+  const [allFriends, setAllFriends] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -31,24 +32,24 @@ const FriendPage = () => {
       })
       .then((data) => {
         console.log(data);
-        setFriends(
-          data.user.friends.map((friend) => {
-            const roomId =
-              friend.chats.filter((chat) => chat.with.userId === data.user._id)
-                .length > 0
-                ? friend.chats.filter(
-                    (chat) => chat.with.userId === data.user._id
-                  )[0].roomId
-                : "_" + Math.random().toString(36).substr(2, 11);
-            return {
-              name: friend.name,
-              address: friend.address,
-              _id: friend._id,
-              imageId: friend.imageId,
-              roomId: roomId,
-            };
-          })
-        );
+        const yourfriends = data.user.friends.map((friend) => {
+          const roomId =
+            friend.chats.filter((chat) => chat.with.userId === data.user._id)
+              .length > 0
+              ? friend.chats.filter(
+                  (chat) => chat.with.userId === data.user._id
+                )[0].roomId
+              : "_" + Math.random().toString(36).substr(2, 11);
+          return {
+            name: friend.name,
+            address: friend.address,
+            _id: friend._id,
+            imageId: friend.imageId,
+            roomId: roomId,
+          };
+        });
+        setAllFriends(yourfriends);
+        setFriends(yourfriends);
         const likedposts = data.user.likedPosts ? data.user.likedPosts : [];
         const savedposts = data.user.savedPosts ? data.user.savedPosts : [];
         let allPosts = [];
@@ -88,6 +89,10 @@ const FriendPage = () => {
       });
   }, [authCtx.token]);
 
+  const searchHandler = (event) => {
+    const regexp = new RegExp(event.target.value, "i");
+    setFriends(allFriends.filter((friend) => friend.name.match(regexp)));
+  };
   const errorHandler = () => {
     setError(null);
   };
@@ -106,6 +111,11 @@ const FriendPage = () => {
         <Fragment>
           <div className={classes.mobile}>
             <div className={classes.listcontainer}>
+              <input
+                onChange={searchHandler}
+                placeholder="Search friends"
+                type="text"
+              />
               <h2>Your Friends</h2>
               {friends.length > 0 ? (
                 friends.map((friend) => (
@@ -125,9 +135,7 @@ const FriendPage = () => {
                   </div>
                 ))
               ) : (
-                <p className={classes.nofriends}>
-                  You Have No Friends..kinda sad, innit?
-                </p>
+                <p className={classes.nofriends}>No Friends Found :(</p>
               )}
             </div>
           </div>
