@@ -16,10 +16,15 @@ const ChatRoom = () => {
   const msgref = useRef();
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [online, setOnline] = useState(false);
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
+    socket.on("online", () => {
+      setOnline(true);
+    });
     socket.on("sendmsg", (msg) => {
+      setOnline(true);
       setmsgs((prevState) => {
         return prevState.concat({ content: msg, to: false });
       });
@@ -81,16 +86,25 @@ const ChatRoom = () => {
         <Fragment>
           <div className={classes.wrapper}>
             <div className={classes.msgwrapper}>
-              <h2>{name}</h2>
-              {msgs.map((msg) => {
-                return (
-                  <Message
-                    message={msg.content}
-                    to={msg.to}
-                    key={Math.random()}
-                  />
-                );
-              })}
+              <h2>
+                {name}
+                {online ? <i class="fa-solid fa-circle"></i> : ""}
+              </h2>
+              {msgs.length > 0 ? (
+                msgs.map((msg) => {
+                  return (
+                    <Message
+                      message={msg.content}
+                      to={msg.to}
+                      key={Math.random()}
+                    />
+                  );
+                })
+              ) : (
+                <div className={classes.nomsgs}>
+                  <p>Wave to {name}👋</p>
+                </div>
+              )}
             </div>
           </div>
           <div className={classes.msgform}>

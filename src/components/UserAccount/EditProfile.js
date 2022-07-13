@@ -4,6 +4,8 @@ import EditModal from "../UI/EditModal";
 import classes from "./EditProfile.module.css";
 import useInput from "../../hooks/use-input";
 import AuthContext from "../../store/auth-context";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditProfile = (props) => {
   const [address, setAddress] = useState("");
@@ -61,6 +63,7 @@ const EditProfile = (props) => {
       })
       .then((data) => {
         props.saveEdit(data.user);
+        toast.success("Profile Updated!");
       })
       .catch((err) => {
         console.log(err);

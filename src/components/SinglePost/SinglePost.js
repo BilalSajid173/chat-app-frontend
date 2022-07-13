@@ -7,6 +7,8 @@ import PostItem from "../AllPosts/PostItem";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SinglePost = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,6 +64,7 @@ const SinglePost = (props) => {
             title: post.title,
             imageId: post.publicId,
             userimgId: post.author.imageId,
+            comments: post.comments.length,
           };
         });
         setAllPosts(posts);
@@ -113,6 +116,7 @@ const SinglePost = (props) => {
             _id: data._id,
           });
         });
+        toast.success("Comment added!");
         cmtRef.current.value = "";
       })
       .catch((err) => {
@@ -177,15 +181,19 @@ const SinglePost = (props) => {
                 />
                 <button>Add</button>
               </form>
-              {comments.map((comment) => {
-                return (
-                  <SingleComment
-                    key={comment._id}
-                    author={comment.name}
-                    comment={comment.comment}
-                  />
-                );
-              })}
+              {comments.length > 0 ? (
+                comments.map((comment) => {
+                  return (
+                    <SingleComment
+                      key={comment._id}
+                      author={comment.name}
+                      comment={comment.comment}
+                    />
+                  );
+                })
+              ) : (
+                <p className={classes.nocom}>Be the first to comment!</p>
+              )}
             </div>
           </div>
           <div className={classes.morePosts}>
@@ -204,6 +212,7 @@ const SinglePost = (props) => {
                 title={post.title}
                 imageId={post.imageId}
                 userimgId={post.userimgId}
+                comments={post.comments}
               />
             ))}
           </div>

@@ -4,6 +4,8 @@ import classes from "./Login.module.css";
 import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
 import ErrorModal from "../UI/ErrorModal";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
@@ -61,12 +63,13 @@ const SignupForm = (props) => {
       })
       .then((data) => {
         navigate("/");
+        toast.success("Signup Successful");
         console.log(data);
       })
       .catch((err) => {
         setError({
           title: "Failed to sign up!",
-          message: "Please try again.",
+          message: "Email already exists",
         });
         console.log(err);
       });

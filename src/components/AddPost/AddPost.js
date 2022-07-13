@@ -5,22 +5,16 @@ import AuthContext from "../../store/auth-context";
 import { Fragment, useContext, useState } from "react";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddPost = () => {
   const authCtx = useContext(AuthContext);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState();
+  const [previewSource, setPreviewSource] = useState("");
   const navigate = useNavigate();
-  const {
-    value: enteredTitle,
-    hasError: titleHasError,
-    valueChangeHandler: titleChangeHandler,
-    onBlurHandler: titleBlurHandler,
-    isValid: titleIsValid,
-    reset: resetTitle,
-  } = useInput((value) => value.trim() !== "");
 
   const {
     value: enteredContent,
@@ -33,14 +27,13 @@ const AddPost = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    if (!titleIsValid || !contentIsValid || !previewSource) {
+    if (!contentIsValid || !previewSource) {
       return;
     }
     setIsLoading(true);
     fetch("http://localhost:8080/post/addpost", {
       method: "POST",
       body: JSON.stringify({
-        title: enteredTitle,
         content: enteredContent,
         image: previewSource,
       }),
@@ -60,6 +53,7 @@ const AddPost = () => {
         console.log(data);
         setIsLoading(false);
         navigate("/allposts");
+        toast.success("Added Post!");
       })
       .catch((err) => {
         setError({
@@ -69,7 +63,6 @@ const AddPost = () => {
         setIsLoading(false);
         console.log(err);
       });
-    resetTitle();
     resetContent();
   };
 
@@ -96,7 +89,6 @@ const AddPost = () => {
     };
   };
 
-  const titleClasses = titleHasError ? classes.invalid : "";
   const contentClasses = contentHasError ? classes.invalid : "";
   return (
     <Fragment>
@@ -124,7 +116,7 @@ const AddPost = () => {
                   type="file"
                   name="photo"
                   id="upload-photo"
-                  className={classes.upload}
+                  className={classes.uploadphoto}
                   onChange={fileInputHandler}
                   value={fileInputState}
                 />
@@ -135,18 +127,6 @@ const AddPost = () => {
                 ) : (
                   "No Image Selected"
                 )}
-              </div>
-              <div className={titleClasses}>
-                {titleHasError && <p className={classes.error}>Enter Title</p>}
-                <input
-                  id="title"
-                  name="title"
-                  type="text"
-                  value={enteredTitle}
-                  onChange={titleChangeHandler}
-                  onBlur={titleBlurHandler}
-                  placeholder="Title"
-                />
               </div>
               <div className={contentClasses}>
                 {contentHasError && (

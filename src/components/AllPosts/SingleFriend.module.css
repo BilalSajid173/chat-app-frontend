@@ -17,6 +17,11 @@
   background-color: white;
 }
 
+.friend p{
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 /* .friend h3 {
   padding-top: 10px;
 } */

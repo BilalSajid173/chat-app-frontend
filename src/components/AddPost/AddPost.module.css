@@ -16,17 +16,15 @@
 }
 
 .addpostform button {
-  /* border-radius: 100px; */
   border: none;
   margin-bottom: 0%;
   cursor: pointer;
   margin-left: 95.5%;
   background-color: white;
-  /* background-color: #f1f2f6; */
   color: black;
 }
 
-.addpostform input,
+.addpostform input[type="text"],
 .addpostform textarea {
   font-size: 0.8rem;
   width: 100%;
@@ -90,10 +88,9 @@
   color: red;
 }
 
-.upload {
-  position: absolute;
+.uploadphoto {
+  display: none;
   z-index: -1;
-  visibility: hidden;
 }
 
 .imagepicker {
@@ -169,8 +166,13 @@
     padding: 2%;
   }
 
+  .addpostform button {
+    margin-left: 93%;
+  }
+
   .actions button {
     padding: 5px;
     font-size: 0.9rem;
+    margin: 0;
   }
 }

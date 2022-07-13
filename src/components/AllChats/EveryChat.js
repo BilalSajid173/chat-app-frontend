@@ -43,16 +43,20 @@ const EveryChat = () => {
             <h2>Your Conversations</h2>
           </div>
           <div className={classes.chatscontainer}>
-            {chats.map((chat) => (
-              <ChatItem
-                name={chat.withUser.name}
-                roomId={chat.roomId}
-                key={chat.roomId}
-                userId={chat.withUser.userId}
-                imageId={chat.imageId}
-                address={chat.address}
-              />
-            ))}
+            {chats.length > 0 ? (
+              chats.map((chat) => (
+                <ChatItem
+                  name={chat.withUser.name}
+                  roomId={chat.roomId}
+                  key={chat.roomId}
+                  userId={chat.withUser.userId}
+                  imageId={chat.imageId}
+                  address={chat.address}
+                />
+              ))
+            ) : (
+              <p className={classes.nochats}>You have no conversations</p>
+            )}
           </div>
         </div>
       )}

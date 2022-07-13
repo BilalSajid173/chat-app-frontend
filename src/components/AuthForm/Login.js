@@ -6,6 +6,8 @@ import image from "../../images/login.jpg";
 import useInput from "../../hooks/use-input";
 import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = (props) => {
   const authCtx = useContext(AuthContext);
@@ -60,6 +62,7 @@ const LoginForm = (props) => {
           new Date().getTime() + remainingMilliseconds
         );
         authCtx.login(data.name, data.token, expiryDate.toISOString());
+        toast.success("Login Successful!");
         navigate("/allposts");
       })
       .catch((err) => {

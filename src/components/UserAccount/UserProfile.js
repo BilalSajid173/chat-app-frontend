@@ -6,6 +6,8 @@ import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -49,6 +51,7 @@ const UserAccount = () => {
             authorId: post.author,
             title: post.title,
             imageId: post.publicId,
+            comments: post.comments.length,
           };
         });
         setImageId(data.user.imageId);
@@ -85,6 +88,9 @@ const UserAccount = () => {
       .then((data) => {
         console.log(data);
         setIsFriend((prev) => {
+          prev
+            ? toast.success("Friend Removed")
+            : toast.success("Friend Added");
           return !prev;
         });
       })
@@ -147,7 +153,7 @@ const UserAccount = () => {
                   crop="scale"
                 />
                 <h3>Bio</h3>
-                <p>{user.bio}</p>
+                <p>{user.bio ? user.bio : "This might be a robot!!"}</p>
               </div>
             </div>
             <div className={classes.userimg_mobile}>
@@ -190,26 +196,31 @@ const UserAccount = () => {
             </div>
             <div className={classes.mobile_bio}>
               <h4>Bio</h4>
-              <p>{user.bio}</p>
+              <p>{user.bio ? user.bio : "This might be a robot!!"}</p>
             </div>
             <div className={classes.userposts}>
               <h2>{user.name}'s Posts</h2>
-              {allPosts.map((post) => (
-                <PostItem
-                  userId={loggedInUserId}
-                  isLiked={post.isLiked}
-                  isSaved={post.isSaved}
-                  authorId={post.authorId}
-                  key={post.id}
-                  id={post.id}
-                  author={post.author}
-                  content={post.content}
-                  createdAt={post.createdAt}
-                  title={post.title}
-                  imageId={post.imageId}
-                  userimgId={imageId}
-                />
-              ))}
+              {allPosts.length > 0 ? (
+                allPosts.map((post) => (
+                  <PostItem
+                    userId={loggedInUserId}
+                    isLiked={post.isLiked}
+                    isSaved={post.isSaved}
+                    authorId={post.authorId}
+                    key={post.id}
+                    id={post.id}
+                    author={post.author}
+                    content={post.content}
+                    createdAt={post.createdAt}
+                    title={post.title}
+                    imageId={post.imageId}
+                    userimgId={imageId}
+                    comments={post.comments}
+                  />
+                ))
+              ) : (
+                <p className={classes.noposts}>No posts found</p>
+              )}
             </div>
           </div>
         </div>
