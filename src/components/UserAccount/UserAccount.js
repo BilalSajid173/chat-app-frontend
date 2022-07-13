@@ -226,7 +226,7 @@ const UserAccount = () => {
                 <button onClick={editFormHandler}>
                   <i className="fa-solid fa-pen-to-square"></i>
                 </button>
-                <Link to="">
+                <Link to="/bookmarked">
                   <i className="fa-solid fa-bookmark"></i>
                 </Link>
               </div>
@@ -279,7 +279,7 @@ const UserAccount = () => {
                 <button onClick={editFormHandler}>
                   <i className="fa-solid fa-pen-to-square"></i>
                 </button>
-                <Link to="">
+                <Link to="/bookmarked">
                   <i className="fa-solid fa-bookmark"></i>
                 </Link>
               </div>

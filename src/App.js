@@ -13,6 +13,7 @@ import UserProfile from "./pages/ViewProfile";
 import AllChats from "./pages/AllChats";
 import PrivateChat from "./pages/PrivateChat";
 import PageNotFound from "./pages/PageNotFound";
+import Bookmarked from "./pages/Bookmarked";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -40,6 +41,9 @@ function App() {
       )}
       {authCtx.isLoggedIn && (
         <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
+      )}
+      {authCtx.isLoggedIn && (
+        <Route path="/bookmarked" element={<Bookmarked />} />
       )}
       {authCtx.isLoggedIn && <Route path="/allchats" element={<AllChats />} />}
       <Route path="*" element={<PageNotFound />} />
