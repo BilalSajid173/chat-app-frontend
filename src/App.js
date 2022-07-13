@@ -14,40 +14,45 @@ import AllChats from "./pages/AllChats";
 import PrivateChat from "./pages/PrivateChat";
 import PageNotFound from "./pages/PageNotFound";
 import Bookmarked from "./pages/Bookmarked";
+import ScrollToTop from "./components/UI/Wrapper";
 
 function App() {
   const authCtx = useContext(AuthContext);
   return (
-    <Routes>
-      {!authCtx.isLoggedIn && <Route path="/" element={<Login />} />}
-      {!authCtx.isLoggedIn && <Route path="/signup" element={<Signup />} />}
-      {authCtx.isLoggedIn && (
-        <Route path="/allposts" element={<FetchAllPosts />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/add-post" element={<AddNewPost />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/friendlist" element={<FriendList />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/singlepost/:postId" element={<ViewPost />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/user_account" element={<Profile />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/user/:userId" element={<UserProfile />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
-      )}
-      {authCtx.isLoggedIn && (
-        <Route path="/bookmarked" element={<Bookmarked />} />
-      )}
-      {authCtx.isLoggedIn && <Route path="/allchats" element={<AllChats />} />}
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <ScrollToTop>
+      <Routes>
+        {!authCtx.isLoggedIn && <Route path="/" element={<Login />} />}
+        {!authCtx.isLoggedIn && <Route path="/signup" element={<Signup />} />}
+        {authCtx.isLoggedIn && (
+          <Route path="/allposts" element={<FetchAllPosts />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/add-post" element={<AddNewPost />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/friendlist" element={<FriendList />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/singlepost/:postId" element={<ViewPost />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/user_account" element={<Profile />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/user/:userId" element={<UserProfile />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/chat/:chatId/:userId" element={<PrivateChat />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/bookmarked" element={<Bookmarked />} />
+        )}
+        {authCtx.isLoggedIn && (
+          <Route path="/allchats" element={<AllChats />} />
+        )}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </ScrollToTop>
   );
 }
 
