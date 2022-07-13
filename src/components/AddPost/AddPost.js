@@ -5,6 +5,8 @@ import AuthContext from "../../store/auth-context";
 import { Fragment, useContext, useState } from "react";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddPost = () => {
   const authCtx = useContext(AuthContext);
@@ -51,6 +53,7 @@ const AddPost = () => {
         console.log(data);
         setIsLoading(false);
         navigate("/allposts");
+        toast.success("Added Post!");
       })
       .catch((err) => {
         setError({

@@ -7,6 +7,8 @@ import PostItem from "../AllPosts/PostItem";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SinglePost = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -114,6 +116,7 @@ const SinglePost = (props) => {
             _id: data._id,
           });
         });
+        toast.success("Comment added!");
         cmtRef.current.value = "";
       })
       .catch((err) => {

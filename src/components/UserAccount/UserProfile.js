@@ -6,6 +6,8 @@ import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -86,6 +88,9 @@ const UserAccount = () => {
       .then((data) => {
         console.log(data);
         setIsFriend((prev) => {
+          prev
+            ? toast.success("Friend Removed")
+            : toast.success("Friend Added");
           return !prev;
         });
       })

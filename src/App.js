@@ -15,6 +15,7 @@ import PrivateChat from "./pages/PrivateChat";
 import PageNotFound from "./pages/PageNotFound";
 import Bookmarked from "./pages/Bookmarked";
 import ScrollToTop from "./components/UI/Wrapper";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -52,6 +53,7 @@ function App() {
         )}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <ToastContainer />
     </ScrollToTop>
   );
 }

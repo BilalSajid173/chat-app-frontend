@@ -6,6 +6,8 @@ import ErrorModal from "../UI/ErrorModal";
 import CommentModal from "../UI/CommentModal";
 import SingleComment from "../SinglePost/Comment";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -35,9 +37,11 @@ const PostItem = (props) => {
       .then((data) => {
         like
           ? setIsLiked((prevState) => {
+              !prevState && toast.success("Post liked");
               return !prevState;
             })
           : setIsSaved((prevState) => {
+              !prevState && toast.success("Post saved");
               return !prevState;
             });
         console.log(data);

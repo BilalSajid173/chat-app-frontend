@@ -123,13 +123,13 @@ body {
   height: 100%;
 }
 
-.invalid input {
+/* .invalid input {
   background-color: #ffc1c1;
 }
 
 .invalid input:focus {
   background-color: #fbe8d2;
-}
+} */
 
 .error {
   font-size: 0.9rem;

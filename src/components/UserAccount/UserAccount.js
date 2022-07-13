@@ -8,6 +8,8 @@ import EditProfile from "./EditProfile";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import ProfilePicModal from "../UI/ProfilePicModal";
 import { Image } from "cloudinary-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserAccount = () => {
   const authCtx = useContext(AuthContext);
@@ -137,6 +139,7 @@ const UserAccount = () => {
         setFileInputState("");
         setPreviewSource("");
         setIsLoading(false);
+        toast.success("Photo updated!");
       })
       .catch((err) => {
         setError({
