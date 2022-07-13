@@ -20,7 +20,8 @@
 
 @media (max-width: 1025px) {
   .container {
-    padding: 2% 15%;
+    padding-left: 3%;
+    padding-right: 35.5%;
   }
   .username_mobile {
     display: block;

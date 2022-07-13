@@ -21,11 +21,11 @@
 }
 
 .friendcont a {
-  width: 80%;
+  width: 85%;
 }
 
 .msgchat {
-  width: 20%;
+  width: 15%;
   height: 90%;
 }
 
@@ -34,7 +34,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   text-decoration: none;
   color: grey;

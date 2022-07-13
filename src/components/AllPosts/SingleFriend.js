@@ -16,7 +16,7 @@ const SingleFriend = (props) => {
             crop="scale"
           />
           <div>
-            <h3>{props.name}</h3>
+            <h4>{props.name}</h4>
             <p>{props.address}</p>
           </div>
         </div>
