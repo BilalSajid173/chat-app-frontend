@@ -71,7 +71,7 @@
 }
 
 .container {
-  min-height: 90vh;
+  min-height: 94vh;
   width: 100%;
   padding: 2.8% 0;
   padding-left: 42%;
@@ -87,12 +87,14 @@
 }
 
 .nopost {
+  margin-top: 4rem;
   margin-left: 30%;
-  font-size: 3rem;
+  font-size:2rem;
 }
 
 .nofriends {
   font-size: 1.2rem;
+  text-align: center;
 }
 
 @media (max-width: 1200px) {

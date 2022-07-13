@@ -99,6 +99,11 @@
   background-color: rgb(233, 182, 255);
 }
 
+.nocom {
+  text-align: center;
+  margin: 1rem 0;
+}
+
 .morePosts {
   position: fixed;
   top: 13%;

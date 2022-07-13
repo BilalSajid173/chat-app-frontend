@@ -240,7 +240,7 @@ const UserAccount = () => {
                 />
                 <i onClick={showModalForm} className="fa-solid fa-camera"></i>
                 <h3>Bio</h3>
-                <p>{user.bio}</p>
+                <p>{user.bio ? user.bio : "Tell others about yourself!"}</p>
               </div>
             </div>
             <div className={classes.userimg_mobile}>
@@ -286,27 +286,33 @@ const UserAccount = () => {
             </div>
             <div className={classes.mobile_bio}>
               <h4>Bio</h4>
-              <p>{user.bio}</p>
+              <p>{user.bio ? user.bio : "Tell others about yourself!"}</p>
             </div>
             <div className={classes.userposts}>
               <h2>Your Posts</h2>
-              {allPosts.map((post) => (
-                <PostItem
-                  userId={user._id}
-                  isLiked={post.isLiked}
-                  isSaved={post.isSaved}
-                  authorId={post.authorId}
-                  key={post.id}
-                  id={post.id}
-                  author={post.author}
-                  content={post.content}
-                  createdAt={post.createdAt}
-                  title={post.title}
-                  imageId={post.imageId}
-                  userimgId={imageId}
-                  comments={post.comments}
-                />
-              ))}
+              {allPosts.length > 0 ? (
+                allPosts.map((post) => (
+                  <PostItem
+                    userId={user._id}
+                    isLiked={post.isLiked}
+                    isSaved={post.isSaved}
+                    authorId={post.authorId}
+                    key={post.id}
+                    id={post.id}
+                    author={post.author}
+                    content={post.content}
+                    createdAt={post.createdAt}
+                    title={post.title}
+                    imageId={post.imageId}
+                    userimgId={imageId}
+                    comments={post.comments}
+                  />
+                ))
+              ) : (
+                <Link to="/add-post" className={classes.noposts}>
+                  Add a post!!
+                </Link>
+              )}
             </div>
           </div>
         </div>

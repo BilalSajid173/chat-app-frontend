@@ -178,15 +178,19 @@ const SinglePost = (props) => {
                 />
                 <button>Add</button>
               </form>
-              {comments.map((comment) => {
-                return (
-                  <SingleComment
-                    key={comment._id}
-                    author={comment.name}
-                    comment={comment.comment}
-                  />
-                );
-              })}
+              {comments.length > 0 ? (
+                comments.map((comment) => {
+                  return (
+                    <SingleComment
+                      key={comment._id}
+                      author={comment.name}
+                      comment={comment.comment}
+                    />
+                  );
+                })
+              ) : (
+                <p className={classes.nocom}>Be the first to comment!</p>
+              )}
             </div>
           </div>
           <div className={classes.morePosts}>
