@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { useParams } from "react-router";
 import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../UI/ErrorModal";
 
 const socket = io("http://localhost:8080/");
 const ChatRoom = () => {
@@ -17,6 +18,7 @@ const ChatRoom = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [online, setOnline] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
@@ -46,6 +48,14 @@ const ChatRoom = () => {
         setmsgs(data.messages);
         setName(data.username);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setError({
+          title: "Failed to load Chats",
+          message: "Please try again later.",
+        });
+        setIsLoading(false);
+        console.log(err);
       });
   }, [roomId, userId, authCtx.token]);
 
@@ -79,10 +89,22 @@ const ChatRoom = () => {
     });
     msgref.current.value = "";
   };
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      {!error && isLoading && <LoadingSpinner />}
+      {!error && !isLoading && (
         <Fragment>
           <div className={classes.wrapper}>
             <div className={classes.msgwrapper}>

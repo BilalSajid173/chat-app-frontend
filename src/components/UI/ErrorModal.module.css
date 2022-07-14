@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,700;1,600&family=Ubuntu&family=Varela+Round&display=swap");
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -10,7 +12,6 @@
 
 .modal {
   background: white;
-  box-shadow: 0px 0px 3px rgb(80, 65, 65);
   border-radius: 5px;
   position: fixed;
   top: 20%;
@@ -22,17 +23,19 @@
 }
 
 .header {
-  background: #ed92ff;
+  background: #dadada;
   padding: 1rem;
 }
 
 .header h2 {
   margin: 0;
-  color: #f1f1f6;
+  color: black;
 }
 
 .content {
   padding: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
 }
 
 .actions {
@@ -43,8 +46,8 @@
 
 .button {
   font: inherit;
-  border: 1px solid #e76eff;
-  background: #e979ff;
+  border: 1px solid #4e4750;
+  background: #4e4750;
   color: white;
   padding: 0.25rem 1rem;
   cursor: pointer;
@@ -52,8 +55,8 @@
 
 .button:hover,
 .button:active {
-  background: #741188;
-  border-color: #741188;
+  background: #423944;
+  border-color: #423944;
 }
 
 .button:focus {
@@ -68,13 +71,12 @@
 }
 
 @media (max-width: 500px) {
-    .modal {
-      width: 90%;
-      left: 5%;
-    }
-
-    .header h2{
-        font-size: 1.3rem;
-    }
+  .modal {
+    width: 90%;
+    left: 5%;
   }
-  
+
+  .header h2 {
+    font-size: 1.3rem;
+  }
+}

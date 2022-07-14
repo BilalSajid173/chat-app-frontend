@@ -3,15 +3,17 @@ import classes from "./SavedPosts.module.css";
 import AuthContext from "../../store/auth-context";
 import PostItem from "../AllPosts/PostItem";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../UI/ErrorModal";
 
 const SavedPosts = () => {
   const authCtx = useContext(AuthContext);
   const [allPosts, setAllPosts] = useState([]);
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/savedposts", {
+    fetch("http://localhost:8080/post/savedpost", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -46,14 +48,30 @@ const SavedPosts = () => {
         setIsLoading(false);
       })
       .catch((err) => {
+        setError({
+          title: "Failed to load Chats",
+          message: "Please try again later.",
+        });
         setIsLoading(false);
         console.log(err);
       });
   }, [authCtx.token]);
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      {!error && isLoading && <LoadingSpinner />}
+      {!error && !isLoading && (
         <div className={classes.container}>
           <div className={classes.heading}>
             <h1>Saved Posts</h1>

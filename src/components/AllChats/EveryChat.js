@@ -3,10 +3,12 @@ import classes from "./EveryChat.module.css";
 import ChatItem from "./ChatItem";
 import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../UI/ErrorModal";
 
 const EveryChat = () => {
   const [chats, setChats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
@@ -29,15 +31,30 @@ const EveryChat = () => {
         setChats(data.userData);
       })
       .catch((err) => {
+        setError({
+          title: "Failed to load Chats",
+          message: "Please try again later.",
+        });
         setIsLoading(false);
         console.log(err);
       });
   }, [authCtx.token]);
 
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      {!error && isLoading && <LoadingSpinner />}
+      {!isLoading && !error && (
         <div className={classes.maincontainer}>
           <div className={classes.heading}>
             <h2>Your Conversations</h2>
