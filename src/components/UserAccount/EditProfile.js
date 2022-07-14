@@ -161,7 +161,7 @@ const EditProfile = (props) => {
           </div>
           <div>
             <input
-              placeholder="Address"
+              placeholder="City"
               type="text"
               autoComplete="off"
               onChange={addressChangeHandler}

@@ -34,7 +34,7 @@ const SavedPosts = () => {
             isSaved: true,
             id: post._id,
             author: post.author.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
             title: post.title,

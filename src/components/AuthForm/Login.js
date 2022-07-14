@@ -63,7 +63,7 @@ const LoginForm = (props) => {
         );
         authCtx.login(data.name, data.token, expiryDate.toISOString());
         toast.success("Login Successful!");
-        navigate("/allposts");
+        navigate("/allposts?page=1");
       })
       .catch((err) => {
         setError({

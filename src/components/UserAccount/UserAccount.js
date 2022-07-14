@@ -46,7 +46,7 @@ const UserAccount = () => {
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: data.user.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
             title: post.title,
