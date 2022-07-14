@@ -17,14 +17,13 @@ const UserAccount = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState();
   const [edit, setEdit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("http://localhost:8080/post/account/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,

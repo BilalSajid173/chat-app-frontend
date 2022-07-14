@@ -19,11 +19,10 @@ const UserAccount = () => {
   const [error, setError] = useState();
   const [isFriend, setIsFriend] = useState(false);
   const [roomId, setRoomId] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("http://localhost:8080/post/user/" + userId, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,

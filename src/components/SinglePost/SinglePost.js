@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SinglePost = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const authCtx = useContext(AuthContext);
   const cmtRef = useRef();
   const params = useParams();
@@ -23,7 +23,6 @@ const SinglePost = (props) => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("http://localhost:8080/post/singlepost/" + postId, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,

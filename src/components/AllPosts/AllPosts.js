@@ -16,10 +16,9 @@ const AllPosts = () => {
   const [friendlist, setFriendlist] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("http://localhost:8080/post/allposts/?page=" + page, {
       headers: {
         Authorisation: "Bearer " + authCtx.token,

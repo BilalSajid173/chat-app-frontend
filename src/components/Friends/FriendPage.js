@@ -14,10 +14,9 @@ const FriendPage = () => {
   const [allFriends, setAllFriends] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
     fetch("http://localhost:8080/post/friendlist/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,

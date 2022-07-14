@@ -100,7 +100,7 @@ const AddPost = () => {
         />
       )}
       {!error && isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {!isLoading && !error && (
         <div className={classes.addPostWrapper}>
           <div className={classes.addpostform}>
             <button type="button" onClick={cancelHandler}>
