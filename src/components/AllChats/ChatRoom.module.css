@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,700;1,600&family=Ubuntu&family=Varela+Round&display=swap");
+
 .wrapper {
   padding: 2% 30%;
   padding-bottom: 5%;
@@ -7,6 +9,7 @@
 }
 
 .msgwrapper {
+  font-family: "Montserrat", sans-serif;
   z-index: -2;
   background-color: white;
   border-radius: 5px;

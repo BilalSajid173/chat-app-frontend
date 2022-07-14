@@ -22,6 +22,7 @@ body {
 }
 
 .maincontainer {
+  font-family: "Merriweather Sans", sans-serif;
   display: flex;
   flex-wrap: wrap;
   padding: 5%;

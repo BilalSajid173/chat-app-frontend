@@ -113,7 +113,7 @@ const FriendPage = () => {
             <div className={classes.listcontainer}>
               <input
                 onChange={searchHandler}
-                placeholder="Search friends"
+                placeholder="Search"
                 type="text"
               />
               <h2>Your Friends</h2>
