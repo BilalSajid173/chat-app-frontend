@@ -38,7 +38,7 @@ const EditProfile = (props) => {
     if (!nameIsValid || !emailIsValid) {
       return;
     }
-    fetch("http://localhost:8080/post/edit-profile", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/edit-profile", {
       method: "POST",
       body: JSON.stringify({
         email: enteredEmail,
@@ -92,11 +92,14 @@ const EditProfile = (props) => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/edit-profile/", {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/edit-profile/",
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -158,7 +161,7 @@ const EditProfile = (props) => {
           </div>
           <div>
             <input
-              placeholder="Address"
+              placeholder="City"
               type="text"
               autoComplete="off"
               onChange={addressChangeHandler}

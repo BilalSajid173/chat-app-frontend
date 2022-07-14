@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useContext } from "react";
 import Login from "./pages/Login";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import FetchAllPosts from "./pages/AllPosts";
 import AuthContext from "./store/auth-context";
@@ -22,6 +22,9 @@ function App() {
   return (
     <ScrollToTop>
       <Routes>
+        {authCtx.isLoggedIn && (
+          <Route path="/" element={<Navigate to="allposts" replace />} />
+        )}
         {!authCtx.isLoggedIn && <Route path="/" element={<Login />} />}
         {!authCtx.isLoggedIn && <Route path="/signup" element={<Signup />} />}
         {authCtx.isLoggedIn && (

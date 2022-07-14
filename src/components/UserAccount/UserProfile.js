@@ -19,16 +19,18 @@ const UserAccount = () => {
   const [error, setError] = useState();
   const [isFriend, setIsFriend] = useState(false);
   const [roomId, setRoomId] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:8080/post/user/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/user/" + userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -46,7 +48,7 @@ const UserAccount = () => {
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: data.user.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
             title: post.title,
@@ -73,11 +75,17 @@ const UserAccount = () => {
   }, [authCtx.token, userId, loggedInUserId]);
 
   const friendHandler = () => {
-    fetch("http://localhost:8080/post/add-friend/" + isFriend + "/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/add-friend/" +
+        isFriend +
+        "/" +
+        userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");

@@ -19,8 +19,9 @@ const PostItem = (props) => {
 
   const onLikeChangeHandler = (like) => {
     fetch(
-      `http://localhost:8080/post/${like ? "likepost" : "savepost"}/` +
-        props.id,
+      `https://intelligent-fromage-47264.herokuapp.com/post/${
+        like ? "likepost" : "savepost"
+      }/` + props.id,
       {
         headers: {
           Authorisation: "Bearer " + authCtx.token,
@@ -57,11 +58,15 @@ const PostItem = (props) => {
 
   const fetchComments = () => {
     setShowComments(true);
-    fetch("http://localhost:8080/post/getComments/" + props.id, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/getComments/" +
+        props.id,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Comments not fetched");

@@ -14,11 +14,10 @@ const FriendPage = () => {
   const [allFriends, setAllFriends] = useState([]);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:8080/post/friendlist/", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/friendlist/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -66,7 +65,7 @@ const FriendPage = () => {
               isSaved: savedposts.includes(post._id) ? true : false,
               id: post._id,
               author: post.author.name,
-              content: post.content.slice(0, 250) + "...",
+              content: post.content.slice(0, 150) + "...",
               createdAt: new Date(post.createdAt).toDateString(),
               authorId: post.author._id,
               title: post.title,
@@ -113,7 +112,7 @@ const FriendPage = () => {
             <div className={classes.listcontainer}>
               <input
                 onChange={searchHandler}
-                placeholder="Search friends"
+                placeholder="Search"
                 type="text"
               />
               <h2>Your Friends</h2>

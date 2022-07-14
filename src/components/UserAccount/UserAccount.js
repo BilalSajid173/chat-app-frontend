@@ -17,15 +17,14 @@ const UserAccount = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState();
   const [edit, setEdit] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:8080/post/account/", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/account/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -47,7 +46,7 @@ const UserAccount = () => {
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: data.user.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author,
             title: post.title,
@@ -115,7 +114,7 @@ const UserAccount = () => {
     e.preventDefault();
     setIsLoading(true);
     if (!previewSource) return;
-    fetch("http://localhost:8080/post/addimage", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addimage", {
       method: "POST",
       body: JSON.stringify({
         image: previewSource,

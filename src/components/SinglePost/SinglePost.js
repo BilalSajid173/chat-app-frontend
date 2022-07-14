@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SinglePost = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const authCtx = useContext(AuthContext);
   const cmtRef = useRef();
   const params = useParams();
@@ -23,12 +23,15 @@ const SinglePost = (props) => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch("http://localhost:8080/post/singlepost/" + postId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/singlepost/" +
+        postId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -58,7 +61,7 @@ const SinglePost = (props) => {
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
             title: post.title,
@@ -90,16 +93,20 @@ const SinglePost = (props) => {
     if (comment.trim() === "") {
       return;
     }
-    fetch("http://localhost:8080/post/addComment/" + postId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        comment: comment,
-      }),
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/addComment/" +
+        postId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          comment: comment,
+        }),
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");

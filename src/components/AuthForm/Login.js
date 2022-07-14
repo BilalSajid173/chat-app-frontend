@@ -38,7 +38,7 @@ const LoginForm = (props) => {
     if (!emailIsValid || !passwordIsValid) {
       return;
     }
-    fetch("http://localhost:8080/auth/login", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/auth/login", {
       body: JSON.stringify({
         email: enteredEmail,
         password: enteredPassword,
@@ -63,7 +63,7 @@ const LoginForm = (props) => {
         );
         authCtx.login(data.name, data.token, expiryDate.toISOString());
         toast.success("Login Successful!");
-        navigate("/allposts");
+        navigate("/allposts?page=1");
       })
       .catch((err) => {
         setError({

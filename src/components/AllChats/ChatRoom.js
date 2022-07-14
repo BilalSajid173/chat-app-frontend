@@ -5,8 +5,9 @@ import { io } from "socket.io-client";
 import { useParams } from "react-router";
 import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import ErrorModal from "../UI/ErrorModal";
 
-const socket = io("http://localhost:8080/");
+const socket = io("https://intelligent-fromage-47264.herokuapp.com/");
 const ChatRoom = () => {
   const authCtx = useContext(AuthContext);
   const params = useParams();
@@ -17,6 +18,7 @@ const ChatRoom = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [online, setOnline] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
@@ -33,11 +35,17 @@ const ChatRoom = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/post/chat/" + roomId + "/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/chat/" +
+        roomId +
+        "/" +
+        userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -46,6 +54,14 @@ const ChatRoom = () => {
         setmsgs(data.messages);
         setName(data.username);
         setIsLoading(false);
+      })
+      .catch((err) => {
+        setError({
+          title: "Failed to load Chats",
+          message: "Please try again later.",
+        });
+        setIsLoading(false);
+        console.log(err);
       });
   }, [roomId, userId, authCtx.token]);
 
@@ -56,7 +72,7 @@ const ChatRoom = () => {
       return;
     }
 
-    fetch("http://localhost:8080/post/addmessage", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addmessage", {
       body: JSON.stringify({
         roomId,
         userId,
@@ -79,10 +95,22 @@ const ChatRoom = () => {
     });
     msgref.current.value = "";
   };
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <Fragment>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      {!error && isLoading && <LoadingSpinner />}
+      {!error && !isLoading && (
         <Fragment>
           <div className={classes.wrapper}>
             <div className={classes.msgwrapper}>

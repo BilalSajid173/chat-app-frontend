@@ -7,8 +7,10 @@ import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import Paginator from "../Paginator/Paginator";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
   const [error, setError] = useState();
   const [allPosts, setAllPosts] = useState([]);
@@ -16,15 +18,19 @@ const AllPosts = () => {
   const [friendlist, setFriendlist] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/post/allposts/?page=" + page, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/allposts/?page=" +
+        page,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Getting Posts Failed");
@@ -42,7 +48,7 @@ const AllPosts = () => {
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
-            content: post.content.slice(0, 250) + "...",
+            content: post.content.slice(0, 150) + "...",
             createdAt: new Date(post.createdAt).toDateString(),
             authorId: post.author._id,
             title: post.title,
@@ -71,13 +77,14 @@ const AllPosts = () => {
     setPage((prev) => {
       return prev - 1;
     });
+    navigate(`/allposts?page=${page - 1}`);
   };
 
   const nextHandler = () => {
-    console.log(page);
     setPage((prev) => {
       return prev + 1;
     });
+    navigate(`/allposts?page=${page + 1}`);
   };
 
   const errorHandler = () => {

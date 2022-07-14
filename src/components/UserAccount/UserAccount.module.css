@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;500;600;700&family=Montserrat:ital,wght@0,400;0,500;0,700;1,600&family=Ubuntu&family=Varela+Round&display=swap");
+
 .main_container {
   padding: 3% 15%;
   background-color: #f1f2f6;
@@ -31,6 +33,11 @@
   margin-bottom: 0.5rem;
 }
 
+.nameaddress p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
 .userimg {
   width: 20%;
   position: fixed;
@@ -49,6 +56,8 @@
 .userimg p {
   padding: 0 5px;
   text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
 }
 
 .userimg i,
@@ -148,6 +157,8 @@
 .mobile_bio {
   display: none;
   padding: 1% 2%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
   margin-bottom: 1rem;
   padding-bottom: 1.5rem;
   border-bottom: 2px solid grey;

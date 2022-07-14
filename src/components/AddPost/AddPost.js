@@ -31,7 +31,7 @@ const AddPost = () => {
       return;
     }
     setIsLoading(true);
-    fetch("http://localhost:8080/post/addpost", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addpost", {
       method: "POST",
       body: JSON.stringify({
         content: enteredContent,
@@ -100,7 +100,7 @@ const AddPost = () => {
         />
       )}
       {!error && isLoading && <LoadingSpinner />}
-      {!isLoading && (
+      {!isLoading && !error && (
         <div className={classes.addPostWrapper}>
           <div className={classes.addpostform}>
             <button type="button" onClick={cancelHandler}>
