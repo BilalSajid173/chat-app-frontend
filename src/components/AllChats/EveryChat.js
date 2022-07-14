@@ -13,7 +13,7 @@ const EveryChat = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/post/allchats", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/allchats", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },

@@ -7,7 +7,7 @@ import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../UI/ErrorModal";
 
-const socket = io("http://localhost:8080/");
+const socket = io("https://intelligent-fromage-47264.herokuapp.com/");
 const ChatRoom = () => {
   const authCtx = useContext(AuthContext);
   const params = useParams();
@@ -35,11 +35,17 @@ const ChatRoom = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:8080/post/chat/" + roomId + "/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/chat/" +
+        roomId +
+        "/" +
+        userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         return res.json();
       })
@@ -66,7 +72,7 @@ const ChatRoom = () => {
       return;
     }
 
-    fetch("http://localhost:8080/post/addmessage", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addmessage", {
       body: JSON.stringify({
         roomId,
         userId,

@@ -17,7 +17,7 @@ const FriendPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/friendlist/", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/friendlist/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },

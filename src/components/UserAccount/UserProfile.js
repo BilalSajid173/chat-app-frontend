@@ -23,11 +23,14 @@ const UserAccount = () => {
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/user/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/user/" + userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -72,11 +75,17 @@ const UserAccount = () => {
   }, [authCtx.token, userId, loggedInUserId]);
 
   const friendHandler = () => {
-    fetch("http://localhost:8080/post/add-friend/" + isFriend + "/" + userId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/add-friend/" +
+        isFriend +
+        "/" +
+        userId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");

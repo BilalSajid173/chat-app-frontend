@@ -31,7 +31,7 @@ const AddPost = () => {
       return;
     }
     setIsLoading(true);
-    fetch("http://localhost:8080/post/addpost", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addpost", {
       method: "POST",
       body: JSON.stringify({
         content: enteredContent,

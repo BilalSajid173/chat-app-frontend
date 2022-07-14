@@ -19,11 +19,15 @@ const AllPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/allposts/?page=" + page, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/allposts/?page=" +
+        page,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Getting Posts Failed");

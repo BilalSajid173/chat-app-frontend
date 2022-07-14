@@ -38,7 +38,7 @@ const LoginForm = (props) => {
     if (!emailIsValid || !passwordIsValid) {
       return;
     }
-    fetch("http://localhost:8080/auth/login", {
+    fetch("https://intelligent-fromage-47264.herokuapp.com/auth/login", {
       body: JSON.stringify({
         email: enteredEmail,
         password: enteredPassword,

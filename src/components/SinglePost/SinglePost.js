@@ -23,11 +23,15 @@ const SinglePost = (props) => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/post/singlepost/" + postId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-      },
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/singlepost/" +
+        postId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -89,16 +93,20 @@ const SinglePost = (props) => {
     if (comment.trim() === "") {
       return;
     }
-    fetch("http://localhost:8080/post/addComment/" + postId, {
-      headers: {
-        Authorisation: "Bearer " + authCtx.token,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        comment: comment,
-      }),
-    })
+    fetch(
+      "https://intelligent-fromage-47264.herokuapp.com/post/addComment/" +
+        postId,
+      {
+        headers: {
+          Authorisation: "Bearer " + authCtx.token,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          comment: comment,
+        }),
+      }
+    )
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
