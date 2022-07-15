@@ -8,12 +8,14 @@ import AuthContext from "../../store/auth-context";
 import ErrorModal from "../UI/ErrorModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const LoginForm = (props) => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     value: enteredEmail,
@@ -38,6 +40,7 @@ const LoginForm = (props) => {
     if (!emailIsValid || !passwordIsValid) {
       return;
     }
+    setIsLoading(true);
     fetch("https://intelligent-fromage-47264.herokuapp.com/auth/login", {
       body: JSON.stringify({
         email: enteredEmail,
@@ -64,6 +67,7 @@ const LoginForm = (props) => {
         authCtx.login(data.name, data.token, expiryDate.toISOString());
         toast.success("Login Successful!");
         navigate("/allposts?page=1");
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
@@ -71,6 +75,7 @@ const LoginForm = (props) => {
           message: "Please try again.",
         });
         console.log(err);
+        setIsLoading(false);
       });
     resetEmail();
     resetPassword();
@@ -97,6 +102,7 @@ const LoginForm = (props) => {
           onConfirm={errorHandler}
         />
       )}
+      {isLoading && <LoadingSpinner />}
       <div className={classes.bodygradient}>
         <div className={classes.maincontainer}>
           <div className={classes.logincontainer}>

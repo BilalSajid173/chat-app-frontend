@@ -6,11 +6,14 @@ import useInput from "../../hooks/use-input";
 import ErrorModal from "../UI/ErrorModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
 const SignupForm = (props) => {
   const navigate = useNavigate();
   const [error, setError] = useState();
   const [showPass, setShowPass] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     value: enteredEmail,
     hasError: emailHasError,
@@ -43,6 +46,7 @@ const SignupForm = (props) => {
     if (!emailIsValid || !passwordIsValid || !nameIsValid) {
       return;
     }
+    setIsLoading(true);
     fetch("https://intelligent-fromage-47264.herokuapp.com/auth/signup/", {
       method: "POST",
       body: JSON.stringify({
@@ -65,6 +69,7 @@ const SignupForm = (props) => {
         navigate("/");
         toast.success("Signup Successful");
         console.log(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
@@ -72,6 +77,7 @@ const SignupForm = (props) => {
           message: "Email already exists",
         });
         console.log(err);
+        setIsLoading(false);
       });
 
     resetName();
@@ -101,6 +107,7 @@ const SignupForm = (props) => {
           onConfirm={errorHandler}
         />
       )}
+      {isLoading && <LoadingSpinner />}
       <div className={classes.bodygradient}>
         <div className={classes.maincontainer}>
           <div className={classes.logincontainer}>

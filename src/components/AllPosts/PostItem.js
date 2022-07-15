@@ -8,6 +8,7 @@ import SingleComment from "../SinglePost/Comment";
 import { Image } from "cloudinary-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LikeLoader from "../UI/LikeLoader";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -16,8 +17,10 @@ const PostItem = (props) => {
   const [error, setError] = useState();
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLikeChangeHandler = (like) => {
+    setIsLoading(true);
     fetch(
       `https://intelligent-fromage-47264.herokuapp.com/post/${
         like ? "likepost" : "savepost"
@@ -46,6 +49,7 @@ const PostItem = (props) => {
               return !prevState;
             });
         console.log(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
@@ -53,11 +57,12 @@ const PostItem = (props) => {
           message: "Please try again.",
         });
         console.log(err);
+        setIsLoading(false);
       });
   };
 
   const fetchComments = () => {
-    setShowComments(true);
+    setIsLoading(true);
     fetch(
       "https://intelligent-fromage-47264.herokuapp.com/post/getComments/" +
         props.id,
@@ -77,6 +82,8 @@ const PostItem = (props) => {
       .then((data) => {
         console.log(data);
         setComments(data.comments);
+        setShowComments(true);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError({
@@ -84,6 +91,7 @@ const PostItem = (props) => {
           message: "Please try again.",
         });
         console.log(err);
+        setIsLoading(false);
       });
   };
 
@@ -104,7 +112,8 @@ const PostItem = (props) => {
           onConfirm={errorHandler}
         />
       )}
-      {showComments && (
+      {!error && isLoading && <LikeLoader />}
+      {!isLoading && showComments && (
         <CommentModal onClose={hideComments}>
           <button onClick={hideComments} className={classes.close}>
             <i className="fa-solid fa-xmark"></i>
