@@ -66,7 +66,7 @@ const FriendPage = () => {
               id: post._id,
               author: post.author.name,
               content: post.content.slice(0, 150) + "...",
-              createdAt: new Date(post.createdAt).toDateString(),
+              createdAt: post.createdAt,
               authorId: post.author._id,
               title: post.title,
               imageId: post.publicId,

@@ -49,7 +49,7 @@ const UserAccount = () => {
             id: post._id,
             author: data.user.name,
             content: post.content.slice(0, 150) + "...",
-            createdAt: new Date(post.createdAt).toDateString(),
+            createdAt: post.createdAt,
             authorId: post.author,
             title: post.title,
             imageId: post.publicId,

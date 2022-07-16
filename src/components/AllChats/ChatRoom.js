@@ -21,6 +21,15 @@ const ChatRoom = () => {
   const [commentLoading, setCommentLoading] = useState(false);
   const [online, setOnline] = useState(false);
   const [error, setError] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [msgs]);
 
   useEffect(() => {
     socket.emit("joinroom", roomId);
@@ -173,6 +182,7 @@ const ChatRoom = () => {
           </div>
         </Fragment>
       )}
+      <div ref={messagesEndRef}></div>
     </Fragment>
   );
 };

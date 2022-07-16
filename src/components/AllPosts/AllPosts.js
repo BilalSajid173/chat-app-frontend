@@ -43,13 +43,14 @@ const AllPosts = () => {
         const likedposts = data.likedPosts ? data.likedPosts : [];
         const savedposts = data.savedPosts ? data.savedPosts : [];
         const posts = data.posts.map((post) => {
+          console.log(post.createdAt);
           return {
             isLiked: likedposts.includes(post._id) ? true : false,
             isSaved: savedposts.includes(post._id) ? true : false,
             id: post._id,
             author: post.author.name,
             content: post.content.slice(0, 150) + "...",
-            createdAt: new Date(post.createdAt).toDateString(),
+            createdAt: post.createdAt,
             authorId: post.author._id,
             title: post.title,
             imageId: post.publicId,

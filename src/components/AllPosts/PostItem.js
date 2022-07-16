@@ -9,6 +9,7 @@ import { Image } from "cloudinary-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LikeLoader from "../UI/LikeLoader";
+import Moment from "react-moment";
 
 const PostItem = (props) => {
   const authCtx = useContext(AuthContext);
@@ -162,7 +163,9 @@ const PostItem = (props) => {
                     </Link>
                   )}
                 </h4>
-                <span>{props.createdAt}</span>
+                <span>
+                  <Moment fromNow>{props.createdAt}</Moment>
+                </span>
               </div>
               <div className={classes.bookmark}>
                 <i
