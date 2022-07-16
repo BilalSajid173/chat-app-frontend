@@ -2,15 +2,11 @@
 
 .wrapper {
   padding: 2% 30%;
-  padding-bottom: 5%;
   background-color: #f1f2f6;
-  min-height: 100vh;
-  z-index: -5;
 }
 
 .msgwrapper {
   font-family: "Montserrat", sans-serif;
-  z-index: -2;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 6px #ccc;
@@ -30,13 +26,12 @@
   color: rgb(121, 156, 251);
 }
 .msgform {
-  position: fixed;
-  top: 93%;
+  background-color: #f1f2f6;
+  position: sticky;
   width: 100%;
   padding: 0 20%;
   display: flex;
   justify-content: center;
-  animation: slide-up 300ms ease-out forwards;
 }
 
 .msgform form {
@@ -77,17 +72,6 @@
   font-size: 1.5rem;
 }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(15vh);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes slide-down {
   from {
     opacity: 0;
@@ -101,8 +85,7 @@
 
 @media (max-width: 1200px) {
   .wrapper {
-    padding: 2% 20%;
-    padding-bottom: 6%;
+    padding: 3% 20%;
   }
 
   .msgform {
@@ -113,7 +96,6 @@
 @media (max-width: 1025px) {
   .wrapper {
     padding: 4% 10%;
-    padding-bottom: 9%;
   }
 
   .msgform {
@@ -128,7 +110,6 @@
 @media (max-width: 550px) {
   .wrapper {
     padding: 7% 3%;
-    padding-bottom: 15%;
   }
 
   .msgform {
