@@ -103,61 +103,63 @@ const LoginForm = (props) => {
         />
       )}
       {isLoading && <LoadingSpinner />}
-      <div className={classes.bodygradient}>
-        <div className={classes.maincontainer}>
-          <div className={classes.logincontainer}>
-            <h2>Sign In</h2>
-            <form onSubmit={formSubmitHandler} noValidate>
-              <div className={emailClasses}>
-                {emailHasError && (
-                  <p className={classes.error}>Please Enter a valid email.</p>
-                )}
-                <input
-                  placeholder="Username"
-                  type="email"
-                  id="email"
-                  autoComplete="off"
-                  required
-                  value={enteredEmail}
-                  onChange={emailChangeHandler}
-                  onBlur={emailBlurHandler}
-                />
-              </div>
-              <div className={passwordClasses}>
-                {passwordHasError && (
-                  <p className={classes.error}>
-                    Min passsword length is 7 characters.
-                  </p>
-                )}
-                <div className={classes.showpasswrap}>
+      {!error && !isLoading && (
+        <div className={classes.bodygradient}>
+          <div className={classes.maincontainer}>
+            <div className={classes.logincontainer}>
+              <h2>Sign In</h2>
+              <form onSubmit={formSubmitHandler} noValidate>
+                <div className={emailClasses}>
+                  {emailHasError && (
+                    <p className={classes.error}>Please Enter a valid email.</p>
+                  )}
                   <input
-                    placeholder="Password"
-                    type={showPass ? "text" : "password"}
-                    id="password"
+                    placeholder="Username"
+                    type="email"
+                    id="email"
+                    autoComplete="off"
                     required
-                    value={enteredPassword}
-                    onChange={passwordChangeHandler}
-                    onBlur={passwordBlurHandler}
+                    value={enteredEmail}
+                    onChange={emailChangeHandler}
+                    onBlur={emailBlurHandler}
                   />
-                  <i
-                    onClick={showPassword}
-                    className={`fa-solid ${
-                      showPass ? "fa-eye-slash" : "fa-eye"
-                    }`}
-                  ></i>
                 </div>
-              </div>
-              <button type="submit">Sign In</button>
-              <h4>
-                Not a member? <Link to="/signup">Sign Up</Link>
-              </h4>
-            </form>
-          </div>
-          <div className={classes.loginimg}>
-            <img src={image} alt="img" />
+                <div className={passwordClasses}>
+                  {passwordHasError && (
+                    <p className={classes.error}>
+                      Min passsword length is 7 characters.
+                    </p>
+                  )}
+                  <div className={classes.showpasswrap}>
+                    <input
+                      placeholder="Password"
+                      type={showPass ? "text" : "password"}
+                      id="password"
+                      required
+                      value={enteredPassword}
+                      onChange={passwordChangeHandler}
+                      onBlur={passwordBlurHandler}
+                    />
+                    <i
+                      onClick={showPassword}
+                      className={`fa-solid ${
+                        showPass ? "fa-eye-slash" : "fa-eye"
+                      }`}
+                    ></i>
+                  </div>
+                </div>
+                <button type="submit">Sign In</button>
+                <h4>
+                  Not a member? <Link to="/signup">Sign Up</Link>
+                </h4>
+              </form>
+            </div>
+            <div className={classes.loginimg}>
+              <img src={image} alt="img" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Fragment>
   );
 };

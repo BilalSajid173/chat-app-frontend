@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import AuthContext from "../../store/auth-context";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../UI/ErrorModal";
+import LikeLoader from "../UI/LikeLoader";
 
 const socket = io("https://intelligent-fromage-47264.herokuapp.com/");
 const ChatRoom = () => {
@@ -17,6 +18,7 @@ const ChatRoom = () => {
   const msgref = useRef();
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [commentLoading, setCommentLoading] = useState(false);
   const [online, setOnline] = useState(false);
   const [error, setError] = useState(false);
 
@@ -47,6 +49,10 @@ const ChatRoom = () => {
       }
     )
       .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
         return res.json();
       })
       .then((data) => {
@@ -71,7 +77,7 @@ const ChatRoom = () => {
     if (newmsg.trim() === "") {
       return;
     }
-
+    setCommentLoading(true);
     fetch("https://intelligent-fromage-47264.herokuapp.com/post/addmessage", {
       body: JSON.stringify({
         roomId,
@@ -85,15 +91,29 @@ const ChatRoom = () => {
       },
     })
       .then((res) => {
+        if (!res.ok) {
+          const error = new Error("Failed");
+          throw error;
+        }
         return res.json();
       })
-      .then((data) => console.log(data));
-
-    socket.emit("message", newmsg, roomId);
-    setmsgs((prevState) => {
-      return prevState.concat({ content: newmsg, to: true });
-    });
-    msgref.current.value = "";
+      .then((data) => {
+        setCommentLoading(false);
+        socket.emit("message", newmsg, roomId);
+        setmsgs((prevState) => {
+          return prevState.concat({ content: newmsg, to: true });
+        });
+        msgref.current.value = "";
+        console.log(data);
+      })
+      .catch((err) => {
+        setError({
+          title: "Failed to load Chats",
+          message: "Please try again later.",
+        });
+        setCommentLoading(false);
+        console.log(err);
+      });
   };
 
   const errorHandler = () => {
@@ -110,6 +130,7 @@ const ChatRoom = () => {
         />
       )}
       {!error && isLoading && <LoadingSpinner />}
+      {commentLoading && <LikeLoader />}
       {!error && !isLoading && (
         <Fragment>
           <div className={classes.wrapper}>
