@@ -2,7 +2,7 @@
 
 .addPostWrapper {
   background-color: #f1f2f6;
-  min-height: 92vh;
+  min-height: 93vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -156,6 +156,7 @@
 
   .addpostform button {
     margin-left: 93%;
+    margin-bottom: 1rem;
   }
 
   .actions button {

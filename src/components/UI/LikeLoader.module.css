@@ -11,9 +11,6 @@
 }
 
 .lds-roller {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
   margin: 0 auto;
   width: 80px;
