@@ -47,7 +47,7 @@ const SignupForm = (props) => {
       return;
     }
     setIsLoading(true);
-    fetch("https://intelligent-fromage-47264.herokuapp.com/auth/signup/", {
+    fetch("https://konnectapp.onrender.com/auth/signup/", {
       method: "POST",
       body: JSON.stringify({
         email: enteredEmail,

@@ -23,7 +23,7 @@ const PostItem = (props) => {
   const onLikeChangeHandler = (like) => {
     setIsLoading(true);
     fetch(
-      `https://intelligent-fromage-47264.herokuapp.com/post/${
+      `https://konnectapp.onrender.com/post/${
         like ? "likepost" : "savepost"
       }/` + props.id,
       {
@@ -65,7 +65,7 @@ const PostItem = (props) => {
   const fetchComments = () => {
     setIsLoading(true);
     fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/getComments/" +
+      "https://konnectapp.onrender.com/post/getComments/" +
         props.id,
       {
         headers: {

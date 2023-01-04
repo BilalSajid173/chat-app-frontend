@@ -38,7 +38,7 @@ const EditProfile = (props) => {
     if (!nameIsValid || !emailIsValid) {
       return;
     }
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/edit-profile", {
+    fetch("https://konnectapp.onrender.com/post/edit-profile", {
       method: "POST",
       body: JSON.stringify({
         email: enteredEmail,
@@ -92,14 +92,11 @@ const EditProfile = (props) => {
   };
 
   useEffect(() => {
-    fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/edit-profile/",
-      {
-        headers: {
-          Authorisation: "Bearer " + authCtx.token,
-        },
-      }
-    )
+    fetch("https://konnectapp.onrender.com/post/edit-profile/", {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");

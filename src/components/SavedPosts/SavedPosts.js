@@ -13,7 +13,7 @@ const SavedPosts = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/savedposts", {
+    fetch("https://konnectapp.onrender.com/post/savedposts", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },

@@ -23,15 +23,11 @@ const SinglePost = (props) => {
   const [error, setError] = useState();
 
   useEffect(() => {
-    fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/singlepost/" +
-        postId,
-      {
-        headers: {
-          Authorisation: "Bearer " + authCtx.token,
-        },
-      }
-    )
+    fetch("https://konnectapp.onrender.com/post/singlepost/" + postId, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -94,7 +90,7 @@ const SinglePost = (props) => {
       return;
     }
     fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/addComment/" +
+      "https://konnectapp.onrender.com/post/addComment/" +
         postId,
       {
         headers: {

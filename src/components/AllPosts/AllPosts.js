@@ -23,7 +23,7 @@ const AllPosts = () => {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/allposts/?page=" +
+      "https://konnectapp.onrender.com/post/allposts/?page=" +
         page,
       {
         headers: {

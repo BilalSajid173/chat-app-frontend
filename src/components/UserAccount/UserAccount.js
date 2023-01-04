@@ -24,7 +24,7 @@ const UserAccount = () => {
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/account/", {
+    fetch("https://konnectapp.onrender.com/post/account/", {
       headers: {
         Authorisation: "Bearer " + authCtx.token,
       },
@@ -114,7 +114,7 @@ const UserAccount = () => {
     e.preventDefault();
     setIsLoading(true);
     if (!previewSource) return;
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addimage", {
+    fetch("https://konnectapp.onrender.com/post/addimage", {
       method: "POST",
       body: JSON.stringify({
         image: previewSource,

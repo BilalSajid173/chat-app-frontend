@@ -8,7 +8,7 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import ErrorModal from "../UI/ErrorModal";
 import LikeLoader from "../UI/LikeLoader";
 
-const socket = io("https://intelligent-fromage-47264.herokuapp.com/");
+const socket = io("https://konnectapp.onrender.com/");
 const ChatRoom = () => {
   const authCtx = useContext(AuthContext);
   const params = useParams();
@@ -47,10 +47,7 @@ const ChatRoom = () => {
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/chat/" +
-        roomId +
-        "/" +
-        userId,
+      "https://konnectapp.onrender.com/post/chat/" + roomId + "/" + userId,
       {
         headers: {
           Authorisation: "Bearer " + authCtx.token,
@@ -87,7 +84,7 @@ const ChatRoom = () => {
       return;
     }
     setCommentLoading(true);
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addmessage", {
+    fetch("https://konnectapp.onrender.com/post/addmessage", {
       body: JSON.stringify({
         roomId,
         userId,

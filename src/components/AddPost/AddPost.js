@@ -31,7 +31,7 @@ const AddPost = () => {
       return;
     }
     setIsLoading(true);
-    fetch("https://intelligent-fromage-47264.herokuapp.com/post/addpost", {
+    fetch("https://konnectapp.onrender.com/post/addpost", {
       method: "POST",
       body: JSON.stringify({
         content: enteredContent,

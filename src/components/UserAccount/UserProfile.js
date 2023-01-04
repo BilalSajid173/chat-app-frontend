@@ -23,14 +23,11 @@ const UserAccount = () => {
   const [imageId, setImageId] = useState("");
 
   useEffect(() => {
-    fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/user/" + userId,
-      {
-        headers: {
-          Authorisation: "Bearer " + authCtx.token,
-        },
-      }
-    )
+    fetch("https://konnectapp.onrender.com/post/user/" + userId, {
+      headers: {
+        Authorisation: "Bearer " + authCtx.token,
+      },
+    })
       .then((res) => {
         if (!res.ok) {
           const error = new Error("Failed");
@@ -76,7 +73,7 @@ const UserAccount = () => {
 
   const friendHandler = () => {
     fetch(
-      "https://intelligent-fromage-47264.herokuapp.com/post/add-friend/" +
+      "https://konnectapp.onrender.com/post/add-friend/" +
         isFriend +
         "/" +
         userId,
